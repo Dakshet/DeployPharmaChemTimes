@@ -10,7 +10,7 @@ const { handleToDB } = require("./connection");
 const app = express();
 const PORT = process.env.PORT || 4000;
 const MONGODB_URL = process.env.MONGODB_URL;
-const FRONTEND_URL = process.env.FRONTEND_URL || "https://deploy-pharma-chem-times-b.vercel.app";
+const FRONTEND_URL = process.env.FRONTEND_URL || "https://deploy-pharma-chem-times-f.vercel.app";
 // const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
 // const PRERENDER_TOKEN = process.env.PRERENDER_TOKEN;
 // console.log(FRONTEND_URL);

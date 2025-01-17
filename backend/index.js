@@ -76,13 +76,23 @@ app.use(express.urlencoded({ extended: false }))
 app.use("/uploads", express.static(path.resolve("./uploads")));
 
 
+app.get("/news/fetchallproductdata", async (req, res) => {
+    try {
+        // const products = await fetchProductDataFromDB(); // Example function
+        return res.status(200).json({ Data: "Successfully send data" });
+    } catch (error) {
+        console.error("Error fetching product data:", error.message);
+        res.status(500).json({ error: "Failed to fetch product data" });
+    }
+});
+
 
 // Routes
-app.use("/user", userRoute);
+// app.use("/user", userRoute);
 
-app.use("/news", newsRoute);
+// app.use("/news", newsRoute);
 
-app.use('/comment', commentRoute)
+// app.use('/comment', commentRoute)
 
 // Logging for requests (optional)
 // app.use((req, res, next) => {

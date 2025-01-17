@@ -12,13 +12,13 @@ const PORT = process.env.PORT || 4000;
 const MONGODB_URL = process.env.MONGODB_URL;
 const FRONTEND_URL = process.env.FRONTEND_URL || "https://deploy-pharma-chem-times-f.vercel.app";
 // const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
-// const PRERENDER_TOKEN = process.env.PRERENDER_TOKEN;
+const PRERENDER_TOKEN = process.env.PRERENDER_TOKEN;
 // console.log(FRONTEND_URL);
 // const FRONTEND_URL = "https://deploy-news-web-frontend.vercel.app";
 
 
 // Add your prerender.io token here
-// prerender.set('prerenderToken', PRERENDER_TOKEN);
+prerender.set('prerenderToken', PRERENDER_TOKEN);
 
 
 // Route Import
@@ -76,23 +76,23 @@ app.use(express.urlencoded({ extended: false }))
 app.use("/uploads", express.static(path.resolve("./uploads")));
 
 
-app.get("/news/fetchallproductdata", async (req, res) => {
-    try {
-        // const products = await fetchProductDataFromDB(); // Example function
-        return res.status(200).json({ Data: "Successfully send data" });
-    } catch (error) {
-        console.error("Error fetching product data:", error.message);
-        res.status(500).json({ error: "Failed to fetch product data" });
-    }
-});
+// app.get("/news/fetchallproductdata", async (req, res) => {
+//     try {
+//         // const products = await fetchProductDataFromDB(); // Example function
+//         return res.status(200).json({ Data: "Successfully send data" });
+//     } catch (error) {
+//         console.error("Error fetching product data:", error.message);
+//         res.status(500).json({ error: "Failed to fetch product data" });
+//     }
+// });
 
 
 // Routes
-// app.use("/user", userRoute);
+app.use("/user", userRoute);
 
-// app.use("/news", newsRoute);
+app.use("/news", newsRoute);
 
-// app.use('/comment', commentRoute)
+app.use('/comment', commentRoute)
 
 // Logging for requests (optional)
 // app.use((req, res, next) => {

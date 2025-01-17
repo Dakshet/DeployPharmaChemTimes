@@ -565,7 +565,7 @@ async function countVisitNumber(req, res) {
             $inc: { count: 1 }
         });
 
-        // console.log(news);
+        console.log(news);
 
         let currentDateMail = await CountVisit.findOne({
             month: "currentDateMail"

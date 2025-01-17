@@ -74,7 +74,7 @@ const Footer = () => {
                 </div>
             </div>
             <div className="footerPannelTwo">
-                <p>&#169;2024 Industrial Times. All rights reserved.</p>
+                <p>&#169;2024 PharmChem Times. All rights reserved.</p>
             </div>
         </div >
     )

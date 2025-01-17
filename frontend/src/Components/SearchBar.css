@@ -1,0 +1,139 @@
+.searchBar {
+    background-color: transparent;
+    /* background-color: transparent; */
+    width: 100%;
+    position: fixed;
+    top: 45px;
+    z-index: 106;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    /* box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2); */
+}
+
+.searchBarInner {
+    float: right;
+    width: 30%;
+    margin-right: 1%;
+    display: block;
+    border-radius: 10px;
+    background-color: #011E29;
+    color: white;
+    animation: moveleft 1s forwards;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+@keyframes moveleft {
+    100% {
+        opacity: 1;
+        transform: translateX(0%);
+    }
+}
+
+.searchBarInner #inputSearch {
+    width: 27.4vw;
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    background-color: transparent;
+    /* background-color: green; */
+    font-size: 17px;
+    font-weight: 600;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    color: white;
+    /* animation: moveleftInput 1s forwards; */
+    display: inline-block;
+    margin: 5px 0px;
+}
+
+
+.searchBarInner input::placeholder {
+    color: white;
+}
+
+.searchBarInner button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.searchBarInner button i {
+    color: white;
+    padding: 7px;
+    cursor: pointer;
+    transition: 0.5s;
+    border-radius: 50%;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.searchBarInner button i:hover {
+    color: #011E29;
+    background-color: white;
+    font-weight: 600;
+    border-radius: 50%;
+}
+
+.hideSearchBar {
+    display: none;
+}
+
+
+
+/* -------------- Media Queries */
+@media (max-width:1250px) {
+
+    .searchBarInner #inputSearch {
+        width: 27vw;
+    }
+
+}
+
+@media (max-width:1000px) {
+
+    .searchBarInner {
+        width: 35vw;
+    }
+
+    .searchBarInner #inputSearch {
+        width: 30vw;
+    }
+}
+
+@media (max-width:800px) {
+
+    .searchBarInner {
+        width: 39vw;
+    }
+
+    .searchBarInner #inputSearch {
+        width: 34vw;
+    }
+}
+
+@media (max-width:650px) {
+    .searchBar {
+        top: 40px;
+    }
+
+    .searchBarInner {
+        width: 60vw;
+    }
+
+    .searchBarInner #inputSearch {
+        width: 53vw;
+    }
+}
+
+@media (max-width:430px) {
+
+    .searchBarInner {
+        width: 80vw;
+    }
+
+    .searchBarInner #inputSearch {
+        width: 69vw;
+    }
+}

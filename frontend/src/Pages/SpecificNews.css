@@ -1,0 +1,344 @@
+.specificNews {
+    padding: 0 17%;
+    /* background-color: rgb(215, 228, 240); */
+    margin-top: 40px;
+}
+
+
+.specificNews.showMenu {
+    margin-top: -39px;
+}
+
+.specificNews.userMenu {
+    /* background-color: blue; */
+    margin-top: -190px;
+}
+
+.specificNewsInner {
+    /* background-color: lightpink; */
+    height: 100%;
+    padding-bottom: 40px;
+    position: relative;
+}
+
+.specificNewsInner h1 {
+    font-size: 30px;
+}
+
+.specificNewsImage {
+    /* width: 1000px; */
+    width: 65%;
+    height: 400px;
+    display: block;
+    margin: 10px auto;
+    border-radius: 5px;
+    /* margin: 20px; */
+}
+
+.specificTimeZone {
+    /* background-color: red; */
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 97%;
+    /* margin-left: 20px; */
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+
+.specificTimeZone p {
+    margin-left: 10px;
+}
+
+.specificTimeZone p:first-child {
+    margin-right: -3px;
+}
+
+.specificPara {
+    margin: 40px 0px 50px;
+    font-size: 18px;
+    overflow: hidden;
+}
+
+.specificIcon {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+    background-color: rgb(255, 255, 255);
+    /* background-color: blueviolet; */
+    position: relative;
+}
+
+.specificIconInner {
+    position: relative;
+}
+
+.specificIconInner .hideLogin {
+    display: none;
+}
+
+.hoverIcon {
+    font-size: 20px;
+    margin-left: 4px;
+    cursor: pointer;
+    padding: 10px;
+    background-color: white;
+    transition: 0.3s;
+}
+
+
+.hoverIcon:hover {
+    border-radius: 50%;
+    background-color: #011E29;
+    color: white;
+}
+
+.hoverText {
+    position: absolute;
+    bottom: 30px;
+    /* background-color: #011E29; */
+    /* color: white; */
+    opacity: 0;
+    transition: 0.5s;
+    padding: 2px;
+    margin-left: 8px;
+    cursor: pointer;
+    visibility: hidden;
+}
+
+
+/* Hover on button then show text it is called as tooltip. */
+.specificIconInner:hover .hoverText {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+.shareOption {
+    position: absolute;
+    bottom: 40px;
+    right: -10px;
+    background-color: #011E29;
+    padding: 20px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+}
+
+.hideSocialMenu {
+    display: none;
+}
+
+.specificNewsInner hr {
+    background-color: #ccc;
+    border: none;
+    height: 1px;
+    width: 68%;
+    display: block;
+    margin: 0 auto;
+}
+
+
+.specificPara a {
+    color: blue;
+    cursor: pointer;
+}
+
+/* -------------------------------------------- Media Queries */
+
+@media (max-width:1100px) {
+
+    .specificNewsInner {
+        padding-bottom: 0px;
+    }
+
+    .specificNewsImage {
+        height: 50vh;
+    }
+
+
+    /* .specificPara img {
+        width: 100%;
+        height: 100%;
+    } */
+}
+
+@media (max-width:950px) {
+
+    .specificNewsInner {
+        padding-bottom: 0px;
+    }
+
+    .specificNewsInner h1 {
+        font-size: 25px;
+    }
+
+    .specificNewsImage {
+        height: 400px;
+        width: 80%;
+    }
+
+}
+
+@media (max-width:650px) {
+    .updateNews {
+        width: 100%;
+        height: 100%;
+        margin-top: 20px;
+        padding: 0 16%;
+        /* position: fixed; */
+        position: sticky;
+        /* position: absolute; */
+        top: 35px;
+        z-index: 100;
+        /* background-color: blue; */
+    }
+
+    .updateNewsInner {
+        background-color: white;
+        /* height: 670px; */
+        height: 720px;
+        /* height: 1200px; */
+        /* height: 100%; */
+        width: 100%;
+        display: block;
+        margin: 0px auto 50px;
+        border-radius: 30px;
+        border: 5px solid #011E29;
+    }
+
+    .specificNews {
+        padding: 0 5%;
+        /* background-color: rgb(215, 228, 240); */
+        margin-top: 40px;
+    }
+
+    .specificNewsInner {
+        padding-bottom: 0px;
+    }
+
+    .specificNewsInner h1 {
+        font-size: 25px;
+        margin-bottom: 25px;
+    }
+
+    .specificNewsImage {
+        /* width: 1000px; */
+        width: 80vw;
+        height: 42vh;
+    }
+
+    .specificTimeZone {
+        width: 99%;
+        font-size: 14px;
+    }
+
+    .specificIcon {
+        /* max-width: 78vw; */
+        /* margin-left: 30vw; */
+        /* background-color: blue; */
+        /* margin-right: -100px;
+        padding-right: -100px; */
+        /* float: right; */
+        /* display: block; */
+        /* text-align: end; */
+        justify-content: flex-start;
+        margin-left: -3vw;
+    }
+
+    .specificPara {
+        margin: 20px 0px 30px;
+    }
+
+    .hoverIcon {
+        font-size: 18px;
+        margin-left: 0px;
+        padding: 7px;
+    }
+
+    .shareOption {
+        position: absolute;
+        bottom: 40px;
+        right: 50vw;
+        background-color: #011E29;
+        padding: 20px 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 20px;
+    }
+
+    .specificNewsInner hr {
+        width: 90%;
+        margin-top: 20px;
+    }
+
+    /* .specificPara img {
+        width: 100%;
+        height: 100%;
+    } */
+
+    .specificNewsInner p {
+        font-size: 16px;
+    }
+
+}
+
+
+@media (max-width:470px) {
+
+    .shareOption {
+        bottom: 40px;
+        right: 200px;
+    }
+}
+
+
+@media (max-width:440px) {
+
+    .shareOption {
+        bottom: 40px;
+        right: 170px;
+    }
+}
+
+
+@media (max-width:400px) {
+
+    .specificNewsImage {
+        /* width: 1000px; */
+        /* width: 80vw; */
+        width: 90vw;
+        height: 60vw;
+    }
+
+    .specificPara img {
+        width: 90vw;
+        height: 60vw;
+    }
+
+    .shareOption {
+        position: absolute;
+        bottom: 40px;
+        right: 130px;
+        /* background-color: #011E29; */
+        /* background-color: red; */
+        padding: 20px 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 20px;
+    }
+}
+
+
+@media (max-width:370px) {
+
+    .shareOption {
+        bottom: 40px;
+        right: 90px;
+    }
+}

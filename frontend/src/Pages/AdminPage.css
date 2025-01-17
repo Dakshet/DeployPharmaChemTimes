@@ -1,0 +1,51 @@
+.adminPage {
+    background-color: white;
+    min-height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.adminPageBtn {
+    background-color: #011E29;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+}
+
+.adminPageInner {
+    /* background-color: #FFDD00; */
+    color: black;
+    padding: 30px 30px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.adminPageInner img {
+    height: 140px;
+    width: 140px;
+    border-radius: 50%;
+    margin-bottom: 25px;
+}
+
+.adminPageInnerList li {
+    list-style: none;
+    background-color: #011E29;
+    color: white;
+    margin: 10px 0px;
+    padding: 15px 20px;
+    text-align: center;
+    border-radius: 20px;
+}
+
+@media (max-width:450px) {
+    h1 {
+        font-size: 18px;
+        margin-bottom: 18px;
+    }
+}

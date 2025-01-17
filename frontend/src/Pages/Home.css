@@ -1,0 +1,445 @@
+.home {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    background-color: aliceblue;
+    /* overflow-y: scroll; */
+    /* height: 2000px; */
+}
+
+
+.leftContainer,
+.rightContainer {
+    flex-basis: 23%;
+    padding: 2.7% 2%;
+    overflow: hidden;
+}
+
+.leftContainer h5,
+.rightContainer h5 {
+    font-size: 18px;
+    text-transform: uppercase;
+    word-spacing: 5px;
+    margin-bottom: 10px;
+}
+
+/* .leftContainerRadioBox {} */
+
+
+
+.leftContainerRadioBox .leftContainerLabel,
+.rightContainerRadioBox .rightContainerLabel {
+    display: flex;
+    align-items: center;
+    /* background-color: rebeccapurple; */
+    justify-content: flex-start;
+    color: black;
+    font-size: 16px;
+    position: relative;
+    padding-left: 20px;
+    overflow: hidden;
+}
+
+.leftContainerRadioBox .leftContainerLabel span,
+.rightContainerRadioBox .rightContainerLabel span {
+    position: absolute;
+    top: 3px;
+    left: 57px;
+    cursor: pointer;
+}
+
+.leftContainerRadioBox .leftContainerLabel input[type="radio"],
+.rightContainerRadioBox .rightContainerLabel input[type="radio"] {
+    appearance: none;
+    width: 2px;
+    height: 2px;
+    border: 2px solid #03384d;
+    background-color: #FFF;
+    margin: 0px 0px 10px;
+    margin-right: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.leftContainerRadioBox .leftContainerLabel input[type="radio"]:checked,
+.dropDownContainerBoxInner input[type="radio"]:checked,
+.rightContainerRadioBox .rightContainerLabel input[type="radio"]:checked,
+.dropDownContainerBoxInner input[type="radio"]:checked {
+    background-color: #03384d;
+    border-color: #03384d;
+}
+
+.leftContainerRadioBox .leftContainerLabel:hover input[type="radio"],
+.dropDownContainerBoxInner:hover input[type="radio"],
+.rightContainerRadioBox .rightContainerLabel:hover input[type="radio"],
+.dropDownContainerBoxInner:hover input[type="radio"] {
+    border-color: #03384d;
+}
+
+.leftContainer .dropDownContainerBox {
+    background-color: transparent;
+    padding-left: 50px;
+    padding-top: 0px;
+    margin-bottom: 20px;
+}
+
+.dropDownContainerBoxInner {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: black;
+    font-size: 16px;
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: -20px;
+}
+
+.dropDownContainerBoxInner span {
+    position: absolute;
+    top: 6px;
+    left: 20px;
+    background-color: transparent;
+    height: 20px;
+    width: 90%;
+    overflow: hidden;
+}
+
+.dropDownContainerBoxInner input[type="radio"] {
+    margin-left: -28px;
+    background-color: #FFF;
+    appearance: none;
+    border: 2px solid #03384d;
+    width: 10px;
+}
+
+.dropDownContainerBoxInner .leftContainer .hideDropDownContainerBox {
+    display: none;
+}
+
+.leftContainer .dropDownContainerBox p,
+.rightContainer .dropDownContainerBox p {
+    cursor: pointer;
+}
+
+.leftContainer .dropDownContainerBox p:hover,
+.rightContainer .dropDownContainerBox p:hover {
+    color: #03384d;
+}
+
+
+
+
+/* ------------------ Center Container */
+.centerContainer {
+    min-height: 100vh;
+    flex-basis: 54%;
+    padding: 2.7% 2%;
+    border-right: 3px solid #ccc;
+    border-left: 3px solid #ccc;
+}
+
+.centerContainer h5 {
+    font-size: 20px;
+    text-transform: uppercase;
+    word-spacing: 5px;
+    margin-bottom: 10px;
+}
+
+.centerContainerInner {
+    margin-left: 20px;
+}
+
+.centerContainerInner h6 {
+    width: 30px;
+    height: 30px;
+    border: 2px solid #03384d;
+    color: black;
+    border-radius: 10px;
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.centerContainerBox {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.centerContainerBox .centerContainerBoxInner,
+.centerContainerInner .centerChemCompContainer {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 2px solid #03384d;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    position: relative;
+}
+
+.centerContainerBoxInner .centerContainerPopUp,
+.centerChemCompContainer .centerContainerPopUp {
+    position: absolute;
+    border: 2px solid #03384d;
+    padding: 10px;
+    left: -3px;
+    top: -30px;
+    z-index: 100;
+    text-align: center;
+    background-color: white;
+    border-radius: 10px;
+}
+
+
+.centerContainerBoxInner .hidePopup {
+    display: none;
+}
+
+.centerContainerPopUp .companyContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.companyContainer .companyContainerInner,
+.selectedCompanyContainer .companyContainerInner {
+    border: 2px solid #03384d;
+    margin: 3px 10px;
+    padding: 2px 10px;
+    border-radius: 10px;
+}
+
+.centerContainerPopUp .companyContainerInner:hover {
+    background-color: #03384d;
+    color: white;
+}
+
+.selectedProduct p {
+    font-size: 20px;
+    margin-left: 12px;
+    margin-top: 20px;
+    /* border-bottom: 4px solid #03384d; */
+    display: inline-block;
+}
+
+.selectedProduct .selectedCompanyContainer {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+
+/* -------------------- Search Bar */
+.searchProductBar {
+    border: 2px solid #03384d;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    float: right;
+    margin-top: -35px;
+}
+
+.searchProductBar .searchProductInput {
+    border: none;
+    outline: none;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    border-radius: 20px;
+    padding-left: 16px;
+    background-color: transparent;
+}
+
+.searchProductBar i {
+    padding: 10px;
+    border-radius: 50%;
+    background-color: #03384d;
+    color: white;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.searchProductBar i:hover {
+    color: #03384d;
+    background-color: white;
+}
+
+
+
+/* ------------------ RIght Container */
+
+.rightContainer .dropDownContainerBox {
+    background-color: transparent;
+    padding-left: 28px;
+    padding-top: 0px;
+    margin-bottom: 20px;
+}
+
+
+.rightContainer .dropDownContainerBoxInner span {
+    position: absolute;
+    top: 7px;
+    left: 20px;
+    background-color: transparent;
+    height: 20px;
+    width: 90%;
+    overflow: hidden;
+    margin-left: 9px;
+}
+
+.centerContainer .centerContainerBtn,
+.centerContainer .centerContainerAllListBtn {
+    display: none;
+}
+
+
+/* ----------------- Media Queries */
+
+@media (max-width:650px) {
+    .home {
+        flex-direction: column;
+    }
+
+    .leftContainer {
+        flex-basis: 100%;
+        height: 0px;
+        background-color: white;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        padding-top: 30px;
+        position: fixed;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        overflow-y: scroll;
+        z-index: 100;
+    }
+
+    .leftContainer h5 {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .leftContainer .hideAllList {
+        display: none;
+    }
+
+    .leftContainerRadioBox .leftContainerLabel {
+        padding-left: 40px;
+        margin-top: 20px;
+    }
+
+    .leftContainerRadioBox .leftContainerLabel span {
+        position: absolute;
+        top: 3px;
+        left: 80px;
+        cursor: pointer;
+    }
+
+    .leftContainer .dropDownContainerBox {
+        padding-left: 70px;
+    }
+
+    .hideContainer {
+        display: none;
+    }
+
+    .searchProductBar {
+        margin-top: -40px;
+    }
+
+    .searchProductBar .searchProductInput {
+        height: 10px;
+    }
+
+    .centerContainer {
+        border: none;
+        flex-basis: 100%;
+        overflow: scroll;
+        width: 100%;
+    }
+
+    .centerContainerInner {
+        margin-left: 10px;
+    }
+
+    .centerContainer .rightContainer {
+        flex-basis: 100%;
+    }
+
+    .centerContainer .centerContainerBtn {
+        display: flex;
+        align-content: center;
+        justify-content: space-evenly;
+        /* background-color: red; */
+    }
+
+    .centerContainer .centerContainerBtn button {
+        flex-basis: 50%;
+        border: 2px solid #ccc;
+        outline: none;
+        padding: 10px 20px;
+        border-radius: 10px;
+        cursor: pointer;
+        margin: 10px 0px 10px;
+    }
+
+    .centerContainer .centerContainerAllListBtn {
+        border: 2px solid #ccc;
+        outline: none;
+        width: 100%;
+        border-radius: 10px;
+        padding: 10px 20px;
+        margin-bottom: 30px;
+        display: block;
+    }
+
+
+    .rightContainer {
+        flex-basis: 100%;
+        height: 0px;
+        background-color: white;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        padding-top: 30px;
+        position: fixed;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        overflow-y: scroll;
+        z-index: 100;
+    }
+
+    .rightContainer h5 {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    /* .rightContainer .leftContainerLabel {
+        padding-left: 40px;
+        margin-top: 20px;
+    }
+
+    .leftContainerRadioBox .leftContainerLabel span {
+        position: absolute;
+        top: 3px;
+        left: 80px;
+        cursor: pointer;
+    } */
+
+    .rightContainer .dropDownContainerBox {
+        padding-left: 70px;
+        margin-top: 20px;
+    }
+
+    .hideContainer {
+        display: none;
+    }
+}

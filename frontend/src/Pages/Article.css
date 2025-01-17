@@ -1,0 +1,236 @@
+.article {
+    /* background-color: lightblue; */
+    padding: 0 15%;
+    margin-top: 40px;
+    min-height: 79vh;
+}
+
+.article.showMenu {
+    margin-top: -50px;
+}
+
+.article.userMenu {
+    /* background-color: blue; */
+    margin-top: -190px;
+}
+
+.articleContainer {
+    /* background-color: rgb(207, 151, 151); */
+    height: 100%;
+}
+
+.articleContainer h3 {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: #011E29;
+    color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.articleContainer hr {
+    background-color: #011E29;
+    flex: 1;
+    border: none;
+    height: 3px;
+    margin-bottom: 10px;
+}
+
+/* ----------------------------------------- Article Container Inner */
+
+.articleContainerInner {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    margin-top: 0px;
+    margin-bottom: 50px;
+    /* background-color: blueviolet; */
+}
+
+
+/* ------------------------------------------- Article Particular Box */
+.articleParticularBox {
+    margin: 0px 20px 40px;
+    background-color: white;
+    /* background-color: rgb(151, 195, 151); */
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    padding: 30px 20px 30px 25px;
+    width: 32vw;
+    height: 240px;
+    /* border: 2px solid #ccc; */
+    transition: all 0.5s;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.articleParticularBox:hover {
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.articleParticularBox img {
+    width: 13vw;
+    height: 200px;
+    margin-right: 0.6vw;
+    transition: 0.5s;
+    object-fit: cover;
+}
+
+.articleParticularBox img:hover {
+    transform: scale(0.98);
+}
+
+.articleParticularBox h5 {
+    width: 16vw;
+    margin: 20px 2px 10px;
+    font-size: 16px;
+    /* background-color: rebeccapurple; */
+}
+
+.articleParticularBox h5:hover {
+    text-decoration: underline;
+}
+
+.articleParticularTimeDate {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 15.5vw;
+    text-align: end;
+    position: absolute;
+    bottom: 20px;
+    font-size: 13px;
+    /* background-color: rebeccapurple; */
+}
+
+
+
+/* ----------------------------------------------------- Media Queries */
+
+@media (max-width:1335px) {
+
+
+    .articleParticularBox {
+        width: 31vw;
+        height: 130px;
+        margin: 20px 2vw;
+        padding: 00px 00px 00px 0px;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+        align-items: flex-start;
+    }
+
+    .articleParticularBox img {
+        width: 10vw;
+        height: 130px;
+    }
+
+    .articleParticularBox h5 {
+        width: 16vw;
+        /* background-color: rebeccapurple; */
+        margin: 7px 0px;
+    }
+
+    .articleParticularTimeDate {
+        width: 20vw;
+        bottom: 7px;
+        /* background-color: rebeccapurple; */
+    }
+}
+
+
+@media (max-width:920px) {
+
+
+    .articleParticularBox {
+        width: 64vw;
+        height: 130px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+        margin: 0px 20px 30px;
+    }
+
+    .articleParticularBox img {
+        width: 18vw;
+        height: 130px;
+    }
+
+    .articleParticularBox h5 {
+        width: 41vw;
+        /* background-color: rebeccapurple; */
+    }
+
+    .articleParticularTimeDate {
+        width: 44vw;
+        bottom: 7px;
+        /* background-color: rebeccapurple; */
+    }
+}
+
+
+@media (max-width:650px) {
+
+    .article {
+        padding: 0 5%;
+    }
+
+    .articleParticularBox {
+        width: 82.5vw;
+        height: 110px;
+        margin: 0px 10px 20px;
+    }
+
+    .articleParticularBox img {
+        width: 22vw;
+        height: 110px;
+        margin-right: 7px;
+    }
+
+    .articleParticularBox h5 {
+        width: 57.5vw;
+        font-size: 14px;
+        /* background-color: rebeccapurple; */
+        /* margin-left: 5px; */
+    }
+
+    .articleParticularTimeDate {
+        width: 57.5vw;
+        bottom: 8px;
+        font-size: 11px;
+        /* background-color: rgb(176, 158, 194); */
+    }
+}
+
+
+@media (max-width:450px) {
+
+
+    .articleParticularBox {
+        width: 100%;
+        height: 90px;
+        margin: 0px 0px 20px;
+    }
+
+    .articleParticularBox img {
+        width: 27vw;
+        height: 90px;
+        margin-right: 7px;
+    }
+
+    .articleParticularBox h5 {
+        width: 59vw;
+        font-size: 14px;
+        /* background-color: rebeccapurple; */
+        /* margin-left: 5px; */
+    }
+
+    .articleParticularTimeDate {
+        width: 59vw;
+        bottom: 5px;
+        font-size: 11px;
+        /* background-color: rgb(176, 158, 194); */
+    }
+}

@@ -1,0 +1,244 @@
+.searchNews {
+    /* background-color: lightblue; */
+    padding: 0 15%;
+    margin-top: 40px;
+    min-height: 530px;
+}
+
+
+.searchNews.userMenu {
+    /* background-color: blue; */
+    margin-top: -190px;
+}
+
+.searchNews.showMenu {
+    margin-top: -50px;
+}
+
+.searchNewsContainer {
+    height: 100%;
+}
+
+.searchNewsContainer h3 {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: #011E29;
+    color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+
+.searchNewsContainer hr {
+    background-color: #011E29;
+    flex: 1;
+    border: none;
+    height: 3px;
+    margin-bottom: 10px;
+}
+
+
+/* ---------------------------------------------- Magazine Container Inner */
+
+
+
+.searchNewsContainerInner {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    /* background-color: red; */
+}
+
+
+/* ---------------------------------------------------- Start Event Particular Box */
+
+
+.searchNewsParticularBox {
+    margin: 20px 1.1vw 10px;
+    padding: 15px 15px 30px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    /* width: 1000px; */
+    width: 20.8vw;
+    height: 350px;
+    border: 2px dotted #ccc;
+    transition: all 0.5s;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.searchNewsParticularBox:hover {
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.searchNewsParticularBox img {
+    width: 18vw;
+    height: 200px;
+    margin: 0 auto 5px;
+    transition: 0.5s;
+    border-radius: 10px;
+}
+
+.searchNewsParticularBox img:hover {
+    transform: scale(0.97);
+}
+
+.searchNewsParticularBox h5 {
+    width: 17vw;
+    margin: 20px auto 10px;
+    font-size: 16px;
+    /* background-color: rebeccapurple; */
+}
+
+.searchNewsParticularBox h5:hover {
+    text-decoration: underline;
+}
+
+.searchNewsParticularTimeDate {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 17vw;
+    text-align: end;
+    position: absolute;
+    bottom: 10px;
+    /* right: 40px; */
+    font-size: 13px;
+    margin-left: 0.6vw;
+    /* background-color: rebeccapurple; */
+}
+
+
+
+
+/* ---------------------------- Media Queries */
+
+
+@media (max-width:1050px) {
+
+    .searchNewsParticularBox {
+        padding: 0px 0px 0px;
+        overflow: hidden;
+        margin: 20px 1.14vw 10px;
+        width: 21vw;
+        height: 310px;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .searchNewsParticularBox img {
+        width: 20.5vw;
+    }
+
+    .searchNewsParticularBox h5 {
+        width: 20vw;
+        margin-top: 10px;
+    }
+
+    .searchNewsParticularTimeDate {
+        display: block;
+        bottom: 4px;
+        /* background-color: blue; */
+        width: 19.4vw;
+        margin-left: 0.3vw;
+        justify-content: space-between;
+    }
+
+}
+
+@media (max-width:900px) {
+
+    .searchNewsParticularBox {
+        padding: 0px 0px 30px;
+        margin: 20px 1.5vw 10px;
+        width: 32vw;
+        height: 300px;
+    }
+
+    .searchNewsParticularBox img {
+        width: 32vw;
+        height: 200px;
+    }
+
+    .searchNewsParticularBox h5 {
+        width: 30vw;
+        margin: 10px auto 10px;
+        font-size: 15px;
+    }
+
+    .searchNewsParticularTimeDate {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 30vw;
+        bottom: 10px;
+        font-size: 13px;
+        margin-left: 6px;
+    }
+}
+
+
+@media (max-width:650px) {
+    .searchNews {
+        padding: 0 5%;
+    }
+
+    .searchNewsParticularBox {
+        margin: 20px 1vw 10px;
+        width: 43vw;
+        height: 280px;
+    }
+
+    .searchNewsParticularBox img {
+        width: 43vw;
+        height: 180px;
+    }
+
+    .searchNewsParticularBox h5 {
+        width: 40vw;
+        margin: 10px auto 10px;
+        font-size: 14px;
+    }
+
+    .searchNewsParticularTimeDate {
+        width: 40vw;
+        margin-left: 1vw;
+        bottom: 10px;
+        font-size: 11px;
+    }
+}
+
+
+@media (max-width:450px) {
+
+    .searchNewsParticularBox {
+        margin: 10px 3.8vw 10px;
+        /* padding: 20px 1vw 20px; */
+        width: 100vw;
+        height: 270px;
+    }
+
+    .searchNewsParticularBox img {
+        width: 82vw;
+        height: 180px;
+    }
+
+    .searchNewsParticularBox h5 {
+        width: 75vw;
+        margin: 10px auto 10px;
+        font-size: 14px;
+    }
+
+    .searchNewsParticularTimeDate {
+        width: 75vw;
+        margin-left: 3vw;
+        bottom: 10px;
+        font-size: 11px;
+    }
+}

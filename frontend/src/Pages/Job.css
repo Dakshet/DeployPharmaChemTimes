@@ -1,0 +1,250 @@
+.event {
+    /* background-color: lightblue; */
+    padding: 0 15%;
+    margin-top: 40px;
+    min-height: 61vh;
+}
+
+
+.event.userMenu {
+    /* background-color: blue; */
+    margin-top: -203px;
+}
+
+.event.showMenu {
+    margin-top: -39px;
+}
+
+
+.eventContainer {
+    height: 100%;
+    /* background-color: beige; */
+}
+
+.eventContainer h3 {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: #011E29;
+    color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+
+.eventContainer hr {
+    background-color: #011E29;
+    flex: 1;
+    border: none;
+    height: 3px;
+    margin-bottom: 10px;
+}
+
+
+/* ---------------------------------------------------- Event Container Inner */
+
+
+.eventContainerInner {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    /* background-color: red; */
+}
+
+
+/* ---------------------------------------------------- Start Event Particular Box */
+
+
+.eventParticularBox {
+    margin: 20px 1.1vw 10px;
+    padding: 15px 15px 30px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    /* width: 1000px; */
+    width: 20.8vw;
+    height: 350px;
+    border: 2px dotted #ccc;
+    transition: all 0.5s;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.eventParticularBox:hover {
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.eventParticularBox img {
+    width: 18vw;
+    height: 200px;
+    margin: 0 auto 5px;
+    transition: 0.5s;
+    border-radius: 10px;
+}
+
+.eventParticularBox img:hover {
+    transform: scale(0.97);
+}
+
+.eventParticularBox h5 {
+    width: 17vw;
+    margin: 20px auto 10px;
+    font-size: 16px;
+    /* background-color: rebeccapurple; */
+}
+
+.eventParticularBox h5:hover {
+    text-decoration: underline;
+}
+
+.eventParticularTimeDate {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 17vw;
+    text-align: end;
+    position: absolute;
+    bottom: 10px;
+    /* right: 40px; */
+    font-size: 13px;
+    margin-left: 0.6vw;
+    /* background-color: rebeccapurple; */
+}
+
+
+/* ---------------------------- Media Queries */
+
+
+@media (max-width:1050px) {
+
+    .eventParticularBox {
+        padding: 0px 0px 0px;
+        overflow: hidden;
+        margin: 20px 1.14vw 10px;
+        width: 21vw;
+        height: 310px;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .eventParticularBox img {
+        width: 20.5vw;
+    }
+
+    .eventParticularBox h5 {
+        /* background-color: blue; */
+        width: 20vw;
+        margin-top: 10px;
+    }
+
+    .eventParticularTimeDate {
+        display: block;
+        bottom: 4px;
+        /* background-color: blue; */
+        width: 19.4vw;
+        margin-left: 0.3vw;
+        justify-content: space-between;
+    }
+
+}
+
+@media (max-width:900px) {
+
+    .eventParticularBox {
+        padding: 0px 0px 30px;
+        margin: 0px 1.5vw 30px;
+        width: 32vw;
+        height: 300px;
+    }
+
+    .eventParticularBox img {
+        width: 32vw;
+        height: 200px;
+    }
+
+    .eventParticularBox h5 {
+        width: 30vw;
+        margin: 10px auto 10px;
+        font-size: 15px;
+        /* background-color: blue; */
+    }
+
+    .eventParticularTimeDate {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 30vw;
+        bottom: 10px;
+        font-size: 13px;
+        margin-left: 6px;
+        /* background-color: rebeccapurple; */
+    }
+}
+
+
+@media (max-width:650px) {
+    .event {
+        padding: 0 5%;
+    }
+
+    .eventParticularBox {
+        margin: 00px 1vw 20px;
+        width: 43vw;
+        height: 280px;
+    }
+
+    .eventParticularBox img {
+        width: 43vw;
+        height: 180px;
+    }
+
+    .eventParticularBox h5 {
+        width: 40vw;
+        margin: 10px auto 10px;
+        font-size: 14px;
+        /* background-color: blue; */
+    }
+
+    .eventParticularTimeDate {
+        width: 40vw;
+        margin-left: 1vw;
+        bottom: 10px;
+        font-size: 11px;
+        /* background-color: lightblue; */
+    }
+}
+
+
+@media (max-width:450px) {
+
+    .eventParticularBox {
+        margin: 0px 3.8vw 20px;
+        /* padding: 20px 1vw 20px; */
+        width: 100vw;
+        height: 270px;
+    }
+
+    .eventParticularBox img {
+        width: 82vw;
+        height: 180px;
+    }
+
+    .eventParticularBox h5 {
+        width: 75vw;
+        margin: 10px auto 10px;
+        font-size: 14px;
+        /* background-color: blue; */
+    }
+
+    .eventParticularTimeDate {
+        width: 75vw;
+        margin-left: 3vw;
+        bottom: 10px;
+        font-size: 11px;
+        /* background-color: lightblue; */
+    }
+}

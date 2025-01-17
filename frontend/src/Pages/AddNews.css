@@ -1,0 +1,126 @@
+.addNews {
+    /* background-color: lightblue; */
+    width: 100%;
+    height: 100%;
+    margin-top: 40px;
+    padding: 0 16%;
+}
+
+.addNews.userMenu {
+    /* background-color: blue; */
+    margin-top: -190px;
+}
+
+
+.addNews.showMenu {
+    margin-top: -50px;
+}
+
+
+.addNewsInner {
+    /* background-color: rgb(227, 173, 173); */
+    height: 100%;
+    width: 100%;
+    display: block;
+    margin: 0px auto 60px;
+    border-radius: 30px;
+    border: 5px solid #011E29;
+}
+
+.addNewsInner h1 {
+    text-align: center;
+    padding-top: 20px;
+}
+
+.addNewsForm {
+    margin: 20px 0px 40px;
+    /* background-color: rgb(226, 189, 233); */
+    padding: 30px 30px 40px;
+}
+
+label {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+input,
+textarea {
+    display: block;
+    width: 100%;
+    margin: 5px 0px;
+    margin-bottom: 30px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    resize: none;
+    font-size: 15px;
+    /* background-color: #022c3d;
+    color: white; */
+    border: 3px solid #011E29;
+}
+
+select {
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: #022c3d;
+    color: white;
+}
+
+.submitBtn {
+    width: 140px;
+    margin-top: 40px;
+    cursor: pointer;
+    background-color: #022c3d;
+    color: white;
+    float: right;
+    border-radius: 10px;
+}
+
+
+.joditEditor {
+    margin: 5px 0px;
+    margin-bottom: 30px;
+}
+
+/* It is use for hide the water mark of Powered by Jodit */
+/* .jodit_wysiwyg_source div[data-powered] {
+    display: none !important;
+} */
+
+.jodit .jodit-status-bar {
+    display: none !important;
+}
+
+
+
+/* ------------------------Responsive Design-------*/
+
+@media (max-width: 950px) {
+    .addNews {
+        padding: 0 15%;
+    }
+
+}
+
+@media (max-width: 750px) {
+    .addNews {
+        padding: 0 5%;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .addNewsForm {
+        padding: 30px 30px 70px;
+    }
+
+    label {
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+}

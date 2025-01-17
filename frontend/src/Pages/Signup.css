@@ -1,0 +1,165 @@
+.signup {
+    background-color: white;
+    height: 100%;
+    padding: 5vw 10vw;
+}
+
+.signupBox {
+    display: block;
+    width: 40vw;
+    margin: 0px auto;
+    /* background-color: rgb(116, 116, 190); */
+    border: 5px solid #011E29;
+    padding: 30px 30px;
+    border-radius: 30px;
+}
+
+.signupBox h2 {
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #011E29;
+    font-weight: 900;
+}
+
+.signupBox form #inputSNameField,
+.signupBox form #inputSEmailField {
+    border: none;
+    outline: none;
+    border-bottom: 2px solid #011E29;
+    border-radius: 0px;
+    padding: 10px 7px;
+    background-color: transparent;
+    color: black;
+    width: 100%;
+    margin: 5px 0px 30px;
+}
+
+.inputSPasswordField,
+.inputSCPasswordField {
+    border-bottom: 2px solid #011E29;
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.inputSPasswordField input,
+.inputSCPasswordField input {
+    border: none;
+    outline: none;
+    border-radius: 0px;
+    padding: 10px 7px;
+    background-color: transparent;
+    color: black;
+    width: 83%;
+    margin: 0px 0px 0px;
+}
+
+.inputSPasswordField #showBtn,
+.inputSCPasswordField #showBtn {
+    position: absolute;
+    top: 6px;
+    right: 0px;
+    padding: 4px 10px;
+    background-color: gainsboro;
+    color: black;
+    font-size: 15px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+
+.signupBox form input::placeholder {
+    color: black;
+}
+
+.signupBox form button {
+    display: block;
+    padding: 15px 9vw;
+    border-radius: 30px;
+    margin: 0px auto;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    background-color: #011E29;
+    color: white;
+    border: 3px solid #011E29;
+    transition: 0.4s;
+}
+
+.signupBox form button:hover {
+    background-color: white;
+    color: #011E29;
+}
+
+.signupBox p {
+    text-align: center;
+    font-size: 16px;
+    color: black;
+}
+
+.signupBox p span {
+    color: #011E29;
+    font-weight: 700;
+}
+
+.signupBox p span:hover {
+    text-decoration: underline;
+}
+
+
+/* ------------------------- Media Queries */
+
+@media (max-width:970px) {
+    .signupBox {
+        width: 60vw;
+    }
+
+    .signupBox h2 {
+        font-size: 24px;
+    }
+
+    .signupBox form label {
+        font-size: 20px;
+    }
+}
+
+@media (max-width:620px) {
+    .signupBox {
+        width: 80vw;
+    }
+
+    .signupBox h2 {
+        font-size: 24px;
+    }
+
+    .signupBox form label {
+        font-size: 18px;
+    }
+}
+
+@media (max-width:420px) {
+    .signup {
+        padding: 5vw 2vw;
+    }
+
+    .signupBox {
+        width: 96vw;
+    }
+
+    .signupBox h2 {
+        font-size: 22px;
+    }
+
+    .signupBox form label {
+        font-size: 16px;
+    }
+
+    .inputSPasswordField input,
+    .inputSCPasswordField input {
+        font-size: 13px;
+    }
+}

@@ -1,0 +1,196 @@
+/* ------------------------------------------------- Start Event Particular Box */
+
+
+.adPageBox {
+    margin: 20px 1.1vw 10px;
+    /* padding: 15px 15px 30px; */
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    /* width: 1000px; */
+    width: 20.8vw;
+    height: 260px;
+    border: 2px dotted #ccc;
+    transition: all 0.5s;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+    /* overflow: hidden; */
+}
+
+/* .adPageBox:hover {
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+} */
+
+.adPageBox img {
+    width: 100%;
+    height: 200px;
+    margin: 0 auto 5px;
+    transition: 0.5s;
+    border-radius: 10px;
+}
+
+
+.adPageItemBoxInner {
+    width: 100%;
+    height: 60px;
+    padding: 0px 10px;
+    /* background-color: red; */
+}
+
+.adPageBox h5 {
+    width: 100%;
+    height: 20px;
+    font-size: 16px;
+    /* background-color: rebeccapurple; */
+    overflow: hidden;
+}
+
+
+.adPageItemBoxInnerTimeDate {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 17vw;
+    text-align: end;
+    position: absolute;
+    bottom: 10px;
+    /* right: 40px; */
+    font-size: 13px;
+    margin-left: 0.6vw;
+    /* background-color: rgb(119, 104, 133); */
+}
+
+
+/* ---------------------------- Media Queries */
+
+
+@media (max-width:1050px) {
+
+    .adPageBox {
+        padding: 0px 0px 0px;
+        overflow: hidden;
+        margin: 20px 1.14vw 10px;
+        width: 21vw;
+        height: 310px;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .adPageBox img {
+        width: 20.5vw;
+    }
+
+    .adPageBox h5 {
+        /* background-color: blue; */
+        width: 20vw;
+        margin-top: 10px;
+    }
+
+    .adPageItemBoxInnerTimeDate {
+        display: block;
+        bottom: 4px;
+        /* background-color: blue; */
+        width: 19.4vw;
+        margin-left: 0.3vw;
+        justify-content: space-between;
+    }
+
+}
+
+@media (max-width:900px) {
+
+    .adPageBox {
+        padding: 0px 0px 30px;
+        margin: 0px 1.5vw 30px;
+        width: 32vw;
+        height: 300px;
+    }
+
+    .adPageBox img {
+        width: 32vw;
+        height: 200px;
+    }
+
+    .adPageBox h5 {
+        width: 30vw;
+        margin: 10px auto 10px;
+        font-size: 15px;
+        /* background-color: blue; */
+    }
+
+    .adPageItemBoxInnerTimeDate {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 30vw;
+        bottom: 10px;
+        font-size: 13px;
+        margin-left: 6px;
+        /* background-color: rebeccapurple; */
+    }
+}
+
+
+@media (max-width:650px) {
+    .event {
+        padding: 0 5%;
+    }
+
+    .adPageBox {
+        margin: 00px 1vw 20px;
+        width: 43vw;
+        height: 280px;
+    }
+
+    .adPageBox img {
+        width: 43vw;
+        height: 180px;
+    }
+
+    .adPageBox h5 {
+        width: 40vw;
+        margin: 10px auto 10px;
+        font-size: 14px;
+        /* background-color: blue; */
+    }
+
+    .adPageItemBoxInnerTimeDate {
+        width: 40vw;
+        margin-left: 1vw;
+        bottom: 10px;
+        font-size: 11px;
+        /* background-color: lightblue; */
+    }
+}
+
+
+@media (max-width:450px) {
+
+    .adPageBox {
+        margin: 0px 3.8vw 20px;
+        /* padding: 20px 1vw 20px; */
+        width: 100vw;
+        height: 270px;
+    }
+
+    .adPageBox img {
+        width: 82vw;
+        height: 180px;
+    }
+
+    .adPageBox h5 {
+        width: 75vw;
+        margin: 10px auto 10px;
+        font-size: 14px;
+        /* background-color: blue; */
+    }
+
+    .adPageItemBoxInnerTimeDate {
+        width: 75vw;
+        margin-left: 3vw;
+        bottom: 10px;
+        font-size: 11px;
+        /* background-color: lightblue; */
+    }
+}

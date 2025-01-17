@@ -1,0 +1,72 @@
+.dropdownAddMenu {
+    position: sticky;
+    top: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    z-index: 105;
+    /* background-color: rebeccapurple; */
+    /* margin-top: -243px; */
+}
+
+.ddAddMenu {
+    width: 150px;
+    height: 117px;
+    background-color: #011E29;
+    color: white;
+    text-align: center;
+    margin-right: 31vw;
+}
+
+.ddAddMenu p {
+    padding: 10px 0px;
+    /* background-color: beige; */
+    transition: 0.3s;
+}
+
+.ddAddMenu p:hover {
+    background-color: white;
+    color: #011E29;
+}
+
+.ddAddMenu p:first-child {
+    border-bottom: 2px solid white;
+}
+
+.dropdownAddMenuHide {
+    display: none;
+}
+
+
+
+/* ------------------------------------ Media Queries */
+
+@media (max-width:1400px) {
+    .ddAddMenu {
+        margin-right: 27vw;
+    }
+}
+
+@media (max-width:1300px) {
+    .ddAddMenu {
+        margin-right: 25vw;
+    }
+}
+
+@media (max-width:1200px) {
+    .ddAddMenu {
+        margin-right: 27%;
+    }
+}
+
+@media (max-width:1000px) {
+    .ddAddMenu {
+        margin-right: 26vw;
+    }
+}
+
+@media (max-width:850px) {
+    .ddAddMenu {
+        margin-right: 22vw;
+    }
+}

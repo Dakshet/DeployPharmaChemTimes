@@ -1,0 +1,362 @@
+.navbar {
+    background-color: #011E29;
+    color: White;
+    position: sticky;
+    top: 0px;
+    padding: 0px 4%;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+    border-bottom: 4px solid #011E29;
+    width: 100%;
+    margin-top: -1px;
+}
+
+.logoNavbar {
+    width: 40px;
+    height: 40px;
+    margin-top: 5px;
+}
+
+.navbar-center ul li {
+    list-style: none;
+    display: inline-block;
+    margin: 5px 20px 5px 20px;
+    font-weight: 550;
+    font-size: 17px;
+    position: relative;
+}
+
+.navbar-center ul li::after {
+    content: "";
+    position: absolute;
+    left: 0px;
+    bottom: -10px;
+    width: 0%;
+    height: 2px;
+    background-color: white;
+    transition: width 0.5s;
+}
+
+.navbar-center ul li.activeNav::after {
+    width: 100%;
+}
+
+
+.navbar-right ul li {
+    list-style: none;
+    display: inline-block;
+    margin: 5px 15px 5px 15px;
+    background-color: white;
+    padding: 8px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    color: #011E29;
+    font-weight: 600;
+}
+
+.navbar-right ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar-right ul img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    padding-top: 3px;
+    cursor: pointer;
+}
+
+
+.menu-icon {
+    display: none;
+}
+
+.navbar-center ul li.hideField {
+    display: none;
+}
+
+.navbar-center ul li.hideLogin {
+    display: none;
+}
+
+.navbar-right ul li.hideLogin {
+    display: none;
+}
+
+.navbar-center ul li i {
+    color: white;
+    padding: 7px;
+    cursor: pointer;
+    transition: 0.5s;
+    border-radius: 50%;
+    transition: all 0.5s;
+    background-color: #011E29;
+}
+
+.navbar-center ul li i:hover {
+    color: #011E29;
+    background-color: white;
+    font-weight: 600;
+    border-radius: 50%;
+}
+
+.navbar .showSearchBar {
+    display: none;
+}
+
+.navbarHide {
+    display: none;
+}
+
+.hideLogin {
+    display: none;
+}
+
+.dropDownBox {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    cursor: pointer;
+    background-color: transparent;
+    border-radius: 20px;
+    padding: 8px 14px;
+    font-weight: 600;
+    transition: 0.5s;
+}
+
+.dropDownBox:hover {
+    color: #011E29;
+    background-color: white;
+}
+
+.dropDownBox p {
+    margin-right: 0.3vw;
+    margin-left: 0.3vw;
+}
+
+.dropDownBox #downDownBoxIcon {
+    background-color: transparent;
+    /* color: white; */
+    border-radius: 0px;
+    padding: 0px;
+    transition: 0.5s;
+    opacity: 1;
+}
+
+.dropDownBox:hover #downDownBoxIcon {
+    color: #011E29;
+}
+
+.navbar-center ul li .hideField {
+    display: none;
+}
+
+
+
+/* --------------------------- Responsive media */
+
+
+@media (max-width:1450px) {
+    .navbar {
+        padding: 0 3%;
+    }
+
+    .navbar-center ul li {
+        margin: 5px 1.1vw;
+    }
+
+    .navbar-right ul li {
+        margin: 5px 8px;
+    }
+}
+
+
+
+@media (max-width:1200px) {
+    .navbar {
+        padding: 0 3%;
+    }
+
+    .navbar-left {
+        display: none;
+    }
+
+    .navbar-center {
+        margin-left: 5vw;
+    }
+
+    .navbar-center ul li {
+        margin: 5px 1.1vw;
+    }
+
+    .navbar-right ul li {
+        margin: 5px 8px;
+    }
+}
+
+
+
+@media (max-width:820px) {
+    .navbar {
+        padding: 0 1%;
+    }
+
+    .navbar-center ul li {
+        margin: 5px 5px;
+        font-size: 15px;
+    }
+
+    .navbar-right ul li {
+        margin: 5px 3px;
+        padding: 5px 10px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width:650px) {
+    .navbar {
+        padding: 0px 4%;
+        /* width: 100vw; */
+    }
+
+    .navbar-left {
+        display: block;
+    }
+
+    .navbar-center ul {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        bottom: 0;
+        width: 200px;
+        height: 95vh;
+        background-color: #011E29;
+        /* background-color: blue; */
+        z-index: -1;
+        padding-top: 0px;
+        animation: moveleftNavbar 0.5s forwards ease-out;
+        opacity: 0;
+        overflow-y: scroll;
+    }
+
+    @keyframes moveleftNavbar {
+        100% {
+            width: 200px;
+            opacity: 1;
+        }
+    }
+
+    .navbar-center ul li {
+        /* margin-top: 25px; */
+        margin-top: 2.5vh;
+        margin-left: 70px;
+        display: block;
+    }
+
+    .navbar-center ul li.hideField {
+        display: block;
+    }
+
+    .navbar-right {
+        display: none;
+    }
+
+    .menu-icon {
+        display: block;
+        margin: 0px 5%;
+        cursor: pointer;
+    }
+
+    .navbar-center .navbarCenterHide {
+        display: none;
+    }
+
+    .navbar-center ul li.hideSearchBarIcon {
+        display: none;
+    }
+
+    .navbar .showSearchBar {
+        display: block;
+        margin-right: -38vw;
+    }
+
+
+    .navbar-center ul li {
+        padding-left: 6px;
+    }
+
+    .navbar-center ul li.activeNav::after {
+        width: 80%;
+    }
+
+    .navbar-center ul li.hideField.hideLogin {
+        display: none;
+    }
+
+    .navbar-center ul li.hideField {
+        display: block;
+    }
+
+    .navbar-center ul li.hideField img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+    }
+
+    .navbar-center ul li.hideField span {
+        /* width: 220px; */
+        /* background-color: grey; */
+        margin-left: -70px;
+        text-align: center;
+        max-width: 500px;
+        /* background-color: blue; */
+        display: block;
+        font-size: 18px;
+    }
+
+    .navbar-center ul li.hideAddBtn {
+        display: none;
+    }
+
+
+    .navbar-center ul li .hideField {
+        display: none;
+    }
+
+    .navbar-center ul li .socialMediaIconx {
+        display: block;
+        /* background-color: red; */
+        margin-left: -70px;
+        height: 20px;
+    }
+
+    .navbar-center ul li .socialMediaIconx i {
+        margin: 2px 1px;
+        background-color: #02384d;
+        color: white;
+        display: inline-block;
+    }
+
+}
+
+@media (max-width:400px) {
+
+    .navbar .showSearchBar {
+        display: block;
+        margin-right: -33vw;
+    }
+
+    .navbar-center ul li {
+        padding-left: 6px;
+    }
+
+    .navbar-center ul li.activeNav::after {
+        width: 70%;
+    }
+
+}

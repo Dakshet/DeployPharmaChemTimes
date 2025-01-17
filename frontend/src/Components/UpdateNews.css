@@ -1,0 +1,168 @@
+.updateNews {
+    width: 100%;
+    height: 100%;
+    margin-top: 20px;
+    padding: 0 16%;
+    /* position: fixed; */
+    position: sticky;
+    /* position: absolute; */
+    top: 35px;
+    z-index: 100;
+    /* background-color: blue; */
+}
+
+.updateNewsInner {
+    background-color: white;
+    /* height: 670px; */
+    height: 700px;
+    /* height: 1200px; */
+    /* height: 100%; */
+    width: 100%;
+    display: block;
+    margin: 0px auto 50px;
+    border-radius: 30px;
+    border: 5px solid #011E29;
+}
+
+.updateNewsInner h1 {
+    text-align: center;
+    padding-top: 10px;
+}
+
+.updateNewsInner i {
+    float: right;
+    font-size: 30px;
+    margin-top: -33px;
+    margin-right: 40px;
+    cursor: pointer;
+}
+
+
+.updateNewsForm {
+    margin: 0px 0px 40px;
+    padding: 10px 30px 60px;
+}
+
+label {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+input,
+textarea {
+    display: block;
+    width: 100%;
+    margin: 5px 0px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    resize: none;
+    font-size: 15px;
+    /* background-color: #022c3d;
+    color: white; */
+    border: 3px solid #011E29;
+}
+
+
+select {
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: #022c3d;
+    color: white;
+}
+
+.submitBtn {
+    width: 130px;
+    /* margin-top: 40px; */
+    cursor: pointer;
+    background-color: #022c3d;
+    color: white;
+    float: right;
+    border-radius: 10px;
+}
+
+.hideUpdateModal {
+    display: none;
+}
+
+
+/* ------------------------Responsive Design-------*/
+
+@media (max-width: 1230px) {
+    .updateNewsInner {
+        height: 740px;
+    }
+}
+
+@media (max-width: 950px) {
+    .updateNews {
+        padding: 0 15%;
+    }
+
+    .updateNewsInner {
+        height: 750px;
+    }
+}
+
+
+@media (max-width: 750px) {
+    .updateNews {
+        padding: 0 5%;
+        position: sticky;
+    }
+
+    .updateNewsInner {
+        height: 720px;
+    }
+
+    .updateNewsInner i {
+        float: right;
+        font-size: 30px;
+        margin-top: -33px;
+        margin-right: 20px;
+        cursor: pointer;
+    }
+
+}
+
+@media (max-width: 655px) {
+    .updateNewsInner {
+        height: 740px;
+    }
+}
+
+@media (max-width: 530px) {
+    .updateNewsInner {
+        height: 780px;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .updateNewsInner i {
+        float: right;
+        font-size: 30px;
+        margin-top: -33px;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+
+    .updateNewsForm {
+        padding: 30px 20px 70px;
+    }
+
+    label {
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .updateNewsInner {
+        height: 850px;
+    }
+
+}

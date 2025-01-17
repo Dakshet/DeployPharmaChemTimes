@@ -1,0 +1,171 @@
+.adSection {
+    width: 100%;
+    height: 550px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    overflow: hidden;
+    position: relative;
+    /* background-color: red; */
+}
+
+
+.showProfileSectionForAd {
+    margin-top: -243px;
+    /* background-color: red; */
+}
+
+.adSection .adBtn {
+    background-color: #011E29;
+    height: 40px;
+    width: 40px;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.adSection .adBtn:hover {
+    background-color: red;
+}
+
+.slider {
+    display: flex;
+    /* width: 950px; */
+    width: 500px;
+    /* height: 100%; */
+    transition: transform 0.5s ease-in-out;
+    /* background-color: blue; */
+    overflow: hidden;
+}
+
+.slide {
+    min-width: 100%;
+    /* height: 100%; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    /* transition: transform 1s ease-in-out; */
+}
+
+.slide a {
+    position: relative;
+}
+
+.slide a img {
+    width: 430px;
+    height: 550px;
+    /* object-fit: cover; */
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.slide .adImageBtn {
+    content: "";
+    position: absolute;
+    bottom: 0px;
+    right: 2px;
+    /* filter: blur(10px); */
+    background-color: rgba(0, 0, 0, 0.5);
+    font-size: 20px;
+    z-index: 100;
+    width: 100%;
+    color: white;
+    height: 80px;
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    word-spacing: 4px;
+}
+
+
+.hideAd {
+    display: none;
+}
+
+
+@media (max-width:940px) {
+    /* .slide a img {
+        width: 700px;
+        height: 530px;
+    } */
+}
+
+
+@media (max-width:700px) {
+    /* .slide a img {
+        width: 600px;
+        height: 500px;
+    } */
+}
+
+@media (max-width:600px) {
+
+    .adSection {
+        height: 500px;
+        position: relative;
+    }
+
+    /* .slide a img {
+        width: 400px;
+        height: 430px;
+    } */
+
+    .adSection .adBtn {
+        height: 30px;
+        width: 30px;
+        padding: 7px;
+    }
+
+    .adSection .adBtn:hover {
+        background-color: #011E29;
+    }
+
+    .adSection #backIcon {
+        position: absolute;
+        bottom: 0px;
+        left: 40%;
+        z-index: 99;
+    }
+
+    .adSection #nextIcon {
+        position: absolute;
+        bottom: 0px;
+        right: 40%;
+    }
+
+    .slide .adImageBtn {
+        font-size: 17px;
+        height: 40px;
+    }
+
+
+}
+
+@media (max-width:410px) {
+
+    .adSection {
+        height: 470px;
+        margin-top: 00px;
+    }
+
+    .slide a img {
+        width: 330px;
+        height: 400px;
+    }
+
+    .adSection #backIcon {
+        position: absolute;
+        bottom: 0px;
+        left: 40%;
+        z-index: 99;
+    }
+
+    .adSection #nextIcon {
+        position: absolute;
+        bottom: 0px;
+        right: 40%;
+    }
+}

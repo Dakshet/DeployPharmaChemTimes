@@ -1,0 +1,153 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+
+
+/* ------------------------------------------ Spinner Animation Add */
+.circle {
+  margin-top: 250px;
+  margin-bottom: 32vh;
+  margin-left: 50%;
+  height: 100px;
+  width: 100px;
+  background-color: white;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 15px solid #ccd1ce;
+  border-top: 15px solid #011E29;
+  border-bottom: 15px solid #011E29;
+  animation: animate 5s infinite linear;
+}
+
+@keyframes animate {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg)
+  }
+
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg)
+  }
+}
+
+
+
+
+
+/* .pagination {
+  background-color: red;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+}
+
+.paginationInnerBtns {
+  height: 50px;
+  width: 80px;
+  background-color: #011E29;
+  color: white;
+  border-radius: 10px;
+  margin: 10px 20px;
+  border: none;
+  outline: none;
+} */
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.pagination button {
+  margin: 0 5px;
+  padding: 5px 10px;
+  border: none;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.pagination button.active {
+  background-color: #011E29;
+  color: white;
+}
+
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+
+
+.goToPreviousePage {
+  position: absolute;
+  /* top: 50px; */
+  top: 260px;
+  left: 0px;
+  /* background-color: red; */
+  width: 100%;
+  padding: 20px 4%;
+}
+
+.goToPreviousePage i {
+  /* background-color: #011E29; */
+  padding: 10px;
+  color: black;
+  border-radius: 50%;
+}
+
+
+
+/* ----------------------------------------- User menu */
+
+
+@media (max-width:650px) {
+
+  .goToPreviousePage {
+    top: 200px;
+  }
+}
+
+
+@media (max-width:570px) {
+
+  .goToPreviousePage {
+    top: 145px;
+    left: -10px;
+  }
+}
+
+
+
+
+/* ----------------------------------------- User menu */

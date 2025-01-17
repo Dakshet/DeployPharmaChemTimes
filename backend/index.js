@@ -49,7 +49,8 @@ app.use(cors({
     credentials: true,
 }));
 
-app.use(prerender);
+app.options('*', cors());
+
 
 // app.use((req, res, next) => {
 //     res.header('Access-Control-Allow-Origin', '*'); // Allow requests from any origin

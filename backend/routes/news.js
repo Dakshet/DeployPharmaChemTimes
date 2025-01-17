@@ -36,7 +36,7 @@ router.post("/addadvertisement", fetchUser, addAD)
 // Routes for the Chemicals
 router.get("/fetchallproductdata", fetchAllProductData)
 
-router.post("/addproductdata", addProductData)
+router.post("/addproductdata", fetchUser, addProductData)
 
 router.delete("/deleteproductdata", deleteProductData)
 

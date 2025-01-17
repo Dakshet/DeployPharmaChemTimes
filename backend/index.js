@@ -43,7 +43,7 @@ handleToDB(MONGODB_URL).then(() => {
 
 // Cors
 app.use(cors({
-    origin: FRONTEND_URL,
+    origin: [FRONTEND_URL],
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization", "auth_token"],
     credentials: true,
@@ -61,13 +61,13 @@ app.use(cors({
 
 
 // Global handling for preflight OPTIONS requests
-app.options('*', (req, res) => {
-    res.header('Access-Control-Allow-Origin', FRONTEND_URL);
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.header('Access-Control-Allow-Credentials', 'true');
-    res.sendStatus(204); // Respond with no content
-});
+// app.options('*', (req, res) => {
+//     res.header('Access-Control-Allow-Origin', FRONTEND_URL);
+//     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+//     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+//     res.header('Access-Control-Allow-Credentials', 'true');
+//     res.sendStatus(204); // Respond with no content
+// });
 
 
 

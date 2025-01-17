@@ -60,15 +60,14 @@ app.use(prerender);
 // });
 
 
-// Global handling for preflight OPTIONS requests
-// app.options('*', (req, res) => {
-//     res.header('Access-Control-Allow-Origin', FRONTEND_URL);
-//     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-//     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-//     res.header('Access-Control-Allow-Credentials', 'true');
-//     res.sendStatus(204); // Respond with no content
-// });
-
+// Explicit handling of preflight requests
+app.options('*', (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', FRONTEND_URL);
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.sendStatus(204); // No Content
+});
 
 
 // Middleware

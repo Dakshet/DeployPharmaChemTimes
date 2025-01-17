@@ -19,7 +19,10 @@
         "OPTIONS"
       ],
       "headers": {
-        "Access-Control-Allow-Origin": true
+        "Access-Control-Allow-Origin": "https://deploy-pharma-chem-times-f.vercel.app", // specify the frontend URL here
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization, auth_token",
+        "Access-Control-Allow-Credentials": "true"
       }
     }
   ]

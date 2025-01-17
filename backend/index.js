@@ -4,7 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path")
 const { handleToDB } = require("./connection");
-const prerender = require('prerender-node');
+// const prerender = require('prerender-node');
 
 
 const app = express();
@@ -12,13 +12,13 @@ const PORT = process.env.PORT || 4000;
 const MONGODB_URL = process.env.MONGODB_URL;
 const FRONTEND_URL = process.env.FRONTEND_URL || "https://deploy-pharma-chem-times-f.vercel.app";
 // const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
-const PRERENDER_TOKEN = process.env.PRERENDER_TOKEN;
+// const PRERENDER_TOKEN = process.env.PRERENDER_TOKEN;
 // console.log(FRONTEND_URL);
 // const FRONTEND_URL = "https://deploy-news-web-frontend.vercel.app";
 
 
 // Add your prerender.io token here
-prerender.set('prerenderToken', PRERENDER_TOKEN);
+// prerender.set('prerenderToken', PRERENDER_TOKEN);
 
 
 // Route Import
@@ -49,7 +49,34 @@ app.use(cors({
     credentials: true,
 }));
 
-app.use(prerender);
+// app.use(prerender);
+
+
+
+const allowCors = fn => async (req, res) => {
+    // res.setHeader('Access-Control-Allow-Credentials', true)
+    // res.setHeader('Access-Control-Allow-Origin', '*')
+    // another common pattern
+    // res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
+    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT')
+    res.setHeader(
+        'Access-Control-Allow-Headers',
+        'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+    )
+    if (req.method === 'OPTIONS') {
+        res.status(200).end()
+        return
+    }
+    return await fn(req, res)
+}
+
+const handler = (req, res) => {
+    const d = new Date()
+    res.end(d.toString())
+}
+
+allowCors(handler)
+
 
 // app.use((req, res, next) => {
 //     res.header('Access-Control-Allow-Origin', '*'); // Allow requests from any origin

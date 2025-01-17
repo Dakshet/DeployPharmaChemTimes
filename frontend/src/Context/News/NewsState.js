@@ -614,8 +614,7 @@ const NewsState = (props) => {
             const response = await fetch(`${host}/news/fetchallproductdata`, {
                 method: "GET",
                 headers: {
-                    "Content-Type": "application/json",
-                    "cors": "no-cors"
+                    "Content-Type": "application/json"
                 }
             })
 

@@ -565,8 +565,6 @@ async function countVisitNumber(req, res) {
             $inc: { count: 1 }
         });
 
-        console.log(news);
-
         let currentDateMail = await CountVisit.findOne({
             month: "currentDateMail"
         });
@@ -710,7 +708,7 @@ async function addProductData(req, res) {
 
         chemical = await chemical.save();
 
-        console.log(chemical);
+        // console.log(chemical);
 
         // //Final
         success = true;

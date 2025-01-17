@@ -40,30 +40,16 @@ handleToDB(MONGODB_URL).then(() => {
     process.exit(1); // Exit the process if the DB connection fails
 })
 
+
 // Cors
 app.use(cors({
-    origin: (origin, callback) => {
-        if (!origin || [FRONTEND_URL, 'https://deploy-pharma-chem-times-b.vercel.app'].includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
+    origin: FRONTEND_URL,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization", "auth_token"],
     credentials: true,
 }));
 
-
-app.options('*', (req, res) => {
-    res.header('Access-Control-Allow-Origin', FRONTEND_URL);
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, auth_token');
-    res.header('Access-Control-Allow-Credentials', 'true');
-    res.sendStatus(204); // Respond with no content
-});
-
-
+app.use(prerender);
 
 // app.use((req, res, next) => {
 //     res.header('Access-Control-Allow-Origin', '*'); // Allow requests from any origin

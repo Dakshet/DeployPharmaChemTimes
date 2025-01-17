@@ -79,7 +79,7 @@ const NewsState = (props) => {
                 // const response = await fetch(`https://deploy-news-web-backend.vercel.app/news/fetchspecificpagenews?tag=${pageName}`, {
                 method: "GET",
                 headers: {
-                    "Content-Type": "application/json",
+                    "Content-Type": "application/json"
                 }
             })
 
@@ -375,7 +375,7 @@ const NewsState = (props) => {
             const response = await fetch(`${host}/comment/fetchallcomments/${id}`, {
                 method: "GET",
                 headers: {
-                    "Content-Type": "application/json",
+                    "Content-Type": "application/json"
                 }
             })
 
@@ -457,7 +457,7 @@ const NewsState = (props) => {
             const response = await fetch(`${host}/news/fetchsearchuser?search=${word}`, {
                 method: "GET",
                 headers: {
-                    "Content-Type": "application/json",
+                    "Content-Type": "application/json"
                 }
             })
 
@@ -498,7 +498,7 @@ const NewsState = (props) => {
             const response = await fetch(`${host}/news/updatecount?month=${monthInNum}`, {
                 method: "PUT",
                 headers: {
-                    "Content-Type": "application/json",
+                    "Content-Type": "application/json"
                 }
             })
 
@@ -614,7 +614,7 @@ const NewsState = (props) => {
             const response = await fetch(`${host}/news/fetchallproductdata`, {
                 method: "GET",
                 headers: {
-                    "Content-Type": "application/json",
+                    "Content-Type": "application/json"
                 }
             })
 

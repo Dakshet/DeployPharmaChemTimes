@@ -64,9 +64,9 @@ app.use(prerender);
 app.options('*', (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', FRONTEND_URL);
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization', "auth_token");
     res.setHeader('Access-Control-Allow-Credentials', 'true');
-    res.sendStatus(200); // No Content
+    res.sendStatus(204); // No Content
 });
 
 

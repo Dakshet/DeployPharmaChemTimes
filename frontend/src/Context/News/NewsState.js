@@ -623,8 +623,6 @@ const NewsState = (props) => {
                 // console.log(json)
 
                 if (json.chemicals) {
-                    // setSearchNewsResult(json.news);
-                    // console.log(json.chemicals)
                     setShowAllProducts(json.chemicals)
                 }
 

@@ -10,7 +10,7 @@ const AdSection = ({ showProfile }) => {
     // const [slides, setSlides] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const { seeAds, fetchPageSpecificNews } = useContext(NewsContext);
-    const hideOnRoutes = ['/news', '/article', '/interview', '/event', '/job', '/magazine']
+    const hideOnRoutes = ['/', '/news', '/article', '/interview', '/event', '/job', '/magazine']
     const location = useLocation();
     const showAds = hideOnRoutes.includes(location.pathname); // Determine ad visibility based on the route
 

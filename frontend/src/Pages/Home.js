@@ -1,9 +1,8 @@
 import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import NewsContext from '../Context/News/NewsContext'
 import "./Home.css"
-import RadioLabel from '../Components/RadioLabel';
 
-const Home = ({ showProfile }) => {
+const Home = () => {
 
     const { visitCounter, showAllProducts, fetchProductChemicalData, } = useContext(NewsContext);
 
@@ -781,7 +780,7 @@ const Home = ({ showProfile }) => {
 
 
     return (
-        <div className={`home ${showProfile ? "userProfile" : ""}`}>
+        <div className={`home`}>
             <div className={`leftContainer ${showProductList ? "" : "hideContainer"}`}>
                 <h5>By Products</h5>
 

@@ -30,6 +30,11 @@ const commentRoute = require("./routes/comment")
 handleToDB(MONGODB_URL).then(() => {
     console.log("MongoDB Connected Successfully!");
 
+    // Listen
+    app.listen(PORT, () => {
+        console.log(`Server is running on ${PORT}`);
+    });
+
 }).catch((error) => {
     console.error("Failed to connect to MongoDB:", error.message);
     process.exit(1); // Exit the process if the DB connection fails
@@ -56,13 +61,13 @@ app.use(prerender);
 
 
 // Explicit handling of preflight requests
-// app.options('*', (req, res) => {
-//     res.setHeader('Access-Control-Allow-Origin', FRONTEND_URL);
-//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-//     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-//     res.setHeader('Access-Control-Allow-Credentials', 'true');
-//     res.sendStatus(204); // No Content
-// });
+app.options('*', (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', FRONTEND_URL);
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.sendStatus(204); // No Content
+});
 
 
 // Middleware
@@ -117,7 +122,3 @@ app.use('/comment', commentRoute)
 // })
 
 
-// Listen
-app.listen(PORT, () => {
-    console.log(`Server is running on ${PORT}`);
-});

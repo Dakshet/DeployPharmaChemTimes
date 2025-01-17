@@ -4,7 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path")
 const { handleToDB } = require("./connection");
-// const prerender = require('prerender-node');
+const prerender = require('prerender-node');
 
 
 const app = express();
@@ -49,7 +49,7 @@ app.use(cors({
     credentials: true,
 }));
 
-// app.use(prerender);
+app.use(prerender);
 
 
 // app.use((req, res, next) => {

@@ -12,13 +12,13 @@ const PORT = process.env.PORT || 4000;
 const MONGODB_URL = process.env.MONGODB_URL;
 const FRONTEND_URL = process.env.FRONTEND_URL || "https://deploy-pharma-chem-times-f.vercel.app";
 // const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
-// const PRERENDER_TOKEN = process.env.PRERENDER_TOKEN;
+const PRERENDER_TOKEN = process.env.PRERENDER_TOKEN;
 // console.log(FRONTEND_URL);
 // const FRONTEND_URL = "https://deploy-news-web-frontend.vercel.app";
 
 
 // Add your prerender.io token here
-// prerender.set('prerenderToken', PRERENDER_TOKEN);
+prerender.set('prerenderToken', PRERENDER_TOKEN);
 
 
 // Route Import
@@ -49,15 +49,7 @@ app.use(cors({
     credentials: true,
 }));
 
-app.options("*", (req, res) => {
-    res.header("Access-Control-Allow-Origin", process.env.FRONTEND_URL || "https://your-frontend.vercel.app");
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-    res.sendStatus(204); // No Content
-});
-
-
-// app.use(prerender);
+app.use(prerender);
 
 // app.use((req, res, next) => {
 //     res.header('Access-Control-Allow-Origin', '*'); // Allow requests from any origin

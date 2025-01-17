@@ -30,11 +30,6 @@ const commentRoute = require("./routes/comment")
 handleToDB(MONGODB_URL).then(() => {
     console.log("MongoDB Connected Successfully!");
 
-    // Listen
-    app.listen(PORT, () => {
-        console.log(`Server is running on ${PORT}`);
-    });
-
 }).catch((error) => {
     console.error("Failed to connect to MongoDB:", error.message);
     process.exit(1); // Exit the process if the DB connection fails
@@ -122,3 +117,7 @@ app.use('/comment', commentRoute)
 // })
 
 
+// Listen
+app.listen(PORT, () => {
+    console.log(`Server is running on ${PORT}`);
+});

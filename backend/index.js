@@ -40,7 +40,6 @@ handleToDB(MONGODB_URL).then(() => {
     process.exit(1); // Exit the process if the DB connection fails
 })
 
-
 // Cors
 app.use(cors({
     origin: (origin, callback) => {
@@ -56,7 +55,14 @@ app.use(cors({
 }));
 
 
-app.options('*', cors());
+app.options('*', (req, res) => {
+    res.header('Access-Control-Allow-Origin', FRONTEND_URL);
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, auth_token');
+    res.header('Access-Control-Allow-Credentials', 'true');
+    res.sendStatus(204); // Respond with no content
+});
+
 
 
 // app.use((req, res, next) => {

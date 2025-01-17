@@ -490,38 +490,38 @@ const NewsState = (props) => {
     //Count Visit
     const visitCounter = async () => {
 
-        const date = new Date();
-        let monthInNum = date.getMonth();
+        // const date = new Date();
+        // let monthInNum = date.getMonth();
 
-        try {
+        // try {
 
-            const response = await fetch(`${host}/news/updatecount?month=${monthInNum}`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            })
+        //     const response = await fetch(`${host}/news/updatecount?month=${monthInNum}`, {
+        //         method: "PUT",
+        //         headers: {
+        //             "Content-Type": "application/json"
+        //         }
+        //     })
 
-            if (response.ok) {
-                const json = await response.json();
+        //     if (response.ok) {
+        //         const json = await response.json();
 
-                if (json.count) {
-                    // console.log(json.count);
+        //         if (json.count) {
+        //             // console.log(json.count);
 
-                }
+        //         }
 
-                else {
-                    console.log(json.Error);
-                }
-            }
+        //         else {
+        //             console.log(json.Error);
+        //         }
+        //     }
 
-            else {
-                console.log(`Error counting news: ${response.status} ${response.statusText}`)
-            }
+        //     else {
+        //         console.log(`Error counting news: ${response.status} ${response.statusText}`)
+        //     }
 
-        } catch (error) {
-            console.error("Error counting the news:", error);
-        }
+        // } catch (error) {
+        //     console.error("Error counting the news:", error);
+        // }
 
 
     }

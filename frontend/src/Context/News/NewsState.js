@@ -649,7 +649,7 @@ const NewsState = (props) => {
 
 
 
-    return (<NewsContext.Provider value={{ news, fetchNews, pageNews, setPageNews, fetchPageSpecificNews, getNewsUsingId, specificNews, setSpecificNews, addNews, deleteNews, editNews, commentNews, fetchComment, addComment, searchNewsResult, setSearchNewsResult, fetchSearchNews, loginUserInfo, addMagazine, deleteMagazine, visitCounter, addAdvertisement, seeAds, showAllProducts, addProductData, fetchProductChemicalData }}>
+    return (<NewsContext.Provider value={{ pageNews, setPageNews, fetchPageSpecificNews, getNewsUsingId, specificNews, setSpecificNews, addNews, deleteNews, editNews, commentNews, fetchComment, addComment, searchNewsResult, setSearchNewsResult, fetchSearchNews, loginUserInfo, addMagazine, deleteMagazine, visitCounter, addAdvertisement, seeAds, showAllProducts, addProductData, fetchProductChemicalData }}>
         {props.children}
     </NewsContext.Provider>
     )

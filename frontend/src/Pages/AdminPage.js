@@ -12,7 +12,7 @@ const AdminPage = () => {
     const handleClick = useCallback(() => {
         setSearchNewsResult([]);
         setSpecificNews({});
-    }, [])
+    }, [setSearchNewsResult, setSpecificNews])
 
 
     return (

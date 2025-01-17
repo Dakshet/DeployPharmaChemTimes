@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import "./News.css";
 import NewsContext from '../Context/News/NewsContext';
-import NewsItem from '../Components/NewsItem';
+// import NewsItem from '../Components/NewsItem';
 import { useNavigate } from 'react-router-dom';
 
 const News = ({ showAddMenu }) => {

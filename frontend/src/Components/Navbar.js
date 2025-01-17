@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react'
 import "./Navbar.css"
 import { Link, useLocation, useNavigate } from "react-router-dom"
-import logoImage from '../Images/logo.jpg'
 import SearchBar from './SearchBar'
 import NewsContext from '../Context/News/NewsContext'
 import { useDispatch, useSelector } from 'react-redux'
@@ -41,10 +40,10 @@ const Navbar = ({ setShowAddMenu, showProfile, setShowProfile, showSearch, setSh
         setShowProfile(false);
     }
 
-    const handleUserProfile = () => {
-        setShowProfile(!showProfile)
-        setShowAddMenu(false);
-    }
+    // const handleUserProfile = () => {
+    //     setShowProfile(!showProfile)
+    //     setShowAddMenu(false);
+    // }
 
     // const handleShowAddMenu = () => {
     //     setShowAddMenu(!showAddMenu)

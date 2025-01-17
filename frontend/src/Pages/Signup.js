@@ -47,7 +47,7 @@ const Signup = ({ showAlert }) => {
                 }
 
                 else {
-                    console.log(`Error fetching news: ${response.status} ${response.statusText}`)
+                    console.log(`Error during signup: ${response.status} ${response.statusText}`)
                     // setCommentNews(commentNews);
                 }
 
@@ -57,7 +57,7 @@ const Signup = ({ showAlert }) => {
             }
         }
         catch (error) {
-            console.error("Error fetching the news:", error);
+            console.error("Error during the signup:", error);
             // setCommentNews(commentNews);
         }
     }

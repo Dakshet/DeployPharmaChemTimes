@@ -1,11 +1,10 @@
 import React, { useCallback, useContext } from 'react'
 import "./ADPageItem.css"
-import { useNavigate } from 'react-router-dom';
 import NewsContext from '../Context/News/NewsContext';
 
 const ADPageItem = ({ adS, showAlert }) => {
 
-    const navigate = useNavigate();
+
     const { deleteNews } = useContext(NewsContext);
 
 

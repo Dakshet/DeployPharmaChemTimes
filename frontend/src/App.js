@@ -5,8 +5,7 @@ import Navbar from './Components/Navbar';
 import {
   BrowserRouter as Router,
   Routes,
-  Route,
-  useLocation,
+  Route
 } from "react-router-dom"
 import NewsState from './Context/News/NewsState';
 import { useState } from 'react';

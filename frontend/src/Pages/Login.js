@@ -42,12 +42,13 @@ const Login = ({ showAlert }) => {
             }
 
             else {
-                console.log(`Error fetching news: ${response.status} ${response.statusText}`)
+                console.log(`Error during login: ${response.status} ${response.statusText}`)
                 // setCommentNews(commentNews);
+                alert("User is not found!")
             }
         }
         catch (error) {
-            console.error("Error fetching the news:", error);
+            console.error("Error during the login:", error);
             // setCommentNews(commentNews);
         }
 

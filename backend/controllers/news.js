@@ -653,28 +653,6 @@ async function fetchAllProductData(req, res) {
     try {
         const chemicals = await Chemicals.find({});
 
-        // chemicals.forEach(chemical => {
-        //     console.log(`Chemical: ${chemical.name}`);
-        //     chemical.companyName.forEach(company => {
-        //         console.log(`Company: ${company.company} and ${company.link}`);
-        //     });
-        // });
-
-
-        // const formattedData = chemicals.map(chemical => ({
-        //     id: chemical._id,
-        //     name: chemical.name,
-        //     companyNames: chemical.companyName.map(company => ({
-        //         id: company._id,
-        //         name: company.name
-        //     })),
-        //     createdAt: chemical.createdAt,
-        //     updatedAt: chemical.updatedAt
-        // }));
-
-        // console.log(formattedData);
-
-        // console.log(chemicals)
         success = true;
         return res.status(200).json({ success, chemicals })
 

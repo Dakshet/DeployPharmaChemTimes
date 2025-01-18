@@ -4,7 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path")
 const { handleToDB } = require("./connection");
-// const prerender = require('prerender-node');
+const prerender = require('prerender-node');
 
 
 const app = express();
@@ -12,13 +12,13 @@ const PORT = process.env.PORT || 4000;
 const MONGODB_URL = process.env.MONGODB_URL;
 const FRONTEND_URL = process.env.FRONTEND_URL || "https://deploy-pharma-chem-times-f.vercel.app";
 // const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
-// const PRERENDER_TOKEN = process.env.PRERENDER_TOKEN;
+const PRERENDER_TOKEN = process.env.PRERENDER_TOKEN;
 // console.log(FRONTEND_URL);
 // const FRONTEND_URL = "https://deploy-news-web-frontend.vercel.app";
 
 
 // Add your prerender.io token here
-// prerender.set('prerenderToken', PRERENDER_TOKEN);
+prerender.set('prerenderToken', PRERENDER_TOKEN);
 
 
 // Route Import
@@ -49,7 +49,7 @@ app.use(cors({
     credentials: true,
 }));
 
-// app.use(prerender);
+app.use(prerender);
 
 
 // app.use((req, res, next) => {
@@ -61,13 +61,13 @@ app.use(cors({
 
 
 // Explicit handling of preflight requests
-app.options('*', (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', FRONTEND_URL);
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization', "auth_token");
-    res.setHeader('Access-Control-Allow-Credentials', 'true');
-    res.sendStatus(200); // No Content
-});
+// app.options('*', (req, res) => {
+//     res.setHeader('Access-Control-Allow-Origin', FRONTEND_URL);
+//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+//     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization', "auth_token");
+//     res.setHeader('Access-Control-Allow-Credentials', 'true');
+//     res.sendStatus(200); // No Content
+// });
 
 
 // Middleware

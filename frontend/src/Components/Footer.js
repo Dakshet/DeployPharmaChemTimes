@@ -16,7 +16,7 @@ const Footer = () => {
                     {/* <img className='userIcon' src="https://static.vecteezy.com/system/resources/thumbnails/024/183/525/small/avatar-of-a-man-portrait-of-a-young-guy-illustration-of-male-character-in-modern-color-style-vector.jpg" alt="" /> */}
                     <div className="footerOneInnerDiv">
                         <h1>Jitendra Nate</h1>
-                        <p>Editor & Director</p>
+                        <p>Publisher & Sales Head</p>
                     </div>
                     <div className="footerOneInnerDiv">
                         <h1>Disha Nate</h1>
@@ -39,34 +39,34 @@ const Footer = () => {
                 </div>
                 <div className="footerOneInnerx">
                     <ul>
-                        <li><img src={mail_icon} alt="" />industrialtimes24@gmail.com </li>
-                        <li><img src={phone_icon} alt="" />+91 8652654519</li>
-                        <li><img src={location_icon} alt="" />B-202, Today Royal Elisum,<br /> Sector - 2, Karanjade, <br /> Navi Mumbai - 410206</li>
+                        <li><img src={mail_icon} alt="" />pharmachemtimes@gmail.com</li>
+                        <li><img src={phone_icon} alt="" />+91 8779345336 / +91 8652654519</li>
+                        <li><img src={location_icon} alt="" />C-204, Today Royal Elisum,<br /> Sector - 2, Karanjade, <br /> Navi Mumbai - 410206</li>
                         <li className='footerSocialIcon'>
                             <a
-                                href="https://wa.me/+918652654519?text=Hello%20Industrial%20Times!"
+                                href="https://wa.me/+918779345336?text=Hello%20PharmaChem%20Times!"
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
                                 <i className="ri-whatsapp-line"></i>
                             </a>
                             <a
-                                href="mailto:industrialtimes24@gmail.com"
+                                href="mailto:pharmachemtimes@gmail.com"
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
                                 <i className="ri-mail-line"></i>
                             </a>
-                            <a href="https://youtube.com/@industrialtimes24?si=n67pYl2TJSSpb0bD" target="_blank" rel="noopener noreferrer">
+                            <a href="https://www.youtube.com/@PharmachemTimes" target="_blank" rel="noopener noreferrer">
                                 <i className="ri-youtube-line"></i>
                             </a>
                             <a href="https://www.linkedin.com/in/industrial-times-7ab62431a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer">
                                 <i className="ri-linkedin-box-line"></i>
                             </a>
-                            <a href="https://www.facebook.com/61570010956901/posts/122105459990667031" target="_blank" rel="noopener noreferrer">
+                            <a href="https://www.facebook.com/profile.php?id=61555495514208" target="_blank" rel="noopener noreferrer">
                                 <i className="ri-facebook-box-line"></i>
                             </a>
-                            <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+                            <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
                                 <i className="ri-instagram-line"></i>
                             </a>
                         </li>

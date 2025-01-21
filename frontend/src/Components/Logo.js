@@ -30,7 +30,7 @@ const Logo = () => {
                 <a href="https://www.youtube.com/@PharmachemTimes" target="_blank" rel="noopener noreferrer">
                     <i className="ri-youtube-line"></i>
                 </a>
-                <a href="https://www.linkedin.com/in/industrial-times-7ab62431a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.linkedin.com/in/pharmachem-times-13b0662b0?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer">
                     <i className="ri-linkedin-box-line"></i>
                 </a>
                 <a href="https://www.facebook.com/profile.php?id=61555495514208" target="_blank" rel="noopener noreferrer">

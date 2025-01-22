@@ -63,7 +63,7 @@ const Login = ({ showAlert }) => {
 
     // Title change
     useEffect(() => {
-        document.title = "INDUSTRIAL TIMES - Login";  // Set the document title to the news title
+        document.title = "PharmaChem TIMES - Login";  // Set the document title to the news title
     }, []);
 
     return (

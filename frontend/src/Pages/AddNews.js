@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useRef, useState } from 'react'
 import "./AddNews.css"
 import NewsContext from '../Context/News/NewsContext';
 import { useNavigate } from 'react-router-dom';
@@ -8,8 +8,8 @@ import GoToPreviousePage from '../Components/GoToPreviousePage';
 
 const AddNews = ({ showAlert, showProfile, showAddMenu }) => {
 
-    const Upload_Preset = process.env.REACT_APP_UPLOAD_PRESET_IMAGE;
-    const Cloud_Name = process.env.REACT_APP_CLOUD_NAME;
+    // const Upload_Preset = process.env.REACT_APP_UPLOAD_PRESET_IMAGE;
+    // const Cloud_Name = process.env.REACT_APP_CLOUD_NAME;
 
     const editor = useRef(null);
     const navigate = useNavigate();
@@ -17,121 +17,85 @@ const AddNews = ({ showAlert, showProfile, showAddMenu }) => {
     const [title, setTitle] = useState("");
     const [description, setDesciption] = useState("");
     const [tag, setTag] = useState("");
-    const [images, setImages] = useState("");
     const userLoginRedux = useSelector((state) => state.counter.userLogin);
+    const [uPhoto, setUPhoto] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault();
         showAlert("Added News Successfully!", "success");
         // console.log(title, description, tag, images);
-        addNews(title, description, tag, images);
+        addNews(title, description, tag, uPhoto);
         setTimeout(() => {
             navigate(`/${(tag).toLowerCase()}`);
         }, 1000);
         // navigate(`/snews/${(tag).toLowerCase()}/${id}`);
     }
 
-    const postImage = async (image) => {
+    const postImage = useCallback((event) => {
 
-        const validImageTypes = ["image/jpeg", "image/jpg", "image/png", "image/avif"];
+        // const validImageTypes = ["image/jpeg", "image/jpg", "image/png", "image/avif"];
 
-        if (validImageTypes.includes(image.type)) {
-            const data = new FormData();
-            data.append("file", image);
-            data.append("upload_preset", Upload_Preset);
-            data.append("cloud_name", Cloud_Name);
+        // if (validImageTypes.includes(image.type)) {
+        //     const data = new FormData();
+        //     data.append("file", image);
+        //     data.append("upload_preset", Upload_Preset);
+        //     data.append("cloud_name", Cloud_Name);
 
-            try {
-                const response = await fetch("https://api.cloudinary.com/v1_1/dpkaxrntd/image/upload", {
-                    method: "post",
-                    body: data,
-                })
+        //     try {
+        //         const response = await fetch("https://api.cloudinary.com/v1_1/dpkaxrntd/image/upload", {
+        //             method: "post",
+        //             body: data,
+        //         })
 
-                if (response.ok) {
-                    const json = await response.json();
+        //         if (response.ok) {
+        //             const json = await response.json();
 
-                    if (json.url) {
-                        setImages(json.url);
-                    }
+        //             if (json.url) {
+        //                 setImages(json.url);
+        //             }
 
-                    else {
-                        console.log(json.Error);
-                    }
-                }
+        //             else {
+        //                 console.log(json.Error);
+        //             }
+        //         }
 
-                else {
-                    console.log(`Error fetching news: ${response.status} ${response.statusText}`)
-                }
+        //         else {
+        //             console.log(`Error fetching news: ${response.status} ${response.statusText}`)
+        //         }
 
 
-            } catch (error) {
-                console.error("Error fetching the news:", error);
+        //     } catch (error) {
+        //         console.error("Error fetching the news:", error);
+        //     }
+        const validImageTypes = ["image/jpeg", "image/jpg"];
+        const maxFileSize = 10 * 1024 * 1024; // 5 MB in bytes
+
+        try {
+            const file = event.target.files[0];
+
+            if (!file) return; // No file selected
+
+            if (!validImageTypes.includes(file.type)) {
+                alert("Please upload an image in JPG or JPEG format.");
+                return;
             }
-        }
-    }
 
-    const descImage = async (image) => {
-        const validImageTypes = ["image/jpeg", "image/jpg", "image/png", "image/avif"];
-
-        if (validImageTypes.includes(image.type)) {
-            const data = new FormData();
-            data.append("file", image);
-            data.append("upload_preset", Upload_Preset);
-            data.append("cloud_name", Cloud_Name);
-
-            try {
-                const response = await fetch("https://api.cloudinary.com/v1_1/dpkaxrntd/image/upload", {
-                    method: "post",
-                    body: data,
-                })
-
-                if (response.ok) {
-                    const json = await response.json();
-
-                    if (json.url) {
-                        setDesciption(prevDesc => prevDesc + `<img src="${json.url}" alt="Uploaded Image"/>`);
-                    }
-
-                    else {
-                        console.log(json.Error);
-                    }
-                }
-
-                else {
-                    console.log(`Error fetching news: ${response.status} ${response.statusText}`)
-                }
-
-
-            } catch (error) {
-                console.error("Error fetching the news:", error);
+            if (file.size > maxFileSize) {
+                alert("File size should not exceed 10 MB.");
+                return;
             }
+
+            setUPhoto(file); // Accept the image
+        } catch (error) {
+            console.error("Error uploading image:", error);
         }
-    }
-    // Function to handle file input change (image selection)
-    const handleImageUpload = (e) => {
-        const image = e.target.files[0];
-        if (image) {
-            descImage(image); // Upload the selected image to Cloudinary
-        }
-    };
+    }, [])
 
 
     // Title change
     useEffect(() => {
-        document.title = "INDUSTRIAL TIMES - Add News";  // Set the document title to the news title
+        document.title = "PharmaChem Times - Add News";  // Set the document title to the news title
     }, []);
-
-    // useEffect(() => {
-    //     if (images.length > 0) {
-    //         if (description.length > 0) {
-    //             setDisabledBtn(true);
-    //         }
-    //     }
-    //     else {
-    //         setDisabledBtn(false);
-    //     }
-
-    // }, [images, description])
 
 
     return (
@@ -147,7 +111,7 @@ const AddNews = ({ showAlert, showProfile, showAddMenu }) => {
                             <div className="addNewsForm">
                                 <form action="" onSubmit={handleSubmit}>
                                     <label htmlFor="image">Cover Image(JPEG/JPG/PNG)</label>
-                                    <input type="file" name='image' id='image' required onChange={(e) => postImage(e.target.files[0])} />
+                                    <input type="file" name='uphoto' id='image' accept="image/jpeg" required onChange={postImage} />
                                     <label htmlFor="title">Title</label>
                                     <input type="text" name='title' id='title' required onChange={(e) => setTitle(e.target.value)} minLength={3} />
                                     <label htmlFor="desc">Description</label>
@@ -170,15 +134,7 @@ const AddNews = ({ showAlert, showProfile, showAddMenu }) => {
                                             buttons: [
                                                 'bold', 'italic', 'underline', '|',
                                                 'ul', 'ol', '|',
-                                                'link', {
-                                                    name: "customImageUpload", // Custom button for image upload
-                                                    iconURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrVLGzO55RQXipmjnUPh09YUtP-BW3ZTUeAA&s", // Optional custom icon
-                                                    // iconURL: "https://img.icons8.com/ios/50/000000/upload.png", // Optional custom icon
-                                                    exec: () => {
-                                                        document.getElementById("image-upload-input").click(); // Trigger file input
-                                                    },
-                                                },
-                                                '|',
+                                                'link', '|',
                                                 'align', 'undo', 'redo',
                                                 'fontsize', 'paragraph', "brush", "preview", '|',
                                             ]
@@ -186,15 +142,7 @@ const AddNews = ({ showAlert, showProfile, showAddMenu }) => {
                                         }
                                         // Only update state when leaving the editor to prevent re-renders on every keystroke
                                         onBlur={newContent => setDesciption(newContent)}
-                                    />
-
-
-                                    <input
-                                        type="file"
-                                        id="image-upload-input"
-                                        style={{ display: 'none' }}
-                                        accept="image/*"
-                                        onChange={handleImageUpload}
+                                        minLength={10}
                                     />
 
                                     <label htmlFor="tag">Type: </label>
@@ -206,7 +154,7 @@ const AddNews = ({ showAlert, showProfile, showAddMenu }) => {
                                         <option value="EVENT">Event</option>
                                         <option value="JOB">Job</option>
                                     </select>
-                                    <input className='submitBtn' disabled={images.length === 0 || description === ""} type="submit" value={images.length === 0 ? "Upload Image" : (description === "" ? "Enter Description" : "Post")} />
+                                    <input className='submitBtn' disabled={uPhoto.length === 0 || description === ""} type="submit" value={uPhoto.length === 0 ? "Upload Image" : (description === "" ? "Enter Description" : "Post")} />
                                 </form>
                             </div>
                         </div>

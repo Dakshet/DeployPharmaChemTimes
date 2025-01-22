@@ -4,8 +4,6 @@ import NewsContext from '../Context/News/NewsContext';
 import JoditEditor from 'jodit-react';
 
 const UpdateNews = ({ showAlert, currentNews, updateModal, setUpdateModal }) => {
-    const Upload_Preset = process.env.REACT_APP_UPLOAD_PRESET_IMAGE;
-    const Cloud_Name = process.env.REACT_APP_CLOUD_NAME;
 
     const editor = useRef(null);
 
@@ -39,40 +37,40 @@ const UpdateNews = ({ showAlert, currentNews, updateModal, setUpdateModal }) => 
         setUpdateModal(false);
     }
 
-    const descImage = async (image) => {
-        const validImageTypes = ["image/jpeg", "image/jpg", "image/png", "image/avif"];
+    // const descImage = async (image) => {
+    //     const validImageTypes = ["image/jpeg", "image/jpg", "image/png", "image/avif"];
 
-        if (validImageTypes.includes(image.type)) {
-            const data = new FormData();
-            data.append("file", image);
-            data.append("upload_preset", Upload_Preset);
-            data.append("cloud_name", Cloud_Name);
+    //     if (validImageTypes.includes(image.type)) {
+    //         const data = new FormData();
+    //         data.append("file", image);
+    //         data.append("upload_preset", Upload_Preset);
+    //         data.append("cloud_name", Cloud_Name);
 
-            try {
-                const response = await fetch("https://api.cloudinary.com/v1_1/dpkaxrntd/image/upload", {
-                    method: "post",
-                    body: data,
-                })
+    //         try {
+    //             const response = await fetch("https://api.cloudinary.com/v1_1/dpkaxrntd/image/upload", {
+    //                 method: "post",
+    //                 body: data,
+    //             })
 
-                const json = await response.json();
+    //             const json = await response.json();
 
-                if (json.url) {
-                    // editor.current.insertImage(json.url); // Insert the uploaded image URL into the editor
-                    // setDesc(prevDesc => prevDesc + `<img src="${json.url}" alt="Uploaded Image" style="width: 200px;"/>`);
-                    setEDesciption(prevDesc => prevDesc + `<img src="${json.url}" alt="Uploaded Image"/>`);
-                }
-            } catch (error) {
-                console.log("Image upload failed:", error);
-            }
-        }
-    }
-    // Function to handle file input change (image selection)
-    const handleImageUpload = (e) => {
-        const image = e.target.files[0];
-        if (image) {
-            descImage(image); // Upload the selected image to Cloudinary
-        }
-    };
+    //             if (json.url) {
+    //                 // editor.current.insertImage(json.url); // Insert the uploaded image URL into the editor
+    //                 // setDesc(prevDesc => prevDesc + `<img src="${json.url}" alt="Uploaded Image" style="width: 200px;"/>`);
+    //                 setEDesciption(prevDesc => prevDesc + `<img src="${json.url}" alt="Uploaded Image"/>`);
+    //             }
+    //         } catch (error) {
+    //             console.log("Image upload failed:", error);
+    //         }
+    //     }
+    // }
+    // // Function to handle file input change (image selection)
+    // const handleImageUpload = (e) => {
+    //     const image = e.target.files[0];
+    //     if (image) {
+    //         descImage(image); // Upload the selected image to Cloudinary
+    //     }
+    // };
 
 
 
@@ -107,15 +105,7 @@ const UpdateNews = ({ showAlert, currentNews, updateModal, setUpdateModal }) => 
                                 buttons: [
                                     'bold', 'italic', 'underline', '|',
                                     'ul', 'ol', '|',
-                                    'link', {
-                                        name: "customImageUpload", // Custom button for image upload
-                                        iconURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrVLGzO55RQXipmjnUPh09YUtP-BW3ZTUeAA&s", // Optional custom icon
-                                        // iconURL: "https://img.icons8.com/ios/50/000000/upload.png", // Optional custom icon
-                                        exec: () => {
-                                            document.getElementById("image-upload-input").click(); // Trigger file input
-                                        },
-                                    },
-                                    '|',
+                                    'link', '|',
                                     'align', 'undo', 'redo',
                                     'fontsize', 'paragraph', "brush", "preview", '|',
                                 ]
@@ -125,14 +115,6 @@ const UpdateNews = ({ showAlert, currentNews, updateModal, setUpdateModal }) => 
                             onBlur={newContent => setEDesciption(newContent)}
                         />
 
-
-                        <input
-                            type="file"
-                            id="image-upload-input"
-                            style={{ display: 'none' }}
-                            accept="image/*"
-                            onChange={handleImageUpload}
-                        />
                         <label htmlFor="tag">Type: </label>
                         <select name="tag" id="tag" value={etag} required onChange={(e) => setETag(e.target.value)} >
                             <option value="">Select Type</option>

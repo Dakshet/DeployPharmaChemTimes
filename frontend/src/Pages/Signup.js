@@ -102,7 +102,7 @@ const Signup = ({ showAlert }) => {
 
     // Title change
     useEffect(() => {
-        document.title = "INDUSTRIAL TIMES - Signup";  // Set the document title to the news title
+        document.title = "PharmaChem TIMES - Signup";  // Set the document title to the news title
     }, []);
 
     return (

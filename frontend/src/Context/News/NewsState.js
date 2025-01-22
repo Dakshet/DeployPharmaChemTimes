@@ -87,34 +87,68 @@ const NewsState = (props) => {
                 const json = await response.json();
 
                 if (json.allNews) {
-                    if (pageName === "AD") {
-                        setSeeAds(json.allNews)
+                    if (json.allNews === "No news found!") {
+                        setPageNews([])
                     }
-                    else {
-                        setPageNews(json.allNews);
-                    }
+                    setPageNews(json.allNews);
                 }
 
                 else {
                     console.log(json.Error);
                     setPageNews([]);
-                    setSeeAds([]);
                 }
             }
 
             else {
                 console.log(`Error fetching news: ${response.status} ${response.statusText}`)
                 setPageNews([]);
-                setSeeAds([]);
             }
 
         } catch (error) {
             // Catch any network or unexpected errors
             console.error("Error fetching the news:", error);
             setPageNews([]);
+        }
+    }
+
+
+
+    //Fetch All ads
+    const fetchPageSpecificAds = async (pageName) => {
+
+        try {
+            const response = await fetch(`${host}/news/fetchspecificpagenews?tag=${pageName}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+
+            if (response.ok) {
+                const json = await response.json();
+
+                if (json.allNews) {
+                    setSeeAds(json.allNews)
+                }
+
+                else {
+                    console.log(json.Error);
+                    setSeeAds([]);
+                }
+            }
+
+            else {
+                console.log(`Error fetching news: ${response.status} ${response.statusText}`)
+                setSeeAds([]);
+            }
+
+        } catch (error) {
+            // Catch any network or unexpected errors
+            console.error("Error fetching the news:", error);
             setSeeAds([]);
         }
     }
+
 
 
     //Fetch news using newsID
@@ -158,17 +192,22 @@ const NewsState = (props) => {
 
 
     //Add news
-    const addNews = async (title, body, tag, coverImageURL) => {
+    const addNews = async (title, body, tag, uPhoto) => {
+
+        const formData = new FormData();
+        formData.append("uPhoto", uPhoto)
+        formData.append("title", title)
+        formData.append("body", body)
+        formData.append("tag", tag)
 
         try {
 
             const response = await fetch(`${host}/news/addnews`, {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json",
                     "auth_token": localStorage.getItem("inews")
                 },
-                body: JSON.stringify({ title, body, tag, coverImageURL })
+                body: (formData)
             })
 
             if (response.ok) {
@@ -176,6 +215,7 @@ const NewsState = (props) => {
 
                 if (json.news) {
                     // console.log(json.news);
+                    setPageNews([...pageNews, json.news])
                 }
 
                 else {
@@ -198,15 +238,19 @@ const NewsState = (props) => {
     //Add Magazine
     const addMagazine = async (title, body, coverImageURL) => {
 
+        const formData = new FormData();
+        formData.append("coverImageURL", coverImageURL)
+        formData.append("title", title)
+        formData.append("body", body)
+
         try {
 
             const response = await fetch(`${host}/news/addmagazine`, {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json",
                     "auth_token": localStorage.getItem("inews")
                 },
-                body: JSON.stringify({ title, body, coverImageURL })
+                body: (formData)
             })
 
             if (response.ok) {
@@ -234,7 +278,7 @@ const NewsState = (props) => {
 
 
     //Delete News
-    const deleteNews = async (id, coverImageURL, tag) => {
+    const deleteNews = async (id, tag) => {
 
         // const newNote = pageNews.filter((news) => news._id !== id)
 
@@ -244,13 +288,16 @@ const NewsState = (props) => {
 
         if (tag === "AD") {
             const newAdArray = seeAds.filter((ads) => ads._id !== id);
-
             setSeeAds(newAdArray);
         }
 
+        const newsArray = pageNews.filter((newss) => newss._id !== id);
+
+        setPageNews(newsArray)
+
         try {
 
-            const response = await fetch(`${host}/news/deletenews?id=${id}&coverImage=${coverImageURL}}`, {
+            const response = await fetch(`${host}/news/deletenews?id=${id}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
@@ -287,7 +334,7 @@ const NewsState = (props) => {
 
         try {
 
-            const response = await fetch(`${host}/news/deletemagazine?id=${id}&coverImage=${coverImageURL}&pd=${pdfName}`, {
+            const response = await fetch(`${host}/news/deletemagazine?id=${id}&pd=${pdfName}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
@@ -528,26 +575,30 @@ const NewsState = (props) => {
 
 
 
-    //Add Magazine
-    const addAdvertisement = async (body, coverImageURL) => {
+    //Add addAdvertisement
+    const addAdvertisement = async (body, coverImageURLs) => {
+
+
+        const formData = new FormData();
+        formData.append("coverImageURLs", coverImageURLs)
+        formData.append("body", body)
 
         try {
 
             const response = await fetch(`${host}/news/addadvertisement`, {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json",
                     "auth_token": localStorage.getItem("inews")
                 },
-                body: JSON.stringify({ body, coverImageURL })
+                body: (formData)
             })
 
             if (response.ok) {
                 const json = await response.json();
 
                 if (json.news) {
-                    //console.log(json.news)
-                    // setSeeAds.concat(json.news);
+                    console.log(json.news)
+                    setSeeAds([...seeAds, json.news]);
                 }
 
                 else {
@@ -647,7 +698,7 @@ const NewsState = (props) => {
 
 
 
-    return (<NewsContext.Provider value={{ pageNews, setPageNews, fetchPageSpecificNews, getNewsUsingId, specificNews, setSpecificNews, addNews, deleteNews, editNews, commentNews, fetchComment, addComment, searchNewsResult, setSearchNewsResult, fetchSearchNews, loginUserInfo, addMagazine, deleteMagazine, visitCounter, addAdvertisement, seeAds, showAllProducts, addProductData, fetchProductChemicalData }}>
+    return (<NewsContext.Provider value={{ pageNews, fetchPageSpecificNews, fetchPageSpecificAds, getNewsUsingId, specificNews, setSpecificNews, addNews, deleteNews, editNews, commentNews, fetchComment, addComment, searchNewsResult, setSearchNewsResult, fetchSearchNews, loginUserInfo, addMagazine, deleteMagazine, visitCounter, addAdvertisement, seeAds, showAllProducts, addProductData, fetchProductChemicalData }}>
         {props.children}
     </NewsContext.Provider>
     )

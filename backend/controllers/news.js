@@ -1,4 +1,3 @@
-const { validationResult } = require("express-validator");
 const News = require("../models/news");
 const cloudinary = require("../middlewares/cloudinary")
 const fs = require('fs');
@@ -10,16 +9,131 @@ const Comment = require("../models/comment");
 const { jsPDF } = require("jspdf");     // Import the jsPDF library
 require("jspdf-autotable"); // Import jsPDF autoTable plugin
 const Chemicals = require("../models/chemicalProd");
+const { google } = require("googleapis");
+const stream = require('stream');
 
 let success = false;
 
 
+
+
+
+// Keys 
+const private_key = process.env.PRIVATE_KEY
+const client_email = process.env.CLIENT_EMAIL
+// const spreadsheetId = process.env.SPREADSHEETID
+
+
+// Get Auth Here
+async function getAuth() {
+    try {
+
+        const auth = new google.auth.GoogleAuth({
+            credentials: {
+                client_email: client_email,
+                private_key: private_key
+            },
+            scopes: ["https://www.googleapis.com/auth/drive"]
+        })
+
+        return auth;
+
+    } catch (error) {
+        console.log("Get Auth", error.message)
+    }
+}
+
+
+
+// Access Google Drive Using Buffer Storage
+async function uploadToGoogleDrive(fileBuffer, mimeType, fileName) {
+    const auth = await getAuth();
+
+    // Obtain an authenticated client
+    const drive = google.drive({ version: "v3", auth })
+
+    const bufferStream = new stream.PassThrough();
+    bufferStream.end(fileBuffer);
+
+    const response = await drive.files.create({
+        resource: {
+            name: fileName,
+            parents: ['1aIAMB1FUnvVNNDo1-TW65gGLzqbmuApb']  // Optional: specify a destination folder
+        },
+        media: {
+            mimeType: mimeType,
+            body: bufferStream
+        },
+        fields: 'id, webViewLink'
+    });
+
+    return response.data;
+}
+
+
+
+// Using Google drive image.
+async function fetchImageAndConvertedIntoHash(fileId) {
+    try {
+        // let imageUrl = "https://res.cloudinary.com/dpkaxrntd/image/upload/v1729657532/iqgpcl1hnra06rdi1e93.jpg"
+
+        // let fileId = req.params.id;
+
+        let imageUrl = `https://lh3.googleusercontent.com/d/${fileId}`
+
+        // Download the image as a buffer using axios
+        // const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
+        const response = await fetch(imageUrl, {
+            method: 'GET', // You can use 'GET' or leave it out as it's the default
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        // Convert the response to an ArrayBuffer
+        const arrayBuffer = await response.arrayBuffer();
+
+        // Convert the buffer to base64
+        // const imageBase64 = Buffer.from(response.data, 'binary').toString('base64');
+        const imageBase64 = Buffer.from(arrayBuffer).toString('base64');
+        const imageMimeType = 'image/jpeg'; // Update this if using a different image type (e.g., image/png)
+
+        // Send the base64 string back to the frontend
+        return `data:${imageMimeType};base64,${imageBase64}`;
+        // return res.status(200).json({ success: true, imageUrl });
+
+
+
+    } catch (error) {
+        console.error("Error fetching image:", error.message);
+        return null; // Return null if the image fetch fails
+    }
+}
+
+
+
+
 async function fetchAllNewsForSpecificRoute(req, res) {
     try {
-        const allNews = await News.find({ tag: req.query.tag }).sort({ createdAt: -1 });
+        let allNews = await News.find({ tag: req.query.tag }).sort({ createdAt: -1 });
 
-        success = true;
-        return res.status(200).json({ success, allNews })
+        // console.log(allNews.length);
+
+        if (!allNews.length) {
+            return res.status(404).json({ success: false, allNews: "No news found" });
+        }
+
+        // Use Promise.all to fetch all images asynchronously
+        allNews = await Promise.all(allNews.map(async (article) => {
+            const base64Image = await fetchImageAndConvertedIntoHash(article.coverImageURL);
+            return {
+                ...article.toObject(), // Convert Mongoose document to plain object
+                coverImageURL: base64Image || article.coverImageURL // Use original if fetch fails
+            };
+        }));
+
+        return res.status(200).json({ success: true, allNews });
 
     } catch (error) {
         console.log(error.message);
@@ -32,6 +146,12 @@ async function fetchAllNewsForSpecificRoute(req, res) {
 async function fetchSpecificNews(req, res) {
     try {
         const news = await News.findById(req.params.newsId)
+
+        const id = await fetchImageAndConvertedIntoHash(news.coverImageURL);
+
+        news.coverImageURL = id;
+
+        // console.log(news);
 
         success = true;
         return res.status(200).json({ success, news })
@@ -67,14 +187,18 @@ async function fetchSearchNews(req, res) {
 async function addNews(req, res) {
     try {
         //Destructure the request
-        const { title, body, tag, coverImageURL } = req.body;
+        const { title, body, tag } = req.body;
 
-        //Validate the fields
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            success = false;
-            return res.status(400).json({ success, Error: errors.array()[0].msg })
-        }
+        // console.log(req.body);
+
+        // Upload to Google Drive directly using stream
+        const file = req.file;
+
+        const driveResponse = await uploadToGoogleDrive(file.buffer, file.mimetype, `${title}.jpg`);
+
+        // const imageLinkShree = driveResponse.webViewLink;
+        const copyImageId = driveResponse.id;
+
 
         //Add data in DB
         let news = await News.create({
@@ -82,7 +206,7 @@ async function addNews(req, res) {
             body,
             tag,
             createdUser: req.user.id,
-            coverImageURL,
+            coverImageURL: copyImageId,
         })
 
         news = await news.save();
@@ -102,7 +226,16 @@ async function addNews(req, res) {
 async function addMagazine(req, res) {
     try {
         // //Destructure the request
-        const { title, body, coverImageURL } = req.body;
+        const { title, body } = req.body;
+
+        // Upload to Google Drive directly using stream
+        const file = req.file;
+
+        const driveResponse = await uploadToGoogleDrive(file.buffer, file.mimetype, `${title}.jpg`);
+
+        // const imageLinkShree = driveResponse.webViewLink;
+        const copyImageId = driveResponse.id;
+
 
         //Add data in DB
         let news = await News.create({
@@ -110,7 +243,7 @@ async function addMagazine(req, res) {
             body,
             tag: "MAGAZINE",
             createdUser: req.user.id,
-            coverImageURL,
+            coverImageURL: copyImageId
         })
 
         news = await news.save();
@@ -138,54 +271,54 @@ async function updateNews(req, res) {
         // console.log("ccc", prevDescription);
 
 
-        //Logic to Find out src link from the description, but this logic for only one src are present in the description that time they work.
+        // //Logic to Find out src link from the description, but this logic for only one src are present in the description that time they work.
 
-        function findImgSrc(htmlString) {
-            const regex = /<img[^>]+src="([^"]+)"/g; // Regular expression to match img tag with src attribute
-            const matches = htmlString.matchAll(regex); // Find all matches
+        // function findImgSrc(htmlString) {
+        //     const regex = /<img[^>]+src="([^"]+)"/g; // Regular expression to match img tag with src attribute
+        //     const matches = htmlString.matchAll(regex); // Find all matches
 
-            const imgSrcList = [];
-            for (const match of matches) {
-                imgSrcList.push(match[1]); // Extract and store the captured src attribute
-            }
+        //     const imgSrcList = [];
+        //     for (const match of matches) {
+        //         imgSrcList.push(match[1]); // Extract and store the captured src attribute
+        //     }
 
-            return imgSrcList;
-        }
+        //     return imgSrcList;
+        // }
 
-        const imgSrcList = findImgSrc(desc);
-        const imgSrcList1 = findImgSrc(prevDescription);
+        // const imgSrcList = findImgSrc(desc);
+        // const imgSrcList1 = findImgSrc(prevDescription);
 
-        if (imgSrcList.length !== 0 && imgSrcList1.length !== 0) {
+        // if (imgSrcList.length !== 0 && imgSrcList1.length !== 0) {
 
-            async function compareArrays(arr1, arr2) {
-                const matches = arr1.filter(element => arr2.includes(element));
-                const unmatches = arr2.filter(element => !arr1.includes(element));
+        //     async function compareArrays(arr1, arr2) {
+        //         const matches = arr1.filter(element => arr2.includes(element));
+        //         const unmatches = arr2.filter(element => !arr1.includes(element));
 
-                if (unmatches.length !== 0) {
-                    //Delete news from cloudinary
-                    for (let imgLink of unmatches) {
-                        try {
-                            //Separate the cloudinary image id
-                            const urlArray = imgLink.split("/");
-                            const image = urlArray[urlArray.length - 1];
-                            const imageName = image.split(".")[0];
+        //         if (unmatches.length !== 0) {
+        //             //Delete news from cloudinary
+        //             for (let imgLink of unmatches) {
+        //                 try {
+        //                     //Separate the cloudinary image id
+        //                     const urlArray = imgLink.split("/");
+        //                     const image = urlArray[urlArray.length - 1];
+        //                     const imageName = image.split(".")[0];
 
-                            //Delete from cloudinary
-                            const result = await cloudinary.uploader.destroy(imageName);
-                            // console.log(result);
-                        } catch (error) {
-                            success = false;
-                            return res.status(400).json({ success, Error: error });
-                        }
-                    }
-                }
-                else {
-                    console.log(matches);
-                }
-            }
+        //                     //Delete from cloudinary
+        //                     const result = await cloudinary.uploader.destroy(imageName);
+        //                     // console.log(result);
+        //                 } catch (error) {
+        //                     success = false;
+        //                     return res.status(400).json({ success, Error: error });
+        //                 }
+        //             }
+        //         }
+        //         else {
+        //             console.log(matches);
+        //         }
+        //     }
 
-            compareArrays(imgSrcList, imgSrcList1);
-        }
+        //     compareArrays(imgSrcList, imgSrcList1);
+        // }
 
         //Create the new object
         const newNews = {};
@@ -234,13 +367,13 @@ async function updateNews(req, res) {
 
 async function deleteNews(req, res) {
     try {
-        //Verified the news id first
-        let coverImageURL = req.query.coverImage;
+        // //Verified the news id first
+        // let coverImageURL = req.query.coverImage;
 
-        //Separate the cloudinary image id
-        const urlArray = coverImageURL.split("/");
-        const image = urlArray[urlArray.length - 1];
-        const imageName = image.split(".")[0];
+        // //Separate the cloudinary image id
+        // const urlArray = coverImageURL.split("/");
+        // const image = urlArray[urlArray.length - 1];
+        // const imageName = image.split(".")[0];
 
 
         let news = await News.findById(req.query.id);
@@ -258,19 +391,29 @@ async function deleteNews(req, res) {
         }
 
         //Delete news
-        news = await News.findByIdAndDelete(req.query.id)
+        let newss = await News.findByIdAndDelete(req.query.id)
 
-        //Delete image from cloudinary
-        await cloudinary.uploader.destroy(imageName, (error, result) => {
-            // console.log(error, result);
-            try {
-                // console.log(result);
-            } catch (error) {
-                success = false;
-                return res.status(400).json({ success, Error: error });
-            }
-        })
+        const auth = await getAuth();
+        const drive = await google.drive({ version: "v3", auth })
 
+        let responseDrive = await drive.files.delete(
+            {
+                fileId: news.coverImageURL
+            })
+
+        console.log(responseDrive);
+
+        //         //Delete image from cloudinary
+        //         await cloudinary.uploader.destroy(imageName, (error, result) => {
+        //             // console.log(error, result);
+        //             try {
+        //                 // console.log(result);
+        //             } catch (error) {
+        //                 success = false;
+        //                 return res.status(400).json({ success, Error: error });
+        //             }
+        //         })
+        // 
         //Final
         success = true;
         return res.status(200).json({ success, news })
@@ -286,14 +429,14 @@ async function deleteNews(req, res) {
 async function deleteMagazine(req, res) {
     try {
         //Verified the news id first
-        let coverImageURL = req.query.coverImage;
+        // let coverImageURL = req.query.coverImage;
         let pdfURL = req.query.pd;
 
 
         //Separate the cloudinary image id
-        const urlArray = coverImageURL.split("/");
-        const image = urlArray[urlArray.length - 1];
-        const imageName = image.split(".")[0];
+        // const urlArray = coverImageURL.split("/");
+        // const image = urlArray[urlArray.length - 1];
+        // const imageName = image.split(".")[0];
 
         //Separate the 
         const urlArrayPdf = pdfURL.split("/");
@@ -314,6 +457,16 @@ async function deleteMagazine(req, res) {
             return res.status(404).json({ success, Error: "You can't delete news!" })
         }
 
+        const auth = await getAuth();
+        const drive = await google.drive({ version: "v3", auth })
+
+        let responseDrive = await drive.files.delete(
+            {
+                fileId: news.coverImageURL
+            })
+
+        console.log(responseDrive);
+
         //Delete news
 
         //1] Delete from Storage
@@ -331,13 +484,13 @@ async function deleteMagazine(req, res) {
         //2] Delete from backend
         news = await News.findByIdAndDelete(req.query.id)
 
-        // Delete the image from Cloudinary
-        const imageDeletionResult = await cloudinary.uploader.destroy(imageName);
+        // // Delete the image from Cloudinary
+        // const imageDeletionResult = await cloudinary.uploader.destroy(imageName);
 
-        if (imageDeletionResult.result !== 'ok') {
-            console.log(`Error deleting image: ${imageDeletionResult}`);
-            return res.status(500).json({ success: false, Error: "Failed to delete image from Cloudinary." });
-        }
+        // if (imageDeletionResult.result !== 'ok') {
+        //     console.log(`Error deleting image: ${imageDeletionResult}`);
+        //     return res.status(500).json({ success: false, Error: "Failed to delete image from Cloudinary." });
+        // }
 
 
         // // Delete the PDF from Cloudinary (resource_type: "raw" is required for non-image files like PDFs)
@@ -615,21 +768,22 @@ async function countVisitNumber(req, res) {
 async function addAD(req, res) {
     try {
         //Destructure the request
-        const { body, coverImageURL } = req.body;
+        const { body } = req.body;
 
-        //Validate the fields
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            success = false;
-            return res.status(400).json({ success, Error: errors.array()[0].msg })
-        }
+        // Upload to Google Drive directly using stream
+        const file = req.file;
+
+        const driveResponse = await uploadToGoogleDrive(file.buffer, file.mimetype, `${body}.jpg`);
+
+        // const imageLinkShree = driveResponse.webViewLink;
+        const copyImageId = driveResponse.id;
 
         //Add data in DB
         let news = await News.create({
             body,
             tag: "AD",
             createdUser: req.user.id,
-            coverImageURL,
+            coverImageURL: copyImageId,
         })
 
         news = await news.save();

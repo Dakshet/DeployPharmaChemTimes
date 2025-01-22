@@ -16,7 +16,7 @@ const Magazine = ({ showAddMenu, showAlert }) => {
 
     // Title change
     useEffect(() => {
-        document.title = "INDUSTRIAL TIMES - Magazine";  // Set the document title to the news title
+        document.title = "PharmaChem TIMES - Magazine";  // Set the document title to the news title
     }, []);
 
 

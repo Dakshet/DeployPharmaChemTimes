@@ -32,7 +32,7 @@ const SpecificNews = ({ showAddMenu, showAlert }) => {
         if (specificNews?.title) {
             document.title = specificNews.title;  // Set the document title to the news title
         } else {
-            document.title = "INDUSTRIAL TIMES";  // Default title if the news title is not available
+            document.title = "PharmaChem TIMES";  // Default title if the news title is not available
         }
     }, [specificNews]);
 

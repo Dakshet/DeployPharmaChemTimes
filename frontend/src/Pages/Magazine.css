@@ -86,6 +86,7 @@
     width: 20.8vw;
     height: 350px;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 
@@ -102,6 +103,7 @@
     position: relative;
     cursor: pointer;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
 }
 
 .magazineParticularBox:hover {
@@ -114,6 +116,7 @@
     margin: 0 auto 5px;
     transition: 0.5s;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .magazineParticularBox img:hover {

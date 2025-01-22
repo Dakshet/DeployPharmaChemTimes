@@ -15,7 +15,7 @@ const Interview = ({ showAddMenu }) => {
 
     // Title change
     useEffect(() => {
-        document.title = "INDUSTRIAL TIMES - Interview";  // Set the document title to the news title
+        document.title = "PharmaChem TIMES - Interview";  // Set the document title to the news title
     }, []);
 
 

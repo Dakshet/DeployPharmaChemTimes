@@ -34,8 +34,16 @@ const ADPageItem = ({ adS, showAlert }) => {
 
     return (
         <div className="adPageBox">
-            <i onClick={() => handleDelete(adS._id, adS.coverImageURL, adS.tag)} className={`ri-close-line closeIcon`} />
-            <img src={adS.coverImageURL} alt="" />
+            <i onClick={() => handleDelete(adS._id, adS.tag)} className={`ri-close-line closeIcon`} />
+            {/* <img src={adS.coverImageURL} alt="" /> */}
+            {adS.coverImageURL ? (
+                <img
+                    src={`${adS.coverImageURL}`}
+                    alt="User"
+                />
+            ) : (
+                <p>Loading image...</p>
+            )}
             <div className="adPageItemBoxInner">
                 <h5>{adS.body}</h5>
                 <div className="adPageItemBoxInnerTimeDate">

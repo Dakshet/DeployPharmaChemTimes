@@ -49,7 +49,7 @@ const AddProduct = ({ showAlert, showProfile }) => {
     }
     // Title change
     useEffect(() => {
-        document.title = "INDUSTRIAL TIMES - Add Product";  // Set the document title to the news title
+        document.title = "PharmaChem TIMES - Add Product";  // Set the document title to the news title
     }, []);
 
 

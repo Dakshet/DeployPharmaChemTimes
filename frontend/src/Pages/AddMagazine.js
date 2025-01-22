@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import GoToPreviousePage from '../Components/GoToPreviousePage';
 
 const AddMagazine = ({ showAlert, showProfile, showAddMenu }) => {
-    const Upload_Preset = process.env.REACT_APP_UPLOAD_PRESET_IMAGE;
+    // const Upload_Preset = process.env.REACT_APP_UPLOAD_PRESET_IMAGE;
     const Cloud_Name = process.env.REACT_APP_CLOUD_NAME;
     const Upload_Preset_PDF = process.env.REACT_APP_UPLOAD_PRESET_PDF;
 
@@ -42,41 +42,29 @@ const AddMagazine = ({ showAlert, showProfile, showAddMenu }) => {
     }, [])
 
 
-    const postImage = async (image) => {
+    const postImage = async (event) => {
 
-        const validImageTypes = ["image/jpeg", "image/jpg", "image/png", "image/avif"];
+        const validImageTypes = ["image/jpeg", "image/jpg"];
+        const maxFileSize = 10 * 1024 * 1024; // 5 MB in bytes
 
-        if (validImageTypes.includes(image.type)) {
-            const data = new FormData();
-            data.append("file", image);
-            data.append("upload_preset", Upload_Preset);
-            data.append("cloud_name", Cloud_Name);
+        try {
+            const file = event.target.files[0];
 
-            try {
-                const response = await fetch("https://api.cloudinary.com/v1_1/dpkaxrntd/image/upload", {
-                    method: "post",
-                    body: data,
-                })
+            if (!file) return; // No file selected
 
-                if (response.ok) {
-                    const json = await response.json();
-
-                    if (json.url) {
-                        setImages(json.url);
-                        console.log(json.url);
-                    }
-                    else {
-                        console.log(json.Error);
-                    }
-                }
-
-                else {
-                    console.log(`Error fetching news: ${response.status} ${response.statusText}`)
-                }
-
-            } catch (error) {
-                console.error("Error fetching the news:", error);
+            if (!validImageTypes.includes(file.type)) {
+                alert("Please upload an image in JPG or JPEG format.");
+                return;
             }
+
+            if (file.size > maxFileSize) {
+                alert("File size should not exceed 10 MB.");
+                return;
+            }
+
+            setImages(file); // Accept the image
+        } catch (error) {
+            console.error("Error uploading image:", error);
         }
     }
 
@@ -118,7 +106,7 @@ const AddMagazine = ({ showAlert, showProfile, showAddMenu }) => {
 
     // Title change
     useEffect(() => {
-        document.title = "INDUSTRIAL TIMES - Add Magazine";  // Set the document title to the news title
+        document.title = "PharmaChem TIMES - Add Magazine";  // Set the document title to the news title
     }, []);
 
 
@@ -135,7 +123,7 @@ const AddMagazine = ({ showAlert, showProfile, showAddMenu }) => {
                             <div className="addMagazineForm">
                                 <form action="" onSubmit={handleSubmit}>
                                     <label htmlFor="image">Cover Image(JPEG/JPG/PNG)</label>
-                                    <input type="file" name='image' id='image' required onChange={(e) => postImage(e.target.files[0])} />
+                                    <input type="file" name='image' id='image' required onChange={postImage} accept="image/jpeg" />
                                     <label htmlFor="title">Upload Magazine</label>
                                     <div className="uploadButtons">
                                         <button className='uploadBtn' onClick={handleLinks}>Upload link</button>

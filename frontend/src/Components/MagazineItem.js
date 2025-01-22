@@ -12,9 +12,9 @@ const MagazineItem = ({ mNews, showAlert }) => {
     }
 
 
-    const handleDelete = (id, coverImageURL, body) => {
+    const handleDelete = (id, body) => {
         showAlert("Deleted News Successfully!", "success");
-        deleteMagazine(id, coverImageURL, body);
+        deleteMagazine(id, body);
     }
 
 
@@ -37,14 +37,33 @@ const MagazineItem = ({ mNews, showAlert }) => {
 
     return (
         <div className="magazineParticularBoxOuter">
-            <div onClick={() => handleClick(mNews.body)} className="magazineParticularBox">
+            {/* <div onClick={() => handleClick(mNews.body)} className="magazineParticularBox">
                 <img src={mNews.coverImageURL} alt="" />
                 <h5>{mNews.title.split(" ").slice(0, 10).join(" ") + "..."}</h5>
                 <div className="magazineParticularTimeDate">
                     <p>{formattedDate}</p>
                     <p>{formattedTime}</p>
                 </div>
+            </div> */}
+            <div onClick={() => handleClick(mNews.body)}>
+                <div className="magazineParticularBox">
+                    {/* <img src={mNews.coverImageURL} alt="" /> */}
+                    {mNews.coverImageURL ? (
+                        <img
+                            src={`${mNews.coverImageURL}`}
+                            alt="User"
+                        />
+                    ) : (
+                        <p>Loading image...</p>
+                    )}
+                    <h5>{mNews.title.split(" ").slice(0, 10).join(" ") + "..."}</h5>
+                    <div className="magazineParticularTimeDate">
+                        <p>{formattedDate}</p>
+                        <p>{formattedTime}</p>
+                    </div>
+                </div>
             </div>
+
             <i className="ri-close-line closeIcon" onClick={() => handleDelete(mNews._id, mNews.coverImageURL, mNews.body)}></i>
         </div>
 

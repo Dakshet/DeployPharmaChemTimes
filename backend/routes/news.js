@@ -1,9 +1,15 @@
 const express = require("express");
-const { body } = require("express-validator");
 const { fetchUser } = require("../middlewares/fetchUser");
 const { addNews, updateNews, deleteNews, fetchSpecificNews, fetchAllNewsForSpecificRoute, fetchSearchNews, addMagazine, deleteMagazine, countVisitNumber, addAD, fetchAllProductData, addProductData, deleteProductData } = require("../controllers/news");
+const multer = require('multer')
 
 const router = express.Router();
+
+
+// Custom Storage engine for multer
+const googleDriveStorage = multer.memoryStorage();
+
+const upload = multer({ storage: googleDriveStorage });
 
 
 router.get("/fetchspecificpagenews", fetchAllNewsForSpecificRoute)
@@ -12,12 +18,9 @@ router.get("/fetchspecificnews/:newsId", fetchSpecificNews)
 
 router.get("/fetchsearchuser", fetchSearchNews)
 
-router.post("/addnews", [
-    body("title", "Title must be 3 characters").isLength({ min: 5 }),
-    body("body", "Content must be 4 characters").isLength({ min: 10 })
-], fetchUser, addNews)
+router.post("/addnews", upload.single("uPhoto"), fetchUser, addNews)
 
-router.post("/addmagazine", fetchUser, addMagazine);
+router.post("/addmagazine", upload.single("coverImageURL"), fetchUser, addMagazine);
 
 router.put("/updatenews/:newsId", fetchUser, updateNews)
 
@@ -30,7 +33,7 @@ router.put("/updatecount", countVisitNumber)
 
 
 // Routes for the AD
-router.post("/addadvertisement", fetchUser, addAD)
+router.post("/addadvertisement", upload.single("coverImageURLs"), fetchUser, addAD)
 
 
 // Routes for the Chemicals

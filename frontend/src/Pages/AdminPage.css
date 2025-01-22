@@ -1,6 +1,6 @@
 .adminPage {
     background-color: white;
-    min-height: 100%;
+    min-height: 90vh;
     width: 100%;
     display: flex;
     align-items: center;

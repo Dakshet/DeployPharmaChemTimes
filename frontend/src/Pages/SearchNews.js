@@ -9,7 +9,7 @@ const SearchNews = ({ showProfile, showAddMenu }) => {
 
     // Title change
     useEffect(() => {
-        document.title = "INDUSTRIAL TIMES - Your Result";  // Set the document title to the news title
+        document.title = "PharmaChem TIMES - Your Result";  // Set the document title to the news title
     }, []);
 
 

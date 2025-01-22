@@ -9,8 +9,8 @@ const AdSection = ({ showProfile }) => {
     const slider = useRef();
     // const [slides, setSlides] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
-    const { seeAds, fetchPageSpecificNews } = useContext(NewsContext);
-    const hideOnRoutes = ['/news', '/article', '/interview', '/event', '/job', '/magazine']
+    const { seeAds, fetchPageSpecificAds } = useContext(NewsContext);
+    const hideOnRoutes = ['/', '/news', '/article', '/interview', '/event', '/job', '/magazine']
     const location = useLocation();
     const showAds = hideOnRoutes.includes(location.pathname); // Determine ad visibility based on the route
 
@@ -27,8 +27,8 @@ const AdSection = ({ showProfile }) => {
 
 
     useEffect(() => {
-        if (hideOnRoutes.includes(location.pathname)) {
-            fetchPageSpecificNews("AD");
+        if (seeAds.length === 0) {
+            fetchPageSpecificAds("AD");
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
@@ -88,7 +88,15 @@ const AdSection = ({ showProfile }) => {
                                         }}
                                     >
                                         <a href={slide.body} target="_blank" rel="noopener noreferrer">
-                                            <img src={slide.coverImageURL} alt={`Advertisement ${index + 1}`} />
+                                            {/* <img src={slide.coverImageURL} alt={`Advertisement ${index + 1}`} /> */}
+                                            {slide.coverImageURL ? (
+                                                <img
+                                                    src={`${slide.coverImageURL}`}
+                                                    alt="User"
+                                                />
+                                            ) : (
+                                                <p>Loading image...</p>
+                                            )}
                                             <p className='adImageBtn'>Click For More Details</p>
                                         </a>
 

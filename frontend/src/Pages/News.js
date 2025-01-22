@@ -19,7 +19,7 @@ const News = ({ showAddMenu }) => {
     }, []);
 
     useEffect(() => {
-        document.title = "INDUSTRIAL TIMES - News"; // Set the document title to the news title
+        document.title = "PharmaChem TIMES - News"; // Set the document title to the news title
     }, []);
 
     const handleClick = (id, tag) => {
@@ -72,7 +72,14 @@ const News = ({ showAddMenu }) => {
                             onClick={() => handleClick(pNews._id, pNews.tag)}
                             className={index === 0 ? "newsParticularBoxFirst" : "newsParticularBox"}
                         >
-                            <img src={pNews.coverImageURL} alt="" />
+                            {pNews.coverImageURL ? (
+                                <img
+                                    src={`${pNews.coverImageURL}`}
+                                    alt="User"
+                                />
+                            ) : (
+                                <p>Loading image...</p>
+                            )}
                             <h5>{pNews.title.split(" ").slice(0, 18).join(" ") + "..."}</h5>
                             <div className="newsParticularTimeDateFirst">
                                 <p>{formattedDate(pNews.createdAt)}</p>

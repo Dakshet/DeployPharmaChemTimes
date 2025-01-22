@@ -17,7 +17,7 @@ const ADPage = ({ showProfile, showAddMenu, showAlert }) => {
 
     // Title change
     useEffect(() => {
-        document.title = "INDUSTRIAL TIMES - Advertisement";  // Set the document title to the news title
+        document.title = "PharmaChem TIMES - Advertisement";  // Set the document title to the news title
     }, []);
 
 

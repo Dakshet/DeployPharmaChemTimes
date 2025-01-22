@@ -20,7 +20,8 @@ let success = false;
 
 // Keys 
 const private_key = process.env.PRIVATE_KEY
-const client_email = process.env.CLIENT_EMAIL
+// const client_email = process.env.CLIENT_EMAIL
+const client_email = "pharmachem@pharmachemuploadsphotos.iam.gserviceaccount.com"
 // const spreadsheetId = process.env.SPREADSHEETID
 
 

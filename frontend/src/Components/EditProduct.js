@@ -55,11 +55,6 @@ const EditProduct = ({ showAlert, showEditForm, setShowEditForm, companyAllData 
         }
     }, [companyAllData]);
 
-    // Title change
-    useEffect(() => {
-
-        document.title = "PharmaChem TIMES - Edit Data";  // Set the document title to the news title
-    }, []);
 
 
     if (userLoginRedux.role !== "REPORTER") {

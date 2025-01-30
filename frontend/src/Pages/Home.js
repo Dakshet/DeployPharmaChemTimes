@@ -334,7 +334,7 @@ const Home = ({ showAlert }) => {
                     </div>
                 </div>
                 <div className="centerContainer">
-                    <button onClick={() => { setSelectedChemName({}); setSelectedLetter(""); setSelectedCompanyProduct([]) }} className='centerContainerAllListBtn'>All List</button>
+                    <button onClick={() => { setSelectedChemName({}); setSearchByCompany([]); setSearchByProduct([]); setSelectedLetter(""); setSelectedCompanyProduct([]) }} className='centerContainerAllListBtn'>All List</button>
                     <div className="centerContainerBtn">
                         <button onClick={handleByProductBtn}>By Product</button>
                         <button onClick={handleByCompanyBtn}>By Company</button>

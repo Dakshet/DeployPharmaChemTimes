@@ -288,9 +288,10 @@ const Home = ({ showAlert }) => {
             <div className={`home`}>
                 <div className={`leftContainer ${showProductList ? "" : "hideContainer"}`}>
                     <h5>By Products</h5>
+                    <i onClick={() => setShowProductList(false)} className="ri-close-circle-line byListCloseBtn"></i>
 
                     <div className="leftContainerRadioBox">
-                        <label className='leftContainerLabel `hideAllList`' htmlFor={`radio-all`}>
+                        <label className='leftContainerLabel hideAllList' htmlFor={`radio-all`}>
                             <span>ALL LIST</span>
                             <input
                                 type="radio"
@@ -493,7 +494,7 @@ const Home = ({ showAlert }) => {
                 </div>
                 <div className={`rightContainer ${showCompanyList ? "" : "hideContainer"}`}>
                     <h5>By Company</h5>
-
+                    <i onClick={() => setShowCompanyList(false)} className="ri-close-circle-line byListCloseBtn"></i>
                     <div className="rightContainerRadioBox">
                         <div className="dropDownContainerBox">
                             {allCompany.map((chem, index) => (

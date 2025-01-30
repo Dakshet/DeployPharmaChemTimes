@@ -21,6 +21,14 @@
     overflow-y: scroll;
 }
 
+.leftContainer .byListCloseBtn,
+.rightContainer .byListCloseBtn {
+    position: absolute;
+    right: 10px;
+    font-size: 23px;
+    top: 14px;
+}
+
 
 .leftContainer::-webkit-scrollbar,
 .rightContainer::-webkit-scrollbar {

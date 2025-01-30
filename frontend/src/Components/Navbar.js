@@ -20,10 +20,6 @@ const Navbar = ({ setShowAddMenu, showProfile, setShowProfile, showSearch, setSh
     const location = useLocation();
     const articleId = location.pathname.split("/")[2] || ""; // This will safely handle paths without a third segment
 
-    const toggleMenu = () => {
-        setMobileMenu(!mobileMenu)
-    }
-
     const handleClick = () => {
         setMobileMenu(false);
         setSearchNewsResult([]);
@@ -40,15 +36,6 @@ const Navbar = ({ setShowAddMenu, showProfile, setShowProfile, showSearch, setSh
         setShowProfile(false);
     }
 
-    // const handleUserProfile = () => {
-    //     setShowProfile(!showProfile)
-    //     setShowAddMenu(false);
-    // }
-
-    // const handleShowAddMenu = () => {
-    //     setShowAddMenu(!showAddMenu)
-    //     setShowProfile(false);
-    // }
 
     const isUserIsNotLogin = Object.keys(userLoginRedux).length === 0;
 

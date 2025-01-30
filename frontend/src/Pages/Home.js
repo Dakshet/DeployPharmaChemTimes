@@ -5,7 +5,7 @@ import EditProduct from '../Components/EditProduct';
 
 const Home = ({ showAlert }) => {
 
-    const { visitCounter, showAllProducts, fetchProductChemicalData, editCompanyProducts } = useContext(NewsContext);
+    const { visitCounter, showAllProducts, fetchProductChemicalData } = useContext(NewsContext);
 
     const [filteredChemicals, setFilteredChemicals] = useState([]);     // It is use when we click on letter in By products list that time they show corresponding prouducts using this useState
     const [selectedLetter, setSelectedLetter] = useState('');           // It is use for select letter wise
@@ -42,15 +42,10 @@ const Home = ({ showAlert }) => {
 
     }, [chemArray]);
 
-    // console.log("letters", letters);
-
-
-    // const letters = useMemo(() => Array.from(new Set(chemArray.map(chem => chem.productName.map(prod => prod.charAt(0).toUpperCase())))), [chemArray])
 
     // Flatten the array and remove duplicates
     const uniqueLetters = Array.from(new Set(letters.flat())).sort((a, b) => a.localeCompare(b));
 
-    // console.log("uniqueLetters", uniqueLetters)
 
 
     // Extract unique company names
@@ -58,7 +53,6 @@ const Home = ({ showAlert }) => {
         new Set(chemArray.map(chem => chem.companyName))
     ), [chemArray]);
 
-    // console.log("allCompany", allCompany)
 
     // All sorted product names only not the complete information but it is ok
     const sortedAllProducts = Array.from(
@@ -176,7 +170,7 @@ const Home = ({ showAlert }) => {
         setSelectedField(letter)
         setSearchByProduct([])
         setSearchByCompany([])
-    }, [chemArray])
+    }, [sortedAllProducts])
 
 
     // // Handle Chemical Selection 
@@ -189,7 +183,7 @@ const Home = ({ showAlert }) => {
         setSelectedCompanyProduct([])
         setSelectedField(chemicalName)
         setShowProductList(false);
-    }, [chemArray])
+    }, [searchAllData])
 
     // // Handle Company Selection 
     const handleCompanySelection = useCallback((companyName) => {
@@ -199,7 +193,7 @@ const Home = ({ showAlert }) => {
         setSelectedLetter('');
         setSelectedField(`@${companyName}`);
         setShowCompanyList(false);
-    }, [chemArray]);
+    }, [searchAllData]);
 
 
     // // Handle Popup Box
@@ -208,13 +202,13 @@ const Home = ({ showAlert }) => {
         setOpenBoxInfo(chemName);
         const searchChemical = searchAllData(chemName)
         setAllCompanyOnPopupBox(searchChemical.companyName)
-    }, [chemArray])
+    }, [searchAllData])
 
     // // Handle Popup Close Box
     const closePopup = useCallback(() => {
         setOpenPopup(false);
         setOpenBoxInfo({});
-    }, [chemArray]);
+    }, []);
 
 
     const handleSearchBox = () => {
@@ -235,11 +229,11 @@ const Home = ({ showAlert }) => {
 
     const handleByProductBtn = useCallback(() => {
         setShowProductList(true);
-    }, [chemArray])
+    }, [])
 
     const handleByCompanyBtn = useCallback(() => {
         setShowCompanyList(true);
-    }, [chemArray])
+    }, [])
 
 
     const handleEditForm = useCallback((companyData) => {
@@ -249,7 +243,7 @@ const Home = ({ showAlert }) => {
 
         setCompanyAllData(editData);
         setShowEditForm(true);
-    }, [chemArray])
+    }, [searchAllData])
 
 
     // Use for close and open Popup box

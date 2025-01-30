@@ -160,6 +160,12 @@ select {
     .addMagazine {
         padding: 0 5%;
     }
+
+
+    .editCompanyCloseIcon:Hover {
+        color: #011E29;
+        border-radius: 20px;
+    }
 }
 
 @media (max-width: 400px) {

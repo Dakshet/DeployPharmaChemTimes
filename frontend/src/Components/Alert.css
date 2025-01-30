@@ -109,6 +109,12 @@
 
     .alertBoxInner h1 {
         font-size: 16px;
+        margin-top: 10px;
+    }
+
+    .alertBoxInner p {
+        height: 32px;
+        width: 32px;
     }
 }
 

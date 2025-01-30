@@ -697,9 +697,15 @@ async function sendAdminMails() {
 async function countVisitNumber(req, res) {
     try {
         //Verified the news id first
-        let month = req.query.month;
+        let { month } = req.query;
+
+        // Ensure month is a valid number
+        if (isNaN(month) || month < 0 || month > 11) {
+            return res.status(400).json({ success: false, error: "Invalid month value" });
+        }
+
         const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-        const monthName = monthNames[month];
+        const monthName = monthNames[parseInt(month, 10)];
 
 
         // let createMonth = await CountVisit.create({
@@ -711,43 +717,31 @@ async function countVisitNumber(req, res) {
 
         // console.log(createMonth);
 
+        // Update visit count for the month
+        let news = await CountVisit.findOneAndUpdate(
+            { month: monthName },
+            { $inc: { count: 1 } },
+            { new: true, upsert: true } // Ensures document is created if not found
+        );
 
-        let news = await CountVisit.findOneAndUpdate({
-            month: monthName
-        }, {
-            $inc: { count: 1 }
-        });
 
-        let currentDateMail = await CountVisit.findOne({
-            month: "currentDateMail"
-        });
-
+        // Get the current date in ddmmyyyy format
         const date = new Date();
+        const numericDate = parseInt(`${date.getDate()}${date.getMonth() + 1}${date.getFullYear()}`, 10);
 
-        // Extract components of the date
-        const day = date.getDate();
-        const months = date.getMonth() + 1; // Months are zero-based
-        const year = date.getFullYear();
-
-        // // Combine them into a number
-        const numericDate = parseInt(`${day}${months}${year}`, 10);
+        // Check and update 'currentDateMail' entry
+        let currentDateMail = await CountVisit.findOne({ month: "currentDateMail" });
 
 
-        if (currentDateMail.count !== numericDate) {
-            let updateDate = await CountVisit.findOneAndUpdate({
-                month: "currentDateMail"
-            }, {
-                count: numericDate
-            });
+        if (!currentDateMail || currentDateMail.count !== numericDate) {
+            await CountVisit.findOneAndUpdate(
+                { month: "currentDateMail" },
+                { count: numericDate },
+                { upsert: true }
+            );
 
-            // console.log(await CountVisit.find({}))
-
-            await sendAdminMails();
-            // console.log("done")
+            await sendAdminMails(); // Send mail when the date changes
         }
-
-        // console.log(currentDateMail);
-
 
 
         //Final

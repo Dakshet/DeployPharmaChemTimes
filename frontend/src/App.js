@@ -62,7 +62,7 @@ function App() {
           <ScrollToTop />
           <Routes>
 
-            <Route index exact path='/' element={<Home showAddMenu={showAddMenu} />} />
+            <Route index exact path='/' element={<Home showAddMenu={showAddMenu} showAlert={showAlert} />} />
             <Route exact path='/news' element={<News showAddMenu={showAddMenu} />} />
             <Route exact path='/article' element={<Article showAddMenu={showAddMenu} />} />
             <Route exact path='/interview' element={<Interview showAddMenu={showAddMenu} />} />

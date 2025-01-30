@@ -5,22 +5,18 @@ const chemiSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'user'
     },
-    name: {
+    companyName: {
         type: String,
         required: false,
     },
-    companyName: [
-        {
-            company: {
-                type: String,
-                required: true
-            },
-            link: {
-                type: String,
-                required: true,
-            }
-        }
-    ]
+    productName: {
+        type: [String],
+        required: true
+    },
+    companyLink: {
+        type: String,
+        required: true,
+    }
 }, {
     timestamps: true,
 })

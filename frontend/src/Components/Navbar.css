@@ -270,6 +270,7 @@
         display: block;
         margin: 0px 5%;
         cursor: pointer;
+        font-size: 17px;
     }
 
     .navbar-center .navbarCenterHide {
@@ -340,6 +341,12 @@
         background-color: #02384d;
         color: white;
         display: inline-block;
+    }
+
+
+    .navbar .closeIcons {
+        margin-left: 10px;
+        font-size: 20px;
     }
 
 }

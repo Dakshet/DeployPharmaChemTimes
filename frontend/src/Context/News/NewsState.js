@@ -537,38 +537,38 @@ const NewsState = (props) => {
     //Count Visit
     const visitCounter = async () => {
 
-        // const date = new Date();
-        // let monthInNum = date.getMonth();
+        const date = new Date();
+        let monthInNum = date.getMonth();
 
-        // try {
+        try {
 
-        //     const response = await fetch(`${host}/news/updatecount?month=${monthInNum}`, {
-        //         method: "PUT",
-        //         headers: {
-        //             "Content-Type": "application/json"
-        //         }
-        //     })
+            const response = await fetch(`${host}/news/updatecount?month=${monthInNum}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
 
-        //     if (response.ok) {
-        //         const json = await response.json();
+            if (response.ok) {
+                const json = await response.json();
 
-        //         if (json.count) {
-        //             // console.log(json.count);
+                if (json.count) {
+                    // console.log(json.count);
 
-        //         }
+                }
 
-        //         else {
-        //             console.log(json.Error);
-        //         }
-        //     }
+                else {
+                    console.log(json.Error);
+                }
+            }
 
-        //     else {
-        //         console.log(`Error counting news: ${response.status} ${response.statusText}`)
-        //     }
+            else {
+                console.log(`Error counting news: ${response.status} ${response.statusText}`)
+            }
 
-        // } catch (error) {
-        //     console.error("Error counting the news:", error);
-        // }
+        } catch (error) {
+            console.error("Error counting the news:", error);
+        }
 
 
     }
@@ -619,7 +619,7 @@ const NewsState = (props) => {
 
 
     //Add Product in DataBase
-    const addProductData = async (name, companyName) => {
+    const addProductData = async (companyName, productName, companyLink) => {
 
 
         try {
@@ -630,13 +630,13 @@ const NewsState = (props) => {
                     "Content-Type": "application/json",
                     "auth_token": localStorage.getItem("inews")
                 },
-                body: JSON.stringify({ name, companyName })
+                body: JSON.stringify({ companyName, productName, companyLink })
             })
 
             if (response.ok) {
                 const json = await response.json();
                 if (json.chemical) {
-                    console.log(json.chemical);
+                    // console.log(json.chemical);
                     //console.log(json.news)
                     // setSeeAds.concat(json.news);
                 }
@@ -698,7 +698,98 @@ const NewsState = (props) => {
 
 
 
-    return (<NewsContext.Provider value={{ pageNews, fetchPageSpecificNews, fetchPageSpecificAds, getNewsUsingId, specificNews, setSpecificNews, addNews, deleteNews, editNews, commentNews, fetchComment, addComment, searchNewsResult, setSearchNewsResult, fetchSearchNews, loginUserInfo, addMagazine, deleteMagazine, visitCounter, addAdvertisement, seeAds, showAllProducts, addProductData, fetchProductChemicalData }}>
+    //Update News
+    const editCompanyProducts = async (id, companyName, productName, companyLink) => {
+
+        //First we see directly update or not then according to that take action
+
+
+
+        try {
+
+            const response = await fetch(`${host}/news/updatecompanydata/${id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "auth_token": localStorage.getItem("inews")
+                },
+                body: JSON.stringify({ companyName, productName, companyLink })
+            })
+
+
+            if (response.ok) {
+                const json = await response.json();
+
+                if (json.companyData) {
+
+                    // Update local state
+                    const updatedProducts = showAllProducts.map((prod) =>
+                        prod._id === id ? json.companyData : prod
+                    );
+
+                    // console.log(updatedProducts)
+                    setShowAllProducts(updatedProducts)
+                }
+
+                else {
+                    console.log(json.Error);
+                }
+            }
+
+            else {
+                console.log(`Error fetching news: ${response.status} ${response.statusText}`)
+            }
+
+        } catch (error) {
+            console.error("Error fetching the news:", error);
+        }
+    }
+
+
+
+    //Delete All product of company
+    const deleteAllCompanyProducts = async (id) => {
+
+
+        try {
+
+            const response = await fetch(`${host}/news/deleteproductdata?id=${id}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    "auth_token": localStorage.getItem("inews")
+                },
+            })
+
+            if (response.ok) {
+                const json = await response.json();
+
+                if (json.chemical) {
+
+                    const deleteProducts = showAllProducts.filter((prod) => prod._id !== id);
+
+                    // console.log(updatedProducts)
+                    setShowAllProducts(deleteProducts)
+                }
+
+                else {
+                    console.log(json.Error);
+                }
+            }
+
+            else {
+                console.log(`Error fetching news: ${response.status} ${response.statusText}`)
+            }
+
+        } catch (error) {
+            console.error("Error fetching the news:", error);
+        }
+    }
+
+
+
+
+    return (<NewsContext.Provider value={{ pageNews, fetchPageSpecificNews, fetchPageSpecificAds, getNewsUsingId, specificNews, setSpecificNews, addNews, deleteNews, editNews, commentNews, fetchComment, addComment, searchNewsResult, setSearchNewsResult, fetchSearchNews, loginUserInfo, addMagazine, deleteMagazine, visitCounter, addAdvertisement, seeAds, showAllProducts, addProductData, fetchProductChemicalData, editCompanyProducts, deleteAllCompanyProducts }}>
         {props.children}
     </NewsContext.Provider>
     )

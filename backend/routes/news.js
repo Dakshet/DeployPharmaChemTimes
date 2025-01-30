@@ -1,6 +1,6 @@
 const express = require("express");
 const { fetchUser } = require("../middlewares/fetchUser");
-const { addNews, updateNews, deleteNews, fetchSpecificNews, fetchAllNewsForSpecificRoute, fetchSearchNews, addMagazine, deleteMagazine, countVisitNumber, addAD, fetchAllProductData, addProductData, deleteProductData } = require("../controllers/news");
+const { addNews, updateNews, deleteNews, fetchSpecificNews, fetchAllNewsForSpecificRoute, fetchSearchNews, addMagazine, deleteMagazine, countVisitNumber, addAD, fetchAllProductData, addProductData, deleteProductData, updateCompanyData } = require("../controllers/news");
 const multer = require('multer')
 
 const router = express.Router();
@@ -41,6 +41,8 @@ router.get("/fetchallproductdata", fetchAllProductData)
 
 router.post("/addproductdata", fetchUser, addProductData)
 
-router.delete("/deleteproductdata", deleteProductData)
+router.put("/updatecompanydata/:companyid", fetchUser, updateCompanyData)
+
+router.delete("/deleteproductdata", fetchUser, deleteProductData)
 
 module.exports = router;

@@ -821,28 +821,23 @@ async function fetchAllProductData(req, res) {
 async function addProductData(req, res) {
     try {
         //Destructure the request
-        const { name, companyName } = req.body;
+        const { companyName, productName, companyLink } = req.body;
 
-        //Validate the fields
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            success = false;
-            return res.status(400).json({ success, Error: errors.array()[0].msg })
-        }
+        const productArray = productName.split(', ').map(product => product.trim()); // Split and trim products    
 
         let chemical;
 
         //Add data in DB
         chemical = await Chemicals.create({
-            name,
             companyName,
+            productName: productArray,
+            companyLink,
+            createdUser: req.user.id,
         })
 
         chemical = await chemical.save();
 
-        // console.log(chemical);
-
-        // //Final
+        // Final
         success = true;
         return res.status(201).json({ success, chemical })
 
@@ -854,49 +849,83 @@ async function addProductData(req, res) {
 }
 
 
-// Delete Product data
-async function deleteProductData(req, res) {
+
+async function updateCompanyData(req, res) {
     try {
-        //Verified the news id first
-        let coverImageURL = req.query.coverImage;
+        //Destructrue the request
+        const { companyName, productName, companyLink } = req.body;
 
-        //Separate the cloudinary image id
-        const urlArray = coverImageURL.split("/");
-        const image = urlArray[urlArray.length - 1];
-        const imageName = image.split(".")[0];
+        //Create the new object
+        const newCompanyData = {};
+
+        if (companyName) {
+            newCompanyData.companyName = companyName;
+        }
+
+        if (productName) {
+            newCompanyData.productName = productName;
+        }
+
+        if (companyLink) {
+            newCompanyData.companyLink = companyLink;
+        }
 
 
-        let news = await News.findById(req.query.id);
+        //Verified the news id first 
+        let companyData = await Chemicals.findById(req.params.companyid)
 
-
-        if (!news) {
+        if (!companyData) {
             success = false;
-            return res.status(404).json({ success, Error: "News is not found!" })
+            return res.status(404).json({ success, Error: "Company Data is not found!" })
         }
 
         //Verified the news user and login user
-        if (news.createdUser.toString() !== req.user.id) {
+        if (companyData.createdUser.toString() !== req.user.id) {
             success = false;
-            return res.status(404).json({ success, Error: "You can't delete news!" })
+            return res.status(404).json({ success, Error: "You can't edit company data!" })
+        }
+
+        //Update news
+        companyData = await Chemicals.findByIdAndUpdate(req.params.companyid, { $set: newCompanyData }, { new: true })
+
+
+        // Final
+        success = true;
+        return res.status(200).json({ success, companyData })
+
+    } catch (error) {
+        console.log(error.message);
+        success = false;
+        return res.status(500).json({ success, Error: "Internal Server Error Occured!" })
+    }
+}
+
+
+
+// Delete Product data
+async function deleteProductData(req, res) {
+    try {
+
+        let chemical = await Chemicals.findById(req.query.id);
+
+
+        if (!chemical) {
+            success = false;
+            return res.status(404).json({ success, Error: "Chemicals is not found!" })
+        }
+
+        //Verified the news user and login user
+        if (chemical.createdUser.toString() !== req.user.id) {
+            success = false;
+            return res.status(404).json({ success, Error: "You can't delete chemical!" })
         }
 
         //Delete news
-        news = await News.findByIdAndDelete(req.query.id)
-
-        //Delete image from cloudinary
-        await cloudinary.uploader.destroy(imageName, (error, result) => {
-            // console.log(error, result);
-            try {
-                // console.log(result);
-            } catch (error) {
-                success = false;
-                return res.status(400).json({ success, Error: error });
-            }
-        })
+        chemical = await Chemicals.findByIdAndDelete(req.query.id)
 
         //Final
         success = true;
-        return res.status(200).json({ success, news })
+        return res.status(200).json({ success, chemical })
 
     } catch (error) {
         console.log(error.message);
@@ -919,5 +948,6 @@ module.exports = {
     addAD,
     fetchAllProductData,
     addProductData,
+    updateCompanyData,
     deleteProductData
 }

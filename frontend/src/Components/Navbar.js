@@ -184,7 +184,8 @@ const Navbar = ({ setShowAddMenu, showProfile, setShowProfile, showSearch, setSh
                 </div>
 
                 <i onClick={() => setShowSearch(!showSearch)} className="ri-search-line showSearchBar"></i>
-                <i className="ri-menu-fill menu-icon" onClick={toggleMenu}></i>
+                {mobileMenu ? <i className="ri-close-circle-line closeIcons" onClick={() => setMobileMenu(false)}></i>
+                    : <i className="ri-menu-fill menu-icon" onClick={() => setMobileMenu(true)}></i>}
             </div >
             <SearchBar showSearch={showSearch} setShowSearch={setShowSearch} />
             <UserProfile showProfile={showProfile} />

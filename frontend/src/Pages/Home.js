@@ -2,6 +2,7 @@ import React, { useCallback, useContext, useEffect, useMemo, useState } from 're
 import NewsContext from '../Context/News/NewsContext'
 import "./Home.css"
 import EditProduct from '../Components/EditProduct';
+import { useSelector } from 'react-redux';
 
 const Home = ({ showAlert }) => {
 
@@ -23,6 +24,7 @@ const Home = ({ showAlert }) => {
     const [searchByCompany, setSearchByCompany] = useState([]);          // It is use for the add data after searching company name        
     const [showEditForm, setShowEditForm] = useState(false);            // It is use for show edit form
     const [companyAllData, setCompanyAllData] = useState([]);            // It is use for send all data into the edit form
+    const userLoginRedux = useSelector((state) => state.counter.userLogin);
 
 
     // Company wise sort
@@ -506,7 +508,7 @@ const Home = ({ showAlert }) => {
                                         />
                                     </label>
                                     {/* Here we need to pass the id instead of  handleEditForm(chem) for identification*/}
-                                    <i onClick={() => handleEditForm(chem)} className="ri-edit-box-fill editBox"></i>
+                                    {userLoginRedux.role === "REPORTER" && <i onClick={() => handleEditForm(chem)} className="ri-edit-box-fill editBox"></i>}
                                 </div>
                             ))}
                         </div>

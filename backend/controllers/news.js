@@ -732,7 +732,7 @@ async function countVisitNumber(req, res) {
         // // Combine them into a number
         const numericDate = parseInt(`${day}${months}${year}`, 10);
 
-        // await sendAdminMails();
+
         if (currentDateMail.count !== numericDate) {
             let updateDate = await CountVisit.findOneAndUpdate({
                 month: "currentDateMail"

@@ -108,7 +108,7 @@ select {
 .editCompanyDataForm {
     position: fixed;
     top: 60px;
-    z-index: 200;
+    /* z-index: 200; */
     height: 540px;
     background-color: transparent;
 }

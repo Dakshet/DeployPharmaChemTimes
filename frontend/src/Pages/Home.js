@@ -17,28 +17,153 @@ const Home = () => {
     const [selectedField, setSelectedField] = useState("")
     const [showProductList, setShowProductList] = useState(false)
     const [showCompanyList, setShowCompanyList] = useState(false)
+    const [allCompanyOnPopupBox, setAllCompanyOnPopupBox] = useState([]);
 
 
-    const chemArray = useMemo(() => {
-        return [...showAllProducts].sort((a, b) => a.name.localeCompare(b.name))
-    }, [showAllProducts])
 
-    const letters = useMemo(() => Array.from(new Set(chemArray.map(chem => chem.name.charAt(0).toUpperCase()))), [chemArray])
+
+    const chemArray = useMemo(() => [
+        {
+            "companyName": "Amazon",
+            "productName": ["Acetone", "Isopropyl Alcohol", "Ethanol"],
+            "companyLink": "https://www.amazon.com"
+        },
+        {
+            "companyName": "Walmart",
+            "productName": ["Hydrogen Peroxide", "Methanol", "Chloroform"],
+            "companyLink": "https://www.walmart.com"
+        },
+        {
+            "companyName": "eBay",
+            "productName": ["Sodium Hydroxide", "Sulfuric Acid", "Glycerin"],
+            "companyLink": "https://www.ebay.com"
+        },
+        {
+            "companyName": "Alibaba",
+            "productName": ["Toluene", "Xylene", "Formaldehyde"],
+            "companyLink": "https://www.alibaba.com"
+        },
+        {
+            "companyName": "Home Depot",
+            "productName": ["Ammonia Solution", "Denatured Alcohol", "Lactic Acid"],
+            "companyLink": "https://www.homedepot.com"
+        },
+        {
+            "companyName": "Lowe's",
+            "productName": ["Propylene Glycol", "Boric Acid", "Acetic Acid"],
+            "companyLink": "https://www.lowes.com"
+        },
+        {
+            "companyName": "CVS Pharmacy",
+            "productName": ["Rubbing Alcohol", "Ethanol", "Hydrogen Peroxide"],
+            "companyLink": "https://www.cvs.com"
+        },
+        {
+            "companyName": "Walgreens",
+            "productName": ["Isopropanol", "Glycerin", "Methanol"],
+            "companyLink": "https://www.walgreens.com"
+        },
+        {
+            "companyName": "Target",
+            "productName": ["Chloroform", "Sodium Hydroxide", "Acetone"],
+            "companyLink": "https://www.target.com"
+        },
+        {
+            "companyName": "Best Buy",
+            "productName": ["Ethanol", "Toluene", "Xylene"],
+            "companyLink": "https://www.bestbuy.com"
+        },
+        {
+            "companyName": "Costco",
+            "productName": ["Lactic Acid", "Acetic Acid", "Denatured Alcohol"],
+            "companyLink": "https://www.costco.com"
+        },
+        {
+            "companyName": "Sam's Club",
+            "productName": ["Sulfuric Acid", "Boric Acid", "Hydrogen Peroxide"],
+            "companyLink": "https://www.samsclub.com"
+        },
+        {
+            "companyName": "Ace Hardware",
+            "productName": ["Formaldehyde", "Ammonia Solution", "Methanol"],
+            "companyLink": "https://www.acehardware.com"
+        },
+        {
+            "companyName": "Grainger",
+            "productName": ["Propylene Glycol", "Rubbing Alcohol", "Isopropanol"],
+            "companyLink": "https://www.grainger.com"
+        },
+        {
+            "companyName": "Uline",
+            "productName": ["Xylene", "Chloroform", "Sulfuric Acid"],
+            "companyLink": "https://www.uline.com"
+        },
+        {
+            "companyName": "McMaster-Carr",
+            "productName": ["Denatured Alcohol", "Glycerin", "Toluene"],
+            "companyLink": "https://www.mcmaster.com"
+        },
+        {
+            "companyName": "Staples",
+            "productName": ["Boric Acid", "Ammonia Solution", "Lactic Acid"],
+            "companyLink": "https://www.staples.com"
+        },
+        {
+            "companyName": "Office Depot",
+            "productName": ["Acetone", "Hydrogen Peroxide", "Propylene Glycol"],
+            "companyLink": "https://www.officedepot.com"
+        },
+        {
+            "companyName": "AliExpress",
+            "productName": ["Formaldehyde", "Sodium Hydroxide", "Methanol"],
+            "companyLink": "https://www.aliexpress.com"
+        },
+        {
+            "companyName": "Menards",
+            "productName": ["Acetic Acid", "Isopropyl Alcohol", "Ethanol"],
+            "companyLink": "https://www.menards.com"
+        }
+    ])
+
+
+
+    // const chemArray = useMemo(() => {
+    //     return [...showAllProducts].sort((a, b) => a.name.localeCompare(b.name))
+    // }, [showAllProducts])
+
+    // const letters = useMemo(() => Array.from(new Set(chemArray.map(chem => chem.name.charAt(0).toUpperCase()))), [chemArray])
+
+
+
+    const letters = useMemo(() => Array.from(new Set(chemArray.map(chem => chem.productName.map(prod => prod.charAt(0).toUpperCase())))), [chemArray])
+
+    // Flatten the array and remove duplicates
+    const uniqueLetters = Array.from(new Set(letters.flat())).sort((a, b) => a.localeCompare(b));
+
 
     // Extract unique company names
     const allCompany = useMemo(() => Array.from(
-        new Set(chemArray.flatMap(chem => chem.companyName.map(company => company.company)))
+        new Set(chemArray.map(chem => chem.companyName))
     ).sort((a, b) => a.localeCompare(b)), [chemArray]);
 
+
+    const sortedAllProducts = Array.from(
+        new Set(
+            chemArray
+                .flatMap(chem => chem.productName) // Flatten all productName arrays into a single array
+                .sort((a, b) => a.localeCompare(b)) // Sort the filtered names alphabetically
+        )
+    )
 
 
     //Handle Letter Selection
     const handleLetterSelection = useCallback((letter) => {
 
-        const sortedLetterArray = chemArray.filter((chem) =>
-            chem.name.toUpperCase().startsWith(letter.toUpperCase())
-        );
+        // const sortedLetterArray = chemArray.filter((chem) =>
+        //     chem.name.toUpperCase().startsWith(letter.toUpperCase())
+        // );
 
+        const sortedLetterArray = sortedAllProducts.filter(name => name.charAt(0).toUpperCase() === letter) // Filter names starting with the specified letter
         setFilteredChemicals(sortedLetterArray);
         setSelectedLetter(letter);
         setSelectedField(letter)
@@ -49,7 +174,22 @@ const Home = () => {
     // Handle Chemical Selection 
     const handleChemicalSelection = useCallback((chemicalName) => {
 
-        setSelectedChemName(chemArray.filter(chem => chem.name === chemicalName));
+
+        let selectedChemicalNameWithArray = chemArray.filter(chem =>
+            chem.productName.some(prod => prod === chemicalName)
+        );
+
+        // Sort by the first property of the object (in this case, `name`)
+        selectedChemicalNameWithArray.sort((a, b) => {
+            const firstKeyA = Object.keys(a)[0]; // Get the first key of object `a`
+            const firstKeyB = Object.keys(b)[0]; // Get the first key of object `b`
+            return a[firstKeyA].localeCompare(b[firstKeyB]);
+        });
+
+        // console.log(arrayC);
+
+
+        setSelectedChemName(selectedChemicalNameWithArray);
         setSelectedChemicalCompany([])
         setSelectedCompanyProduct([])
         setSelectedField(chemicalName)
@@ -58,21 +198,33 @@ const Home = () => {
 
 
     // Handle Company Selection 
-    const handleCompanySelection = useCallback((companyName) => {
-        const filteredProducts = chemArray.filter(chem =>
-            chem.companyName.some(comp => comp.company.toLowerCase() === companyName.toLowerCase())
-        );
-        setSelectedCompanyProduct(filteredProducts);
-        setSelectedLetter('');
-        setSelectedField(`@${companyName}`);
-        setShowCompanyList(false);
-    }, [chemArray]);
+    // const handleCompanySelection = useCallback((companyName) => {
+    //     const filteredProducts = chemArray.filter(chem =>
+    //         chem.companyName.some(comp => comp.company.toLowerCase() === companyName.toLowerCase())
+    //     );
+    //     setSelectedCompanyProduct(filteredProducts);
+    //     setSelectedLetter('');
+    //     setSelectedField(`@${companyName}`);
+    //     setShowCompanyList(false);
+    // }, [chemArray]);
 
 
     // Handle Popup Box
     const handlePopupBox = useCallback((chemName) => {
         setOpenPopup(true);
         setOpenBoxInfo(chemName);
+        let selectedChemicalNameWithArray = chemArray.filter(chem =>
+            chem.productName.some(prod => prod === chemName)
+        );
+
+        // Sort by the first property of the object (in this case, `name`)
+        selectedChemicalNameWithArray.sort((a, b) => {
+            const firstKeyA = Object.keys(a)[0]; // Get the first key of object `a`
+            const firstKeyB = Object.keys(b)[0]; // Get the first key of object `b`
+            return a[firstKeyA].localeCompare(b[firstKeyB]);
+        });
+
+        setAllCompanyOnPopupBox(selectedChemicalNameWithArray)
     }, [])
 
 
@@ -86,21 +238,104 @@ const Home = () => {
     const handleSearchBox = () => {
         const query = searchBox.toLowerCase();
 
-        // Filter by chemical name or company name
-        const results = chemArray.filter((chem) =>
-            chem.name.toLowerCase().includes(query) ||
-            chem.companyName.some((comp) =>
-                comp.company.toLowerCase().includes(query)
-            )
-        );
+        //Filtered by company name
+        let arrayC = [];
 
-        if (results.length === 0) {
-            setSelectedChemicalCompany("-1");
+        for (let i = 0; i < chemArray.length; i++) {
+
+            let filterProducts = chemArray[i].productName.filter(product =>
+                product.toLowerCase().includes(query)
+            )
+
+            if (filterProducts.length > 0) {
+                arrayC.push({
+                    ...chemArray[i],
+                    productName: filterProducts
+                })
+            }
+        }
+
+
+        if (arrayC.length > 0) {
+
+            let productMap = new Map();         // Map for storing unique product names
+
+            arrayC.forEach(item => {
+                item.productName.forEach(product => {
+                    let productLower = product.toLowerCase();
+                    if (!productMap.has(productLower)) {
+                        productMap.set(productLower, {
+                            productName: product,
+                            companyName: [item.companyName],
+                            companyLink: [item.companyLink]
+                        })
+                    }
+                    else {
+                        let existingEntry = productMap.get(productLower);
+                        existingEntry.companyName.push(item.companyName);
+                        existingEntry.companyLink.push(item.companyLink);
+                    }
+                });
+            });
+
+
+            // Convert the map back to an array of unique products
+            let uniqueProducts = Array.from(productMap.values());
+            console.log(uniqueProducts);
+            return uniqueProducts;
+
+
         }
         else {
-            setSelectedChemicalCompany(results);
+            for (let i = 0; i < chemArray.length; i++) {
+
+                if (chemArray[i].companyName.toLowerCase() === query) {
+                    arrayC.push(chemArray[i])
+                }
+            }
+            console.log(arrayC)
+            return arrayC;
         }
-        setSelectedField("")
+
+
+
+        // Sort by the first property of the object (in this case, `name`)
+        // selectedChemicalNameWithArray.sort((a, b) => {
+        //     const firstKeyA = Object.keys(a)[0]; // Get the first key of object `a`
+        //     const firstKeyB = Object.keys(b)[0]; // Get the first key of object `b`
+        //     return a[firstKeyA].localeCompare(b[firstKeyB]);
+        // });
+
+
+        // const names = selectedChemicalNameWithArray.filter((prod) => prod.productName.toLowerCase() === query)
+
+        // let arrayC = [];
+
+        // for (let i = 0; i < selectedChemicalNameWithArray.length; i++) {
+        //     for (let j = 0; j < selectedChemicalNameWithArray[i].productName.length; j++) {
+        //         if (selectedChemicalNameWithArray[i].productName[j].toLowerCase().includes(query)) {
+        //             arrayC.push(selectedChemicalNameWithArray[i].productName[j])
+        //         }
+        //     }
+        // }
+
+        // const filteredProducts = Array.from(new Set(selectedChemicalNameWithArray
+        //     .flatMap((item) => item.productName) // Flatten the array of product names
+        //     .filter((productName) => productName.toLowerCase().includes(query))));
+
+        // console.log(filteredProducts.sort((a, b) => a.localeCompare(b)));
+
+        // console.log(selectedChemicalNameWithArray);
+
+
+        // Comment out in the last
+        // if (selectedChemicalNameWithArray.length === 0) {
+        //     setSelectedChemicalCompany("-1");
+        // }
+        // else {
+        //     setSelectedChemicalCompany(selectedChemicalNameWithArray);
+        // }
+        // setSelectedField("")
     };
 
     const handleByProductBtn = useCallback(() => {
@@ -132,17 +367,17 @@ const Home = () => {
 
     // console.log(showAllProducts)
 
-    useEffect(() => {
-        visitCounter();
-        fetchProductChemicalData()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    // useEffect(() => {
+    //     visitCounter();
+    //     fetchProductChemicalData()
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [])
 
 
-    // Title change
-    useEffect(() => {
-        document.title = "PharmaChem Times";  // Set the document title to the news title
-    }, []);
+    // // Title change
+    // useEffect(() => {
+    //     document.title = "PharmaChem Times";  // Set the document title to the news title
+    // }, []);
 
 
     return (
@@ -161,19 +396,7 @@ const Home = () => {
                             onChange={() => { setSelectedField("@#number"); setSelectedChemName({}); setSelectedLetter(""); setSelectedChemicalCompany([]); setSelectedCompanyProduct([]) }}
                         />
                     </label>
-                    {/* <RadioLabel
-                        id="radio-all"
-                        label="ALL LIST"
-                        checked={selectedField === "@#number"}
-                        onChange={() => {
-                            setSelectedField("@#number");
-                            setSelectedChemName({});
-                            setSelectedLetter("");
-                            setSelectedChemicalCompany([]);
-                            setSelectedCompanyProduct([]);
-                        }}
-                    /> */}
-                    {letters.map(letter => (
+                    {uniqueLetters.map(letter => (
                         <div key={letter}>
                             <label className='leftContainerLabel' htmlFor={`radio-${letter}`}>
                                 <span>{letter}</span>
@@ -189,12 +412,12 @@ const Home = () => {
                                 <div className="dropDownContainerBox">
                                     {filteredChemicals.map((chem, index) => (
                                         <label key={index} className='dropDownContainerBoxInner' htmlFor={`radio-${letter}`}>
-                                            <span>{chem.name}</span>
+                                            <span>{chem}</span>
                                             <input
                                                 type="radio"
                                                 name="prodName"
-                                                checked={selectedField === chem.name}
-                                                onChange={() => handleChemicalSelection(chem.name)}
+                                                checked={selectedField === chem}
+                                                onChange={() => handleChemicalSelection(chem)}
                                             />
                                         </label>
                                     ))}
@@ -210,14 +433,16 @@ const Home = () => {
                     <button onClick={handleByCompanyBtn}>By Company</button>
                 </div>
                 <button onClick={() => { setSelectedChemName({}); setSelectedLetter(""); setSelectedChemicalCompany([]); setSelectedCompanyProduct([]) }} className='centerContainerAllListBtn'>All List</button>
-                {showAllProducts.length === 0 ? (<h3>Product is not available.</h3>) : selectedCompanyProduct.length > 0 ? (
+                {/* here we need change when are getting data from the backend */}
+                {/* {showAllProducts.length === 0 ? (<h3>Product is not available.</h3>) : selectedCompanyProduct.length > 0 ? ( */}
+                {chemArray.length === 0 ? (<h3>Product is not available.</h3>) : selectedCompanyProduct.length > 0 ? (
                     <div className="centerContainerInner">
                         <h5>Selected Products of "{selectedField.replace("@", "")}"</h5>
                         {selectedCompanyProduct.map((chemComp, index) => {
                             return (
                                 <div key={index} onClick={() => handlePopupBox(chemComp)} className='centerChemCompContainer'>
-                                    <p>{chemComp.name}</p>
-                                    {openPopup && openBoxInfo.name === chemComp.name && (<div className={`centerContainerPopUp`}>
+                                    <p>{chemComp.companyName}</p>
+                                    {/* {openPopup && openBoxInfo.name === chemComp.name && (<div className={`centerContainerPopUp`}>
                                         <p>{openBoxInfo.name}</p>
                                         <div className="companyContainer">
                                             {openBoxInfo.companyName.map((companys, index) => {
@@ -228,7 +453,7 @@ const Home = () => {
                                                 )
                                             })}
                                         </div>
-                                    </div>)}
+                                    </div>)} */}
                                 </div>
                             )
                         })}
@@ -239,7 +464,7 @@ const Home = () => {
                         (selectedChemicalCompany.length > 0 ? (
                             <div className="centerContainerInner">
                                 <h5>Your Search Result For "{searchBox}"</h5>
-                                {selectedChemicalCompany.map((chemComp, index) => {
+                                {/* {selectedChemicalCompany.map((chemComp, index) => {
                                     return (
                                         <div key={index} onClick={() => handlePopupBox(chemComp)} className='centerChemCompContainer'>
                                             <p>{chemComp.name}</p>
@@ -257,20 +482,20 @@ const Home = () => {
                                             </div>)}
                                         </div>
                                     )
-                                })}
+                                })} */}
                             </div>
                         )
                             :
-                            selectedChemName.length === 1 ? (<>
+                            selectedChemName.length > 0 ? (<>
                                 <div className="centerContainerInner">
                                     <h5>Selected Products</h5>
                                     <div className="selectedProduct">
-                                        <p>{selectedChemName[0].name}</p>
+                                        <p>{selectedField}</p>
                                         <div className="selectedCompanyContainer">
-                                            {selectedChemName[0].companyName.map((companys, index) => {
+                                            {selectedChemName.map((companys, index) => {
                                                 return (
                                                     <div key={index} className="companyContainerInner">
-                                                        <a href={companys.link} target='_blank' rel="noopener noreferrer">{companys.company}</a>
+                                                        <a href={companys.companyLink} target='_blank' rel="noopener noreferrer">{companys.companyName}</a>
                                                     </div>
                                                 )
                                             })}
@@ -286,22 +511,22 @@ const Home = () => {
                                             <i onClick={handleSearchBox} className="ri-search-line"></i>
                                         </div>
                                         {
-                                            letters.map(letter => (
+                                            uniqueLetters.map(letter => (
                                                 <div key={letter} className='centerContainerInner'>
                                                     <h6>{letter}</h6>
                                                     <div className='centerContainerBox'>
                                                         {
-                                                            chemArray.filter((chemName) => letter === chemName.name.toUpperCase().charAt(0)
+                                                            sortedAllProducts.filter((chemName) => chemName.toUpperCase().charAt(0) === letter
                                                             ).map((chemName, index) => {
                                                                 return (<div key={index} onClick={() => handlePopupBox(chemName)} className='centerContainerBoxInner'>
-                                                                    <p>{chemName.name}</p>
-                                                                    {openPopup && openBoxInfo.name === chemName.name && (<div className={`centerContainerPopUp`}>
+                                                                    <p>{chemName}</p>
+                                                                    {openPopup && openBoxInfo === chemName && (<div className={`centerContainerPopUp`}>
                                                                         <p>{openBoxInfo.name}</p>
                                                                         <div className="companyContainer">
-                                                                            {openBoxInfo.companyName.map((companys, index) => {
+                                                                            {allCompanyOnPopupBox.map((companys, index) => {
                                                                                 return (
                                                                                     <div key={index} className="companyContainerInner">
-                                                                                        <a href={companys.link} target='_blank' rel="noopener noreferrer">{companys.company}</a>
+                                                                                        <a href={companys.companyLink} target='_blank' rel="noopener noreferrer">{companys.companyName}</a>
                                                                                     </div>
                                                                                 )
                                                                             })}
@@ -318,7 +543,7 @@ const Home = () => {
                                     </>)
                         ))}
             </div>
-            <div className={`rightContainer ${showCompanyList ? "" : "hideContainer"}`}>
+            {/* <div className={`rightContainer ${showCompanyList ? "" : "hideContainer"}`}>
                 <h5>By Company</h5>
 
                 <div className="rightContainerRadioBox">
@@ -335,11 +560,8 @@ const Home = () => {
                             </label>
                         ))}
                     </div>
-                    {/* )}
-                        </div>
-                    ))} */}
                 </div>
-            </div>
+            </div> */}
         </div >
     )
 }

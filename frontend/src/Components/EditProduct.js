@@ -41,6 +41,7 @@ const EditProduct = ({ showAlert, showEditForm, setShowEditForm, companyAllData 
     const handleDelete = () => {
         deleteAllCompanyProducts(companyId);
         setShowEditForm(false);
+        navigate("/");
     }
 
     // Populate form fields when companyAllData changes

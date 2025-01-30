@@ -114,7 +114,7 @@ select {
 }
 
 .editCompanyDataForm .addMagazineInner {
-    background-color: white;
+    background-color: transparent;
 }
 
 .editCompanyDataForm .hideProduct {

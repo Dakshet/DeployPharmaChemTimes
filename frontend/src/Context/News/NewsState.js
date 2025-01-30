@@ -639,6 +639,7 @@ const NewsState = (props) => {
                     // console.log(json.chemical);
                     //console.log(json.news)
                     // setSeeAds.concat(json.news);
+                    setShowAllProducts(prevProducts => [...prevProducts, json.chemical]);
                 }
 
                 else {

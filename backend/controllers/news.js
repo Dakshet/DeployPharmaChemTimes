@@ -721,7 +721,7 @@ async function countVisitNumber(req, res) {
         let news = await CountVisit.findOneAndUpdate(
             { month: monthName },
             { $inc: { count: 1 } },
-            { new: true, upsert: true } // Ensures document is created if not found
+            { new: true, upsert: true, setDefaultsOnInsert: true }
         );
 
 
@@ -736,7 +736,7 @@ async function countVisitNumber(req, res) {
         if (!currentDateMail || currentDateMail.count !== numericDate) {
             await CountVisit.findOneAndUpdate(
                 { month: "currentDateMail" },
-                { count: numericDate },
+                { $set: { count: numericDate } },
                 { upsert: true }
             );
 

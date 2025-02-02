@@ -18,7 +18,6 @@ router.post("/login", loginUser)
 
 router.get("/loginuserdetails", fetchUser, loginUserDetails)
 
-
 // Routes for the AD
 router.post("/addadvertisement", fetchUser, addAD)
 

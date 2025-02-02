@@ -81,7 +81,9 @@
 }
 
 .leftContainerRadioBox .leftContainerLabel input[type="radio"],
-.rightContainerRadioBox .rightContainerLabel input[type="radio"] {
+.rightContainerRadioBox .rightContainerLabel input[type="radio"],
+.leftContainerRadioBox .leftContainerLabel input[type="checkbox"],
+.rightContainerRadioBox .rightContainerLabel input[type="checkbox"] {
     appearance: none;
     width: 2px;
     height: 2px;
@@ -96,16 +98,20 @@
 .leftContainerRadioBox .leftContainerLabel input[type="radio"]:checked,
 .dropDownContainerBoxInner input[type="radio"]:checked,
 .rightContainerRadioBox .rightContainerLabel input[type="radio"]:checked,
-.dropDownContainerBoxInner input[type="radio"]:checked {
+.dropDownContainerBoxInner input[type="radio"]:checked,
+.leftContainerRadioBox .leftContainerLabel input[type="checkbox"]:checked,
+.dropDownContainerBoxInner input[type="checkbox"]:checked,
+.rightContainerRadioBox .rightContainerLabel input[type="checkbox"]:checked,
+.dropDownContainerBoxInner input[type="checkbox"]:checked {
     background-color: #03384d;
     border-color: #03384d;
 }
 
-.leftContainerRadioBox .leftContainerLabel:hover input[type="radio"],
-.dropDownContainerBoxInner:hover input[type="radio"],
-.rightContainerRadioBox .rightContainerLabel:hover input[type="radio"],
-.dropDownContainerBoxInner:hover input[type="radio"] {
-    border-color: #03384d;
+.leftContainerRadioBox .leftContainerLabel:hover input[type="checkbox"],
+.dropDownContainerBoxInner:hover input[type="checkbox"],
+.rightContainerRadioBox .rightContainerLabel:hover input[type="checkbox"],
+.dropDownContainerBoxInner:hover input[type="checkbox"] {
+    border-color: #054e6b;
 }
 
 .leftContainer .dropDownContainerBox {

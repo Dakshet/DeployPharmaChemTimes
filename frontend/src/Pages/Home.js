@@ -162,17 +162,44 @@ const Home = ({ showAlert }) => {
     }, [chemArray])
 
 
-    // //Handle Letter Selection
-    const handleLetterSelection = useCallback((letter) => {
+    // // //Handle Letter Selection
+    // const handleLetterSelection = useCallback((letter) => {
 
-        const sortedLetterArray = sortedAllProducts.filter(name => name.charAt(0).toUpperCase() === letter) // Filter names starting with the specified letter
-        setSelectedChemName([])
-        setFilteredChemicals(sortedLetterArray);
-        setSelectedLetter(letter);
-        setSelectedField(letter)
-        setSearchByProduct([])
-        setSearchByCompany([])
-    }, [sortedAllProducts])
+    //     console.log("hello")
+    //     console.log(selectedLetter)
+    //     console.log(letter)
+    //     if (selectedLetter === letter) {
+    //         setSelectedLetter("");
+    //     }
+
+    //     const sortedLetterArray = sortedAllProducts.filter(name => name.charAt(0).toUpperCase() === letter) // Filter names starting with the specified letter
+    //     setSelectedChemName([])
+    //     setFilteredChemicals(sortedLetterArray);
+    //     setSelectedLetter(letter);
+    //     setSelectedField(letter)
+    //     setSearchByProduct([])
+    //     setSearchByCompany([])
+    // }, [sortedAllProducts])
+
+    const handleLetterSelection = useCallback((letter) => {
+        // Toggle the selected letter
+        if (selectedLetter === letter) {
+            // If the same letter is clicked again, unselect it
+            setSelectedChemName([]);
+            setFilteredChemicals([]);
+            setSelectedLetter('');
+            setSelectedField('');
+        } else {
+            // Otherwise, select the new letter
+            const sortedLetterArray = sortedAllProducts.filter(name => name.charAt(0).toUpperCase() === letter);
+            setSelectedChemName([]);
+            setFilteredChemicals(sortedLetterArray);
+            setSelectedLetter(letter);
+            setSelectedField(letter);
+        }
+        setSearchByProduct([]);
+        setSearchByCompany([]);
+    }, [sortedAllProducts, selectedLetter]);
 
 
     // // Handle Chemical Selection 
@@ -186,6 +213,7 @@ const Home = ({ showAlert }) => {
         setSelectedField(chemicalName)
         setShowProductList(false);
     }, [searchAllData])
+
 
     // // Handle Company Selection 
     const handleCompanySelection = useCallback((companyName) => {
@@ -306,14 +334,14 @@ const Home = ({ showAlert }) => {
                                 <label className='leftContainerLabel' htmlFor={`radio-${letter}`}>
                                     <span>{letter}</span>
                                     <input
-                                        type="radio"
+                                        type="checkbox"
                                         name="chemName"
+                                        className='checkBoxSelection'
                                         id={`radio-${letter}`}
-                                        checked={selectedField === letter || selectedField.charAt(0).toLowerCase() === letter.toLowerCase()}
+                                        checked={selectedLetter === letter || selectedField.charAt(0).toLowerCase() === letter.toLowerCase()}
                                         onChange={() => handleLetterSelection(letter)}
                                     />
                                 </label>
-
                                 {selectedLetter === letter && (
                                     <div className="dropDownContainerBox">
                                         {filteredChemicals.map((chem, index) => (

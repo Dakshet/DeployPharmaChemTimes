@@ -25,26 +25,17 @@ const Login = ({ showAlert }) => {
                 },
                 body: JSON.stringify({ email: credentials.email, password: credentials.password })
             })
+            const json = await response.json();
 
-            if (response.ok) {
-                const json = await response.json();
-
-                if (json.success) {
-                    showAlert("Successfully Login!", "success");
-                    localStorage.setItem('inews', json.token)   //token save in local storeage.
-                    loginUserInfo();
-                    navigate("/");
-                }
-                else {
-                    showAlert(json.Error, "error");
-                    // alert(json.Error);
-                }
+            if (json.success) {
+                showAlert("Successfully Login!", "success");
+                localStorage.setItem('inews', json.token)   //token save in local storeage.
+                loginUserInfo();
+                navigate("/");
             }
-
             else {
-                console.log(`Error during login: ${response.status} ${response.statusText}`)
-                // setCommentNews(commentNews);
-                alert("User is not found!")
+                showAlert(json.Error, "error");
+                // alert(json.Error);
             }
         }
         catch (error) {

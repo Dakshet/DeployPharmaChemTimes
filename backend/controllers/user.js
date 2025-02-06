@@ -12,7 +12,7 @@ let success = false;
 async function signupUser(req, res) {
     try {
         //Destructure the user
-        const { name, email, password, profileImageURL } = req.body;
+        const { name, email, password, number } = req.body;
 
         //Validate the fields
         const errors = validationResult(req);
@@ -40,7 +40,7 @@ async function signupUser(req, res) {
             name,
             email,
             password: securePass,
-            profileImageURL
+            number
         })
 
         user = await user.save();

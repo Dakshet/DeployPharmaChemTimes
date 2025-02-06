@@ -42,10 +42,11 @@
     background-color: green;
     color: white;
     border-radius: 50%;
-    height: 30px;
-    width: 30px;
+    /* height: 30px;
+    width: 30px; */
+    padding: 0.3vw;
     text-align: center;
-    padding-top: 4px;
+    /* padding-top: 4px; */
     margin-right: 10px;
 
 }

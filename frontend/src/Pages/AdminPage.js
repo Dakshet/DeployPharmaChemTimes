@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import NewsContext from '../Context/News/NewsContext';
 import GoToPreviousePage from '../Components/GoToPreviousePage';
+import UserAdminData from '../Components/UserAdminData';
 
 const AdminPage = () => {
     const userLoginRedux = useSelector((state) => state.counter.userLogin);
@@ -21,24 +22,26 @@ const AdminPage = () => {
             <div className='adminPage'>
                 {
                     userLoginRedux.role === "REPORTER" ? (
-                        <div className="adminPageInner">
-                            <img src={userLoginRedux.profileImageURL} alt="" />
-                            <h1>{userLoginRedux.name}</h1>
-                            <ul className='adminPageInnerList'>
-                                <li onClick={handleClick}>
-                                    <Link to="/addnews">Add News</Link>
-                                </li>
-                                <li onClick={handleClick} >
-                                    <Link to="/addmagazine">Add Magazine</Link>
-                                </li>
-                                <li onClick={handleClick} >
-                                    <Link to="/add/advertisement">Add Advertisement</Link>
-                                </li>
-                                <li onClick={handleClick} >
-                                    <Link to="/add/product">Add Product</Link>
-                                </li>
-                            </ul>
-                        </div>
+                        <>
+                            <div className="adminPageInner">
+                                <h1>{userLoginRedux.name}</h1>
+                                <ul className='adminPageInnerList'>
+                                    <li onClick={handleClick}>
+                                        <Link to="/addnews">Add News</Link>
+                                    </li>
+                                    <li onClick={handleClick} >
+                                        <Link to="/addmagazine">Add Magazine</Link>
+                                    </li>
+                                    <li onClick={handleClick} >
+                                        <Link to="/add/advertisement">Add Advertisement</Link>
+                                    </li>
+                                    <li onClick={handleClick} >
+                                        <Link to="/add/product">Add Product</Link>
+                                    </li>
+                                </ul>
+                            </div>
+                            {/* <UserAdminData /> */}
+                        </>
                     ) : (
                         <Link to="/login" className='adminPageBtn'>Login</Link>
                     )

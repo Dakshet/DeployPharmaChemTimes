@@ -41,7 +41,7 @@ const Footer = () => {
                     <ul>
                         <li><img src={mail_icon} alt="" />pharmachemtimes@gmail.com</li>
                         <li><img src={phone_icon} alt="" />+91 8779345336 / +91 8652654519</li>
-                        <li><img src={location_icon} alt="" />C-204, Today Royal Elisum,<br /> Sector - 2, Karanjade, <br /> Navi Mumbai - 410206</li>
+                        <li><img src={location_icon} alt="" />C-204, Today Royal Elisum,<br /> Sector - 2, Karanjade, <br /> Panvel - 410206</li>
                         <li className='footerSocialIcon'>
                             <a
                                 href="https://wa.me/+918779345336?text=Hello%20PharmaChem%20Times!"

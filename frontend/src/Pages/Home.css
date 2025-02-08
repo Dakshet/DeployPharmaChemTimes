@@ -485,6 +485,12 @@
     }
 
 
+    .centerContainerBox .centerContainerBoxInner {
+        padding: 5px 8px;
+        margin: 5px;
+    }
+
+
     .rightContainer {
         flex-basis: 100%;
         height: 0px;

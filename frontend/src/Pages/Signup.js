@@ -31,7 +31,7 @@ const Signup = ({ showAlert }) => {
 
                 if (json.success) {
                     showAlert("Successfully Account Created!", "success");
-                    localStorage.setItem('inews', json.token)   //token save in local storeage.
+                    localStorage.setItem('iPharma', json.token)   //token save in local storeage.
                     loginUserInfo();
                     navigate("/");
                 }

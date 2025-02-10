@@ -29,7 +29,7 @@ const Login = ({ showAlert }) => {
 
             if (json.success) {
                 showAlert("Successfully Login!", "success");
-                localStorage.setItem('inews', json.token)   //token save in local storeage.
+                localStorage.setItem('iPharma', json.token)   //token save in local storeage.
                 loginUserInfo();
                 navigate("/");
             }

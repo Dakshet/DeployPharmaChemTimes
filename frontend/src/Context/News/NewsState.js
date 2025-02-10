@@ -40,7 +40,7 @@ const NewsState = (props) => {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
-                    "auth_token": localStorage.getItem("inews")
+                    "auth_token": localStorage.getItem("iPharma")
                 }
             })
 
@@ -206,7 +206,7 @@ const NewsState = (props) => {
             const response = await fetch(`${host}/news/addnews`, {
                 method: "POST",
                 headers: {
-                    "auth_token": localStorage.getItem("inews")
+                    "auth_token": localStorage.getItem("iPharma")
                 },
                 body: (formData)
             })
@@ -249,7 +249,7 @@ const NewsState = (props) => {
             const response = await fetch(`${host}/news/addmagazine`, {
                 method: "POST",
                 headers: {
-                    "auth_token": localStorage.getItem("inews")
+                    "auth_token": localStorage.getItem("iPharma")
                 },
                 body: (formData)
             })
@@ -302,7 +302,7 @@ const NewsState = (props) => {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
-                    "auth_token": localStorage.getItem("inews")
+                    "auth_token": localStorage.getItem("iPharma")
                 },
             })
 
@@ -339,7 +339,7 @@ const NewsState = (props) => {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
-                    "auth_token": localStorage.getItem("inews")
+                    "auth_token": localStorage.getItem("iPharma")
                 },
             })
 
@@ -377,7 +377,7 @@ const NewsState = (props) => {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
-                    "auth_token": localStorage.getItem("inews")
+                    "auth_token": localStorage.getItem("iPharma")
                 },
                 body: JSON.stringify({ title, desc, tag, prevDescription })
             })
@@ -462,7 +462,7 @@ const NewsState = (props) => {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "auth_token": localStorage.getItem("inews")
+                    "auth_token": localStorage.getItem("iPharma")
                 },
                 body: JSON.stringify({ content, newsId: newsIdAddComment })
             })
@@ -589,7 +589,7 @@ const NewsState = (props) => {
             const response = await fetch(`${host}/news/addadvertisement`, {
                 method: "POST",
                 headers: {
-                    "auth_token": localStorage.getItem("inews")
+                    "auth_token": localStorage.getItem("iPharma")
                 },
                 body: (formData)
             })
@@ -629,7 +629,7 @@ const NewsState = (props) => {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "auth_token": localStorage.getItem("inews")
+                    "auth_token": localStorage.getItem("iPharma")
                 },
                 body: JSON.stringify({ companyName, productName, companyLink })
             })
@@ -713,7 +713,7 @@ const NewsState = (props) => {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
-                    "auth_token": localStorage.getItem("inews")
+                    "auth_token": localStorage.getItem("iPharma")
                 },
                 body: JSON.stringify({ companyName, productName, companyLink })
             })
@@ -759,7 +759,7 @@ const NewsState = (props) => {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
-                    "auth_token": localStorage.getItem("inews")
+                    "auth_token": localStorage.getItem("iPharma")
                 },
             })
 

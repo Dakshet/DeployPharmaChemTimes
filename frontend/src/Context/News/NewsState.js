@@ -156,6 +156,7 @@ const NewsState = (props) => {
         // let newsIdx;
         // if (id !== undefined) {
         //     newsIdx = id;
+        setSpecificNews({});
 
         try {
             const response = await fetch(`${host}/news/fetchspecificnews/${id}`, {

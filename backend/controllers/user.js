@@ -6,6 +6,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const JWT_SECURE = process.env.JWT_SECURE
+const TOKEN_EXPIRATION = "2d";     // Token will expire in 1 hour (use other formats like '2d', '10m', '365d' as needed
 
 let success = false;
 
@@ -43,7 +44,7 @@ async function signupUser(req, res) {
             number
         })
 
-        user = await user.save();
+        // user = await user.save();
 
         //Token
         const payload = {
@@ -51,7 +52,7 @@ async function signupUser(req, res) {
                 id: user.id,
             }
         }
-        const token = jwt.sign(payload, JWT_SECURE);
+        const token = jwt.sign(payload, JWT_SECURE, { expiresIn: TOKEN_EXPIRATION });
 
 
         //Final
@@ -94,7 +95,7 @@ async function loginUser(req, res) {
             }
         }
 
-        const token = jwt.sign(payload, JWT_SECURE);
+        const token = jwt.sign(payload, JWT_SECURE, { expiresIn: TOKEN_EXPIRATION });
         // console.log("con", token)
 
         //Final

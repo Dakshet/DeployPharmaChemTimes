@@ -383,6 +383,7 @@
 @media (max-width:650px) {
     .home {
         flex-direction: column;
+        font-size: 13px;
     }
 
     .leftContainer {

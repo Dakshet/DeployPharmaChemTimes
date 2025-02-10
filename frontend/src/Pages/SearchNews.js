@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import "./SearchNews.css"
 import NewsContext from '../Context/News/NewsContext';
 import SearchItem from '../Components/SearchItem';
+import AllNewsLoader from '../Components/AllNewsLoader';
 
 const SearchNews = ({ showProfile, showAddMenu }) => {
 
@@ -14,7 +15,7 @@ const SearchNews = ({ showProfile, showAddMenu }) => {
 
 
     if (!searchNewsResult || searchNewsResult.length === 0) {
-        return <div className='circle'></div>; // Handle case when news is not yet available
+        return <AllNewsLoader />; // Handle case when news is not yet available
     }
 
 

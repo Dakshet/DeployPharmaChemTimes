@@ -4,6 +4,7 @@ import "./News.css";
 import NewsContext from '../Context/News/NewsContext';
 // import NewsItem from '../Components/NewsItem';
 import { useNavigate } from 'react-router-dom';
+import AllNewsLoader from '../Components/AllNewsLoader';
 
 const News = ({ showAddMenu }) => {
     const navigate = useNavigate();
@@ -46,7 +47,7 @@ const News = ({ showAddMenu }) => {
     };
 
     if (!pageNews || pageNews.length === 0) {
-        return <div className="circle"></div>; // Handle case when news is not yet available
+        return <AllNewsLoader />; // Handle case when news is not yet available
     }
 
     // Pagination logic

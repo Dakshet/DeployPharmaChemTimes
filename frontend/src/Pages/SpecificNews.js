@@ -6,6 +6,7 @@ import UpdateNews from '../Components/UpdateNews'
 import Comments from '../Components/Comments'
 import SpecificNewsInner from '../Components/SpecificNewsInner'
 import GoToPreviousePage from '../Components/GoToPreviousePage'
+import SpecificNewsLoader from '../Components/SpecificNewsLoader';
 
 const SpecificNews = ({ showAddMenu, showAlert }) => {
 
@@ -55,46 +56,34 @@ const SpecificNews = ({ showAddMenu, showAlert }) => {
 
 
     if (!specificNews || specificNews.length === 0) {
-        return <div className='circle'></div>; // Handle case when news is not yet available
+        return <SpecificNewsLoader />; // Handle case when news is not yet available
     }
+
 
 
     return (
         <>
-            {/* Set dynamic meta tags */}
-            {/* <Helmet>
-                <title>{specificNews.title}</title>
-                <meta property="og:title" content={specificNews.title} />
-                <meta property="og:url" content={shareUrl} />
-                <meta property="og:description" content={specificNews.title} /> */}
-            {/* <meta property="og:image" content={specificNews.coverImageURL || "http://res.cloudinary.com/dpkaxrntd/image/upload/v1727242172/df85jrwmbue1cjymxoc4.jpg"} /> */}
-            {/* <meta property="og:type" content="website" />
-                <meta property="og:image" content={"http://res.cloudinary.com/dpkaxrntd/image/upload/v1727242172/df85jrwmbue1cjymxoc4.jpg"} />
-                <meta property="og:image:width" content="1200" />
-                <meta property="og:image:height" content="630" />
-            </Helmet> */}
 
+            {
+                Object.keys(specificNews).length === 0 ? (<SpecificNewsLoader />) : <>
+                    <GoToPreviousePage />
+                    <UpdateNews showAlert={showAlert} currentNews={currentNews} updateModal={updateModal} setUpdateModal={setUpdateModal} />
+                    <SpecificNewsInner
+                        title={specificNews.title}
+                        shareUrl={shareUrl}
+                        body={specificNews.body}
+                        image={specificNews.coverImageURL}
+                        showAddMenu={showAddMenu}
+                        handleDeleteNews={handleDeleteNews}
+                        handleUpdateNews={handleUpdateNews}
+                        shareModal={shareModal}
+                        setShareModal={setShareModal}
+                        specificNews={specificNews}
+                    />
 
-            {/* {console.log(specificNews.coverImageURL)} */}
-
-
-            <GoToPreviousePage />
-            <UpdateNews showAlert={showAlert} currentNews={currentNews} updateModal={updateModal} setUpdateModal={setUpdateModal} />
-
-            <SpecificNewsInner
-                title={specificNews.title}
-                shareUrl={shareUrl}
-                body={specificNews.body}
-                image={specificNews.coverImageURL}
-                showAddMenu={showAddMenu}
-                handleDeleteNews={handleDeleteNews}
-                handleUpdateNews={handleUpdateNews}
-                shareModal={shareModal}
-                setShareModal={setShareModal}
-                specificNews={specificNews}
-            />
-
-            <Comments showAlert={showAlert} />
+                    <Comments showAlert={showAlert} />
+                </>
+            }
         </>
     )
 }

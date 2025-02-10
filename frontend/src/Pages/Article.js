@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import "./Article.css"
 import NewsContext from '../Context/News/NewsContext';
 import ArticleItem from '../Components/ArticleItem';
+import AllNewsLoader from '../Components/AllNewsLoader';
 
 const Article = ({ showAddMenu }) => {
 
@@ -20,7 +21,7 @@ const Article = ({ showAddMenu }) => {
 
 
     if (!pageNews || pageNews.length === 0) {
-        return <div className='circle'></div>; // Handle case when news is not yet available
+        return <AllNewsLoader />; // Handle case when news is not yet available
     }
 
     return (

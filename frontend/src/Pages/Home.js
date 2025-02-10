@@ -3,6 +3,7 @@ import NewsContext from '../Context/News/NewsContext'
 import "./Home.css"
 import EditProduct from '../Components/EditProduct';
 import { useSelector } from 'react-redux';
+import ProductHomeLoader from '../Components/ProductHomeLoader';
 
 const Home = ({ showAlert }) => {
 
@@ -313,7 +314,7 @@ const Home = ({ showAlert }) => {
 
     return (
         <>
-            <div className={`home`}>
+            {showAllProducts.length === 0 ? <ProductHomeLoader /> : (<div className={`home`}>
                 <div className={`leftContainer ${showProductList ? "" : "hideContainer"}`}>
                     <h5>By Products</h5>
                     <i onClick={() => setShowProductList(false)} className="ri-close-circle-line byListCloseBtn"></i>
@@ -544,6 +545,7 @@ const Home = ({ showAlert }) => {
                     </div>
                 </div>
             </div >
+            )}
 
             {showEditForm &&
                 <EditProduct showAlert={showAlert} showEditForm={showEditForm} setShowEditForm={setShowEditForm} companyAllData={companyAllData} />

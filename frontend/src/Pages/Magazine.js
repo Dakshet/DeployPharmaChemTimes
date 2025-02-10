@@ -4,6 +4,7 @@ import NewsContext from '../Context/News/NewsContext';
 import MagazineItem from '../Components/MagazineItem';
 import issuuImage from '../Images/issuuImage1.png'
 import { Link } from 'react-router-dom';
+import AllNewsLoader from '../Components/AllNewsLoader';
 
 const Magazine = ({ showAddMenu, showAlert }) => {
     const { pageNews, fetchPageSpecificNews } = useContext(NewsContext);
@@ -21,7 +22,7 @@ const Magazine = ({ showAddMenu, showAlert }) => {
 
 
     if (!pageNews || pageNews.length === 0) {
-        return <div className='circle'></div>; // Handle case when news is not yet available
+        return <AllNewsLoader />;  // Handle case when news is not yet available
     }
 
 

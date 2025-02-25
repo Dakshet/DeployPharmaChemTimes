@@ -1,9 +1,11 @@
 const { validationResult } = require("express-validator");
 const User = require("../models/user");
+const nodemailer = require('nodemailer');
 
 const bcrypt = require("bcryptjs");
 
 const jwt = require("jsonwebtoken");
+const { sendMails } = require("./subscription");
 
 const JWT_SECURE = process.env.JWT_SECURE
 const TOKEN_EXPIRATION = "2d";     // Token will expire in 1 hour (use other formats like '2d', '10m', '365d' as needed
@@ -45,6 +47,35 @@ async function signupUser(req, res) {
         })
 
         // user = await user.save();
+        let subject = "Welcome to PharmaChem Times";
+
+        let text = `
+         <div style="font-family: Arial, sans-serif; padding: 20px; border: 1px solid #ddd; border-radius: 8px;">
+                    <h2 style="color: #007bff;">Welcome to PharmaChem Times, ${user.name}!</h2>
+                    <p>Thank you for signing up. We are excited to have you as a part of our community.</p>
+
+                    <h3>📢 Our Subscription Plans:</h3>
+                    <ul>
+                        <li>✅ <strong>Free Email Subscription:</strong> Receive a daily electronic newsletter with the latest industry news straight to your inbox.</li>
+                        <li>✅ <strong>Free Print Subscription:</strong> Get a monthly hard copy of our print magazine delivered to your address.</li>
+                    </ul>
+
+                    <h3>📌 What’s Next?</h3>
+                    <p>Your subscription form has been received. However, to confirm your subscription, please proceed with the payment. Once completed, we will activate your subscription and send you a confirmation email.</p>
+
+                    <h3>📞 Need Assistance?</h3>
+                    <p><strong>Contact:</strong> Jitendra Nate<br>
+                    📱 <strong>Phone:</strong> +91 8779345336</p>
+
+                    <p>🔗 <a href="https://www.pharmachemtimes.in" style="color: #007bff; text-decoration: none;">Visit Our Website</a></p>
+
+                    <p>Thank you for joining <strong>PharmaChem Times</strong>!<br>
+                    <strong>Best Regards,</strong><br>
+                    <strong>PharmaChem Times Team</strong></p>
+                </div>
+        `
+
+        sendMails(user.email, subject, text)
 
         //Token
         const payload = {

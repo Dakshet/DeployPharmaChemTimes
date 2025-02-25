@@ -11,6 +11,8 @@ require("jspdf-autotable"); // Import jsPDF autoTable plugin
 const Chemicals = require("../models/chemicalProd");
 const { google } = require("googleapis");
 const stream = require('stream');
+const { sendMails } = require("./subscription");
+const Subscribe = require("../models/subscription");
 
 let success = false;
 
@@ -209,7 +211,18 @@ async function addNews(req, res) {
             coverImageURL: copyImageId,
         })
 
-        news = await news.save();
+        let subject = `📢 Daily News Update: ${news.title}`;
+        let text = `${news.body} <br><br> For more details, visit <a href="https://www.pharmachemtimes.in/${news.tag.toLowerCase()}/${news._id}" target="_blank">${news.title}</a>`;
+
+
+        let allSubscriptionData = await Subscribe.find({ paymentStatus: "YES" });
+
+        let allEmail = allSubscriptionData.map(data => data.email)
+
+        // Loop over all emails and send one by one
+        for (let email of allEmail) {
+            await sendMails(email, subject, text);
+        }
 
         //Final
         success = true;

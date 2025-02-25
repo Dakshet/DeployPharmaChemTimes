@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import NewsContext from '../Context/News/NewsContext';
 import GoToPreviousePage from '../Components/GoToPreviousePage';
-import UserAdminData from '../Components/UserAdminData';
+// import UserAdminData from '../Components/UserAdminData';
 
 const AdminPage = () => {
     const userLoginRedux = useSelector((state) => state.counter.userLogin);
@@ -37,6 +37,12 @@ const AdminPage = () => {
                                     </li>
                                     <li onClick={handleClick} >
                                         <Link to="/add/product">Add Product</Link>
+                                    </li>
+                                    <li onClick={handleClick} >
+                                        <Link to="/subscription/data">Subscription Data</Link>
+                                    </li>
+                                    <li onClick={handleClick} >
+                                        <Link to="/subscription/pending/data">Pending Subscription Data</Link>
                                     </li>
                                 </ul>
                             </div>

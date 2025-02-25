@@ -19,15 +19,19 @@ const Footer = () => {
                         <p>Publisher & Sales Head</p>
                     </div>
                     <div className="footerOneInnerDiv">
+                        <h1>Anurag More</h1>
+                        <p>Sub-Editor & Events Head</p>
+                    </div>
+                    <div className="footerOneInnerDiv">
                         <h1>Disha Nate</h1>
-                        <p>Ad Co-Ordinator</p>
+                        <p>Ad Co-Ordinator Circulation & Subscription</p>
                     </div>
                     <div className="footerOneInnerDiv">
                         <h1>Sakshi Rikame</h1>
                         <p>Graphic Designer</p>
                     </div>
                 </div>
-                <div className="footerOneInner">
+                <div className="footerOneInnerMenuList">
                     <ul>
                         <li><Link to="/">Home</Link></li>
                         <li><Link to="/news">News</Link></li>
@@ -41,7 +45,7 @@ const Footer = () => {
                     <ul>
                         <li><img src={mail_icon} alt="" />pharmachemtimes@gmail.com</li>
                         <li><img src={phone_icon} alt="" />+91 8779345336 / +91 8652654519</li>
-                        <li><img src={location_icon} alt="" />C-204, Today Royal Elisum,<br /> Sector - 2, Karanjade, <br /> Panvel - 410206</li>
+                        <li><img src={location_icon} alt="" />C-204, Today Royal Elisum,<br /> Plot No. 47, <br /> Sector - 2, Karanjade, <br /> Panvel, Navi Mumbai- 410206</li>
                         <li className='footerSocialIcon'>
                             <a
                                 href="https://wa.me/+918779345336?text=Hello%20PharmaChem%20Times!"

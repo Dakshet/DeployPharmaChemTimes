@@ -29,6 +29,9 @@ import AddAD from './Pages/AddAD';
 import ADPage from './Pages/ADPage';
 import AdminPage from './Pages/AdminPage';
 import AddProduct from './Pages/AddProduct';
+import AddSubscription from './Pages/AddSubscription';
+import SubscriptionData from './Components/SubscriptionData';
+import PendingSubscriptionData from './Components/PendingSubscriptionData';
 
 function App() {
 
@@ -80,6 +83,9 @@ function App() {
             <Route exact path='/advertisement' element={<ADPage showAlert={showAlert} showProfile={showProfile} showAddMenu={showAddMenu} />} />
             <Route exact path='/adminpage' element={<AdminPage showAlert={showAlert} showProfile={showProfile} showAddMenu={showAddMenu} />} />
             <Route exact path='/add/product' element={<AddProduct showAlert={showAlert} showProfile={showProfile} />} />
+            <Route exact path='/subscribe' element={<AddSubscription showAlert={showAlert} />} />
+            <Route exact path='/subscription/data' element={<SubscriptionData />} />
+            <Route exact path='/subscription/pending/data' element={<PendingSubscriptionData />} />
 
             <Route path="*" element={<Home showProfile={showProfile} showAddMenu={showAddMenu} />} />
           </Routes>

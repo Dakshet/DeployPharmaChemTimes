@@ -31,6 +31,9 @@ const NewsState = (props) => {
 
     const [showAllProducts, setShowAllProducts] = useState([])
 
+    const [subscriptionData, setSubscriptionData] = useState([]);
+    const [pendingSubscriptionData, setPendingSubscriptionData] = useState([]);
+
 
     //Fetch user using token
     const loginUserInfo = async () => {
@@ -790,8 +793,176 @@ const NewsState = (props) => {
 
 
 
+    //Fetch All Subscription Data
+    const fetchSubscriptionData = async (paymentStatus) => {
 
-    return (<NewsContext.Provider value={{ pageNews, fetchPageSpecificNews, fetchPageSpecificAds, getNewsUsingId, specificNews, setSpecificNews, addNews, deleteNews, editNews, commentNews, fetchComment, addComment, searchNewsResult, setSearchNewsResult, fetchSearchNews, loginUserInfo, addMagazine, deleteMagazine, visitCounter, addAdvertisement, seeAds, showAllProducts, addProductData, fetchProductChemicalData, editCompanyProducts, deleteAllCompanyProducts }}>
+        try {
+
+            const response = await fetch(`${host}/subscription/getsubscriptionData/${paymentStatus}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "auth_token": localStorage.getItem("iPharma")
+                }
+            })
+
+            if (response.ok) {
+                const json = await response.json();
+
+
+                if (json.subscriptionData) {
+                    if (paymentStatus === "YES") {
+                        if (json.subscriptionData.length === 0) {
+                            setSubscriptionData([])
+                        }
+                        else {
+                            setSubscriptionData(json.subscriptionData)
+                        }
+                    }
+                    else {
+                        if (json.subscriptionData.length === 0) {
+                            setPendingSubscriptionData([])
+                        }
+                        else {
+                            setPendingSubscriptionData(json.subscriptionData)
+                        }
+                    }
+                }
+
+                else {
+                    console.log(json.Error);
+                    setSubscriptionData([])
+                    setPendingSubscriptionData([])
+                }
+            }
+
+            else {
+                console.log(`Error fetching subscription data: ${response.status} ${response.statusText}`)
+                setSubscriptionData([]);
+                setPendingSubscriptionData([]);
+            }
+
+        } catch (error) {
+            console.error("Error fetching the subscription data:", error);
+            setSubscriptionData([]);
+            setPendingSubscriptionData([])
+        }
+    }
+
+
+
+
+
+    //Update Subscription Data
+    const editSubscriptionData = async (id) => {
+
+
+        try {
+
+            const response = await fetch(`${host}/subscription/updateSubscriptionData/${id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "auth_token": localStorage.getItem("iPharma")
+                }
+            })
+
+
+            if (response.ok) {
+                const json = await response.json();
+
+
+                if (json.userSubscriptionData) {
+                    console.log("Payment Done Successfully!")
+                }
+
+                else {
+                    console.log(json.Error);
+                }
+            }
+
+            else {
+                console.log(`Error fetching news: ${response.status} ${response.statusText}`)
+            }
+
+        } catch (error) {
+            console.error("Error fetching the news:", error);
+        }
+    }
+
+
+
+
+    //Delete User Subscription
+    const deleteSubscription = async (id) => {
+
+
+        try {
+
+            const response = await fetch(`${host}/subscription/deletesubscription?id=${id}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    "auth_token": localStorage.getItem("iPharma")
+                },
+            })
+
+            if (response.ok) {
+                const json = await response.json();
+
+                if (json.news) {
+                    await response.json();
+                }
+
+                else {
+                    console.log(json.Error);
+                }
+            }
+
+            else {
+                console.log(`Error fetching news: ${response.status} ${response.statusText}`)
+            }
+
+        } catch (error) {
+            console.error("Error fetching the news:", error);
+        }
+    }
+
+
+
+    return (<NewsContext.Provider value={{
+        pageNews,
+        fetchPageSpecificNews,
+        fetchPageSpecificAds,
+        getNewsUsingId,
+        specificNews,
+        setSpecificNews,
+        addNews,
+        deleteNews,
+        editNews,
+        commentNews,
+        fetchComment,
+        addComment,
+        searchNewsResult,
+        setSearchNewsResult,
+        fetchSearchNews,
+        loginUserInfo,
+        addMagazine,
+        deleteMagazine,
+        visitCounter,
+        addAdvertisement,
+        seeAds,
+        showAllProducts,
+        addProductData,
+        fetchProductChemicalData,
+        editCompanyProducts,
+        deleteAllCompanyProducts,
+        subscriptionData,
+        pendingSubscriptionData,
+        fetchSubscriptionData,
+        editSubscriptionData,
+        deleteSubscription
+    }}>
         {props.children}
     </NewsContext.Provider>
     )

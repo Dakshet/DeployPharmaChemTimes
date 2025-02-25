@@ -157,6 +157,10 @@
 }
 
 
+.navbar .closeIcons {
+    display: none;
+}
+
 
 /* --------------------------- Responsive media */
 

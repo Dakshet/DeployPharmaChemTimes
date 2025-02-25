@@ -108,6 +108,9 @@ const Navbar = ({ setShowAddMenu, showProfile, setShowProfile, showSearch, setSh
                         <li onClick={handleClick} className={`hideField ${isUserIsNotLogin ? "" : "hideLogin"}`}>
                             <Link to="/login">Login</Link>
                         </li>
+                        <li className={`hideField ${location.pathname === "/subscribe" ? "activeNav" : ""}`} onClick={handleClick}>
+                            <Link to="/subscribe">Subscribe</Link>
+                        </li>
                         <li className={`hideField ${isUserIsNotLogin ? "hideLogin" : ""}`} onClick={handleLogout}>
                             Logout
                         </li>
@@ -146,6 +149,7 @@ const Navbar = ({ setShowAddMenu, showProfile, setShowProfile, showSearch, setSh
                 </div>
                 <div className="navbar-right">
                     <ul>
+                        <li><Link to="/subscribe">Subscribe</Link></li>
                         {
                             isUserIsNotLogin ? (
                                 <>

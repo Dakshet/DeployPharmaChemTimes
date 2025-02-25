@@ -25,6 +25,7 @@ const FRONTEND_URL = process.env.FRONTEND_URL || "https://deploy-pharma-chem-tim
 const userRoute = require("./routes/user")
 const newsRoute = require('./routes/news')
 const commentRoute = require("./routes/comment")
+const subscriptionRoute = require("./routes/subscription")
 
 // MongoDB connection
 handleToDB(MONGODB_URL).then(() => {
@@ -98,6 +99,8 @@ app.use("/user", userRoute);
 app.use("/news", newsRoute);
 
 app.use('/comment', commentRoute)
+
+app.use('/subscription', subscriptionRoute)
 
 // Logging for requests (optional)
 // app.use((req, res, next) => {

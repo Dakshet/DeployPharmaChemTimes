@@ -19,6 +19,8 @@ async function sendMails(email, subject, text) {
             },
         });
 
+        console.log(transporter);
+
 
         // const pdfPath = await createAdminPDF();
 

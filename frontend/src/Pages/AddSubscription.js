@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import "./AddSubscription.css"
 import { useNavigate } from 'react-router-dom';
+import NewsContext from '../Context/News/NewsContext';
 
 const AddSubscription = ({ showAlert }) => {
 
-    const host = process.env.REACT_APP_SECRET_KEY;
+    const { addSubscriptionData } = useContext(NewsContext);
 
     const navigate = useNavigate();
     const [credentials, setCredentials] = useState({ name: "", address: "", country: "", number: "", email: "" })
@@ -12,35 +13,11 @@ const AddSubscription = ({ showAlert }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        try {
-            const response = await fetch(`${host}/subscription/addsubscription`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ name: credentials.name, address: credentials.address, country: credentials.country, number: credentials.number, email: credentials.email })
-            })
-            const json = await response.json();
-
-            if (json.success) {
-                showAlert("Successfully Form Submitted!", "success");
-                navigate("/");
-            }
-            else {
-                // alert(json.Error);
-                showAlert(json.Error, "error");
-            }
-
-
-        }
-        catch (error) {
-            console.error("Error during the subscribe:", error);
-            // setCommentNews(commentNews);
-        }
+        addSubscriptionData(credentials.name, credentials.address, credentials.country, credentials.number, credentials.email);
+        showAlert("Successfully Form Submitted!", "success");
+        navigate("/");
     }
 
-    console.log(credentials)
 
     const onChange = (e) => {
         setCredentials({

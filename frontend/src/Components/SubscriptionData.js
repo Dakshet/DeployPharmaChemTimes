@@ -9,9 +9,9 @@ const SubscriptionData = () => {
     const { subscriptionData, fetchSubscriptionData, deleteSubscription } = useContext(NewsContext);
 
     const handleDeleteBtn = useCallback((id) => {
-        deleteSubscription(id);
+        deleteSubscription(id, "sub");
         // eslint-disable-next-line
-    }, [])
+    }, [subscriptionData])
 
     useEffect(() => {
         fetchSubscriptionData("YES")

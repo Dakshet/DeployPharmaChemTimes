@@ -11,12 +11,12 @@ const PendingSubscriptionData = () => {
     const handlePayBtn = useCallback((id) => {
         editSubscriptionData(id);
         // eslint-disable-next-line
-    }, [])
+    }, [pendingSubscriptionData])
 
     const handleDeleteBtn = useCallback((id) => {
-        deleteSubscription(id);
+        deleteSubscription(id, "pending");
         // eslint-disable-next-line
-    }, [])
+    }, [pendingSubscriptionData])
 
     useEffect(() => {
         fetchSubscriptionData("NO")

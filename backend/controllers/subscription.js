@@ -106,7 +106,8 @@ async function addSubscription(req, res) {
                 <p><a href="https://www.pharmachemtimes.in">Visit Our Website</a></p>
         `
 
-        sendMails(user.email, subject, text)
+
+        await sendMails(user.email, subject, text)
 
         //Final
         success = true;
@@ -155,7 +156,6 @@ async function getSubscriptionData(req, res) {
 async function updateSubscriptionData(req, res) {
     try {
 
-        console.log(req.params.id);
         let userSubscriptionData = await Subscribe.findById(req.params.id);
 
 
@@ -191,7 +191,7 @@ async function updateSubscriptionData(req, res) {
         `
 
 
-        sendMails(userSubscriptionData.email, subject, text)
+        await sendMails(userSubscriptionData.email, subject, text)
 
         //Final
         success = true;
@@ -220,6 +220,7 @@ async function deleteSubscriptionData(req, res) {
 
         //Delete news
         subscriptionUser = await Subscribe.findByIdAndDelete(req.query.id)
+
 
         //Final
         success = true;

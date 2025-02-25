@@ -93,7 +93,9 @@ const NewsState = (props) => {
                     if (json.allNews === "No news found!") {
                         setPageNews([])
                     }
-                    setPageNews(json.allNews);
+                    else {
+                        setPageNews(json.allNews);
+                    }
                 }
 
                 else {
@@ -812,20 +814,10 @@ const NewsState = (props) => {
 
                 if (json.subscriptionData) {
                     if (paymentStatus === "YES") {
-                        if (json.subscriptionData.length === 0) {
-                            setSubscriptionData([])
-                        }
-                        else {
-                            setSubscriptionData(json.subscriptionData)
-                        }
+                        setSubscriptionData(json.subscriptionData)
                     }
                     else {
-                        if (json.subscriptionData.length === 0) {
-                            setPendingSubscriptionData([])
-                        }
-                        else {
-                            setPendingSubscriptionData(json.subscriptionData)
-                        }
+                        setPendingSubscriptionData(json.subscriptionData)
                     }
                 }
 
@@ -852,6 +844,44 @@ const NewsState = (props) => {
 
 
 
+    //Add subscription data
+    const addSubscriptionData = async (name, address, country, number, email) => {
+
+        try {
+            const response = await fetch(`${host}/subscription/addsubscription`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ name, address, country, number, email })
+            })
+
+
+            if (response.ok) {
+                const json = await response.json();
+
+                if (json) {
+                    console.log("Added successfully!")
+                }
+
+                else {
+                    console.log(json.Error);
+                }
+            }
+
+            else {
+                console.log(`Error during subscribe: ${response.status} ${response.statusText}`)
+            }
+
+        }
+        catch (error) {
+            console.error("Error during the subscribe:", error);
+            // setCommentNews(commentNews);
+        }
+    }
+
+
+
 
     //Update Subscription Data
     const editSubscriptionData = async (id) => {
@@ -874,6 +904,9 @@ const NewsState = (props) => {
 
                 if (json.userSubscriptionData) {
                     console.log("Payment Done Successfully!")
+                    let pendingData = pendingSubscriptionData.filter((data) => data._id !== id);
+
+                    setPendingSubscriptionData(pendingData);
                 }
 
                 else {
@@ -891,11 +924,8 @@ const NewsState = (props) => {
     }
 
 
-
-
     //Delete User Subscription
-    const deleteSubscription = async (id) => {
-
+    const deleteSubscription = async (id, sub) => {
 
         try {
 
@@ -910,8 +940,15 @@ const NewsState = (props) => {
             if (response.ok) {
                 const json = await response.json();
 
-                if (json.news) {
-                    await response.json();
+                if (json.subscriptionUser) {
+                    if (sub === "pending") {
+                        let pendingData = pendingSubscriptionData.filter((data) => data._id !== id);
+                        setPendingSubscriptionData(pendingData);
+                    }
+                    else {
+                        let subData = subscriptionData.filter((data) => data._id !== id);
+                        setSubscriptionData(subData);
+                    }
                 }
 
                 else {
@@ -960,6 +997,7 @@ const NewsState = (props) => {
         subscriptionData,
         pendingSubscriptionData,
         fetchSubscriptionData,
+        addSubscriptionData,
         editSubscriptionData,
         deleteSubscription
     }}>

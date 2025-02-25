@@ -349,6 +349,7 @@
 
 
     .navbar .closeIcons {
+        display: block;
         margin-left: 10px;
         font-size: 20px;
     }

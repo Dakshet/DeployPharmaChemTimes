@@ -238,7 +238,7 @@
         right: 0;
         bottom: 0;
         width: 200px;
-        height: 95vh;
+        height: 100vh;
         background-color: #011E29;
         /* background-color: blue; */
         z-index: -1;
@@ -349,7 +349,7 @@
 
 
     .navbar .closeIcons {
-        display: block;
+        display: inline-block;
         margin-left: 10px;
         font-size: 20px;
     }

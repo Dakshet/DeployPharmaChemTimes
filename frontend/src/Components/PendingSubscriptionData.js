@@ -3,8 +3,11 @@ import "./SubscriptionData.css"
 import NewsContext from '../Context/News/NewsContext';
 import AllNewsLoader from './AllNewsLoader';
 import GoToPreviousePage from './GoToPreviousePage';
+import { useNavigate } from 'react-router-dom';
 
 const PendingSubscriptionData = () => {
+
+    let navigate = useNavigate();
 
     const { pendingSubscriptionData, fetchSubscriptionData, editSubscriptionData, deleteSubscription } = useContext(NewsContext);
 
@@ -19,7 +22,13 @@ const PendingSubscriptionData = () => {
     }, [pendingSubscriptionData])
 
     useEffect(() => {
-        fetchSubscriptionData("NO")
+        if (localStorage.getItem("iPharma")) {
+            fetchSubscriptionData("NO")
+        }
+        else {
+            navigate("/login")
+        }
+        // eslint-disable-next-line 
         // eslint-disable-next-line
     }, [])
 

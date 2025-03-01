@@ -3,8 +3,11 @@ import "./SubscriptionData.css"
 import NewsContext from '../Context/News/NewsContext';
 import AllNewsLoader from './AllNewsLoader';
 import GoToPreviousePage from './GoToPreviousePage';
+import { useNavigate } from 'react-router-dom';
 
 const SubscriptionData = () => {
+
+    let navigate = useNavigate();
 
     const { subscriptionData, fetchSubscriptionData, deleteSubscription } = useContext(NewsContext);
 
@@ -14,7 +17,12 @@ const SubscriptionData = () => {
     }, [subscriptionData])
 
     useEffect(() => {
-        fetchSubscriptionData("YES")
+        if (localStorage.getItem("iPharma")) {
+            fetchSubscriptionData("YES")
+        }
+        else {
+            navigate("/login")
+        }
         // eslint-disable-next-line 
     }, [])
 

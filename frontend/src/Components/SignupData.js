@@ -2,13 +2,21 @@ import React, { useContext, useEffect } from 'react'
 import GoToPreviousePage from './GoToPreviousePage'
 import NewsContext from '../Context/News/NewsContext';
 import AllNewsLoader from './AllNewsLoader';
+import { useNavigate } from 'react-router-dom';
 
 const SignupData = () => {
+
+    let navigate = useNavigate();
 
     const { signupData, fetchSignUpData } = useContext(NewsContext);
 
     useEffect(() => {
-        fetchSignUpData("")
+        if (localStorage.getItem("iPharma")) {
+            fetchSignUpData();
+        }
+        else {
+            navigate("/login")
+        }
         // eslint-disable-next-line 
     }, [])
 

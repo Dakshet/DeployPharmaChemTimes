@@ -39,6 +39,9 @@ const AdminPage = () => {
                                         <Link to="/add/product">Add Product</Link>
                                     </li>
                                     <li onClick={handleClick} >
+                                        <Link to="/add/signup/data">Signup Data</Link>
+                                    </li>
+                                    <li onClick={handleClick} >
                                         <Link to="/subscription/data">Subscription Data</Link>
                                     </li>
                                     <li onClick={handleClick} >

@@ -33,6 +33,7 @@ const NewsState = (props) => {
 
     const [subscriptionData, setSubscriptionData] = useState([]);
     const [pendingSubscriptionData, setPendingSubscriptionData] = useState([]);
+    const [signupData, setSignupData] = useState([]);
 
 
     //Fetch user using token
@@ -967,6 +968,46 @@ const NewsState = (props) => {
 
 
 
+
+
+    //Fetch All Subscription Data
+    const fetchSignUpData = async () => {
+
+        try {
+
+            const response = await fetch(`${host}/user/signupuserdetails`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "auth_token": localStorage.getItem("iPharma")
+                }
+            })
+
+            if (response.ok) {
+                const json = await response.json();
+
+                if (json.user) {
+                    setSignupData(json.user)
+                }
+
+                else {
+                    console.log(json.Error);
+                    setSignupData([]);
+                }
+            }
+
+            else {
+                console.log(`Error fetching subscription data: ${response.status} ${response.statusText}`)
+                setSignupData([]);
+            }
+
+        } catch (error) {
+            console.error("Error fetching the subscription data:", error);
+            setSignupData([]);
+        }
+    }
+
+
     return (<NewsContext.Provider value={{
         pageNews,
         fetchPageSpecificNews,
@@ -999,7 +1040,9 @@ const NewsState = (props) => {
         fetchSubscriptionData,
         addSubscriptionData,
         editSubscriptionData,
-        deleteSubscription
+        deleteSubscription,
+        signupData,
+        fetchSignUpData
     }}>
         {props.children}
     </NewsContext.Provider>

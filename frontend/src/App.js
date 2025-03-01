@@ -32,6 +32,7 @@ import AddProduct from './Pages/AddProduct';
 import AddSubscription from './Pages/AddSubscription';
 import SubscriptionData from './Components/SubscriptionData';
 import PendingSubscriptionData from './Components/PendingSubscriptionData';
+import SignupData from './Components/SignupData';
 
 function App() {
 
@@ -86,6 +87,7 @@ function App() {
             <Route exact path='/subscribe' element={<AddSubscription showAlert={showAlert} />} />
             <Route exact path='/subscription/data' element={<SubscriptionData />} />
             <Route exact path='/subscription/pending/data' element={<PendingSubscriptionData />} />
+            <Route exact path='/add/signup/data' element={<SignupData />} />
 
             <Route path="*" element={<Home showProfile={showProfile} showAddMenu={showAddMenu} />} />
           </Routes>

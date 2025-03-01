@@ -158,8 +158,29 @@ async function loginUserDetails(req, res) {
 }
 
 
+
+async function signupUserDetails(req, res) {
+    try {
+
+        //Validate the user
+        let user = await User.find({})
+
+        //Final
+        success = true;
+        return res.status(200).json({ success, user })
+
+
+    } catch (error) {
+        console.log(error.message);
+        success = false;
+        return res.status(500).json({ success, Error: "Internal Server Error Occured!" })
+    }
+}
+
+
 module.exports = {
     signupUser,
     loginUser,
-    loginUserDetails
+    loginUserDetails,
+    signupUserDetails
 }

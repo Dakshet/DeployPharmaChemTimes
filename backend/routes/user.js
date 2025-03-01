@@ -1,5 +1,5 @@
 const express = require("express");
-const { signupUser, loginUser, loginUserDetails } = require("../controllers/user");
+const { signupUser, loginUser, loginUserDetails, signupUserDetails } = require("../controllers/user");
 
 const { body } = require("express-validator");
 const { fetchUser } = require("../middlewares/fetchUser");
@@ -21,6 +21,8 @@ router.get("/loginuserdetails", fetchUser, loginUserDetails)
 
 // Routes for the AD
 router.post("/addadvertisement", fetchUser, addAD)
+
+router.get("/signupuserdetails", fetchUser, signupUserDetails)
 
 
 module.exports = router;

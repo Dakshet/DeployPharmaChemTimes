@@ -64,7 +64,7 @@ const AdSection = ({ showProfile }) => {
 
         const interval = setInterval(() => {
             setCurrentIndex((prevIndex) => (prevIndex + 1) % seeAds.length);
-        }, 3000); // Change slide every 3 seconds
+        }, 6000); // Change slide every 6 seconds
 
         return () => clearInterval(interval); // Cleanup on unmount
     }, [seeAds]);

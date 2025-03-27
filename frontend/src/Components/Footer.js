@@ -23,7 +23,7 @@ const Footer = () => {
                         <p>Advertising Sales Director</p>
                     </div>
                     <div className="footerOneInnerDiv">
-                        <h1>Rajiv</h1>
+                        <h1>Rajiv                   </h1>
                         <p>Business Developer</p>
                     </div>
                     <div className="footerOneInnerDiv">

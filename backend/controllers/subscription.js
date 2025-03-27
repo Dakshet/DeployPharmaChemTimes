@@ -37,7 +37,7 @@ async function sendMails(email, subject, text) {
                 address: process.env.USERMAIL,
             }, // sender address
             // to: "bar@example.com, baz@example.com", // When we have list of receivers and here add gym mail account and our gym account.
-            to: `${email},pharmachemtimes@gmail.com`,
+            to: `${email}`,
             subject: `${subject}`, // Subject line
             html: `${text}`
             // attachments: attachments

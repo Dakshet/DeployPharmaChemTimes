@@ -16,19 +16,19 @@ const Footer = () => {
                     {/* <img className='userIcon' src="https://static.vecteezy.com/system/resources/thumbnails/024/183/525/small/avatar-of-a-man-portrait-of-a-young-guy-illustration-of-male-character-in-modern-color-style-vector.jpg" alt="" /> */}
                     <div className="footerOneInnerDiv">
                         <h1>Jitendra Nate</h1>
-                        <p>Publisher & Sales Head</p>
+                        <p>Publisher & Managing Director</p>
+                    </div>
+                    <div className="footerOneInnerDiv">
+                        <h1>Zohra Rozani</h1>
+                        <p>Advertising Sales Director</p>
+                    </div>
+                    <div className="footerOneInnerDiv">
+                        <h1>Rajiv</h1>
+                        <p>Business Developer</p>
                     </div>
                     <div className="footerOneInnerDiv">
                         <h1>Anurag More</h1>
-                        <p>Sub-Editor & Events Head</p>
-                    </div>
-                    <div className="footerOneInnerDiv">
-                        <h1>Disha Nate</h1>
-                        <p>Ad Co-Ordinator Circulation & Subscription</p>
-                    </div>
-                    <div className="footerOneInnerDiv">
-                        <h1>Sakshi Rikame</h1>
-                        <p>Graphic Designer</p>
+                        <p>Sub-Editor & Event Head</p>
                     </div>
                 </div>
                 <div className="footerOneInnerMenuList">
@@ -44,8 +44,8 @@ const Footer = () => {
                 <div className="footerOneInnerx">
                     <ul>
                         <li><img src={mail_icon} alt="" />pharmachemtimes@gmail.com</li>
-                        <li><img src={phone_icon} alt="" />+91 8779345336 / +91 8652654519</li>
-                        <li><img src={location_icon} alt="" />C-204, Today Royal Elisum,<br /> Plot No. 47, <br /> Sector - 2, Karanjade, <br /> Panvel, Navi Mumbai- 410206</li>
+                        <li><img src={phone_icon} alt="" />+91 8779345336</li>
+                        <li><img src={location_icon} alt="" />Shop No. 6, Deep Divine 5, Plot No. - 21,<br /> Sector - R4, Pushpak Node, Karanjade, Panvel,<br /> Pin. - 410206. Navi Mumbai<br />Maharashtra, India</li>
                         <li className='footerSocialIcon'>
                             <a
                                 href="https://wa.me/+918779345336?text=Hello%20PharmaChem%20Times!"

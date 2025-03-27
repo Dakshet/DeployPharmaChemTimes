@@ -213,8 +213,8 @@
     .footerOneInner h1,
     .footerOneInner p {
         display: block;
-        min-width: 100%;
-        background-color: red;
+        width: 270px;
+        /* background-color: red; */
     }
 }
 

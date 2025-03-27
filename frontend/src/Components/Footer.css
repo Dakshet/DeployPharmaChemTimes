@@ -208,6 +208,14 @@
     }
 }
 
+@media (max-width:400px) {
+
+    .footerOneInner h1,
+    .footerOneInner p {
+        display: block;
+    }
+}
+
 
 @media (max-width:385px) {
 

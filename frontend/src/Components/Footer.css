@@ -148,6 +148,7 @@
 
     .footerOneInner h1 {
         margin: 15px 0 10px;
+        width: 100%;
     }
 
     .footerOneInnerMenuList ul {

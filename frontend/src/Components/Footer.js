@@ -17,18 +17,22 @@ const Footer = () => {
                     <div className="footerOneInnerDiv">
                         <h1>Jitendra Nate</h1>
                         <p>Publisher & Managing Director</p>
+                        <p>+91 8779345336</p>
                     </div>
                     <div className="footerOneInnerDiv">
                         <h1>Zohra Rozani</h1>
                         <p>Advertising Sales Director</p>
+                        <p>+91 9860066753</p>
                     </div>
                     <div className="footerOneInnerDiv">
                         <h1>Rajiv</h1>
                         <p>Business Developer</p>
+                        <p>+91 7208209653</p>
                     </div>
                     <div className="footerOneInnerDiv">
                         <h1>Anurag More</h1>
                         <p>Sub-Editor & Event Head</p>
+                        <p>+91 9860443862</p>
                     </div>
                 </div>
                 <div className="footerOneInnerMenuList">

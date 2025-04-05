@@ -194,11 +194,11 @@
 
     .footerOneInner,
     .footerOneInnerMenuList {
-        height: 240px;
+        height: 330px;
         width: 80vw;
         flex-wrap: wrap;
         /* background-color: black; */
-        margin-bottom: 60px;
+        margin-bottom: 80px;
     }
 
     .footerOneInnerx {
@@ -215,6 +215,7 @@
         display: block;
         width: 270px;
         /* background-color: red; */
+        /* margin-bottom: 30px; */
     }
 }
 

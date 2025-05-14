@@ -25,9 +25,9 @@ const Footer = () => {
                         <p>+91 9860066753</p>
                     </div>
                     <div className="footerOneInnerDiv">
-                        <h1>Rajiv</h1>
-                        <p>Business Developer</p>
-                        <p>+91 7208209653</p>
+                        <h1>Pravin Donde</h1>
+                        <p>Advertising Sales Manager</p>
+                        <p>+91 8104560806</p>
                     </div>
                     <div className="footerOneInnerDiv">
                         <h1>Anurag More</h1>

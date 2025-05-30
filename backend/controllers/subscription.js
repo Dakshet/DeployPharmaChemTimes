@@ -107,7 +107,7 @@ async function addSubscription(req, res) {
         `
 
 
-        await sendMails(user.email, subject, text)
+        // await sendMails(user.email, subject, text)
 
         //Final
         success = true;
@@ -191,7 +191,7 @@ async function updateSubscriptionData(req, res) {
         `
 
 
-        await sendMails(userSubscriptionData.email, subject, text)
+        // await sendMails(userSubscriptionData.email, subject, text)
 
         //Final
         success = true;

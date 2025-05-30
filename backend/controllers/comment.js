@@ -12,7 +12,7 @@ async function fetchAllComments(req, res) {
 
 
     } catch (error) {
-        console.log(error.message);
+        console.log(`[controller][comment][fetchAllComments] Error occured during fetch comments: ${error.message}`);
         success = false;
         return res.status(500).json({ success, Error: "Internal Server Error Occured!" })
     }
@@ -49,7 +49,7 @@ async function addComment(req, res) {
         return res.status(201).json({ success, comment })
 
     } catch (error) {
-        console.log(error.message);
+        console.log(`[controller][comment][addComment] Error occured during Add comments: ${error.message}`);
         success = false;
         return res.status(500).json({ success, Error: "Internal Server Error Occured!" })
     }

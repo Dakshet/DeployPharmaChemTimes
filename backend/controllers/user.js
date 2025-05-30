@@ -75,7 +75,7 @@ async function signupUser(req, res) {
                 </div>
         `
 
-        await sendMails(user.email, subject, text)
+        // await sendMails(user.email, subject, text)
 
         //Token
         const payload = {

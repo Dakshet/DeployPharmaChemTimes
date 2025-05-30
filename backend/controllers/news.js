@@ -41,7 +41,7 @@ async function getAuth() {
         return auth;
 
     } catch (error) {
-        console.log("Get Auth", error.message)
+        console.error(`[controllers][news][getAuth] Error occured during getting auth: ${error.message}`)
     }
 }
 
@@ -49,27 +49,32 @@ async function getAuth() {
 
 // Access Google Drive Using Buffer Storage
 async function uploadToGoogleDrive(fileBuffer, mimeType, fileName) {
-    const auth = await getAuth();
+    try {
+        const auth = await getAuth();
 
-    // Obtain an authenticated client
-    const drive = google.drive({ version: "v3", auth })
+        // Obtain an authenticated client
+        const drive = google.drive({ version: "v3", auth })
 
-    const bufferStream = new stream.PassThrough();
-    bufferStream.end(fileBuffer);
+        const bufferStream = new stream.PassThrough();
+        bufferStream.end(fileBuffer);
 
-    const response = await drive.files.create({
-        resource: {
-            name: fileName,
-            parents: ['1aIAMB1FUnvVNNDo1-TW65gGLzqbmuApb']  // Optional: specify a destination folder
-        },
-        media: {
-            mimeType: mimeType,
-            body: bufferStream
-        },
-        fields: 'id, webViewLink'
-    });
+        const response = await drive.files.create({
+            resource: {
+                name: fileName,
+                parents: ['1aIAMB1FUnvVNNDo1-TW65gGLzqbmuApb']  // Optional: specify a destination folder
+            },
+            media: {
+                mimeType: mimeType,
+                body: bufferStream
+            },
+            fields: 'id, webViewLink'
+        });
 
-    return response.data;
+        return response.data;
+
+    } catch (error) {
+        console.error(`[controllers][news][uploadToGoogleDrive] Error occured during upload photos: ${error.message}`)
+    }
 }
 
 
@@ -90,7 +95,7 @@ async function fetchImageAndConvertedIntoHash(fileId) {
         });
 
         if (!response.ok) {
-            throw new Error('Network response was not ok');
+            throw new Error(`[controllers][news][fetchImageAndConvertIntoHash] Network response is not ok.`);
         }
 
         // Convert the response to an ArrayBuffer
@@ -108,7 +113,7 @@ async function fetchImageAndConvertedIntoHash(fileId) {
 
 
     } catch (error) {
-        console.error("Error fetching image:", error.message);
+        console.error(`[controllers][news][fetchImageAndConvertIntoHash] Error occured during fetch image: ${error.message}`);
         return null; // Return null if the image fetch fails
     }
 }
@@ -138,7 +143,7 @@ async function fetchAllNewsForSpecificRoute(req, res) {
         return res.status(200).json({ success: true, allNews });
 
     } catch (error) {
-        console.log(error.message);
+        console.error(`[controllers][news][fetchAllNewsForSpecificRoute] Error occured during fetch specific news according to route: ${error.message}`);
         success = false;
         return res.status(500).json({ success, Error: "Internal Server Error Occured!" })
     }
@@ -159,7 +164,7 @@ async function fetchSpecificNews(req, res) {
         return res.status(200).json({ success, news })
 
     } catch (error) {
-        console.log(error.message);
+        console.error(`[controllers][news][fetchSpecificNews] Error occured during fetch news: ${error.message}`);
         success = false;
         return res.status(500).json({ success, Error: "Internal Server Error Occured!" })
     }
@@ -179,7 +184,7 @@ async function fetchSearchNews(req, res) {
         return res.status(200).json({ success, news })
 
     } catch (error) {
-        console.log(error.message);
+        console.error(`[controllers][news][fetchSearchNews] Error occured during fetch search news: ${error.message}`);
         success = false;
         return res.status(500).json({ success, Error: "Internal Server Error Occured!" })
     }
@@ -212,7 +217,7 @@ async function addNews(req, res) {
         })
 
         let subject = `📢 Daily News Update: ${news.title}`;
-        let text = `${news.body} <br><br> For more details, visit <a href="https://www.pharmachemtimes.in/${news.tag.toLowerCase()}/${news._id}" target="_blank">${news.title}</a>`;
+        let text = `${news.body} < br > <br> For more details, visit <a href="https://www.pharmachemtimes.in/${news.tag.toLowerCase()}/${news._id}" target="_blank">${news.title}</a>`;
 
 
         let allSubscriptionData = await Subscribe.find({ paymentStatus: "YES" });
@@ -220,16 +225,16 @@ async function addNews(req, res) {
         let allEmail = allSubscriptionData.map(data => data.email)
 
         // Loop over all emails and send one by one
-        for (let email of allEmail) {
-            await sendMails(email, subject, text);
-        }
+        // for (let email of allEmail) {
+        //     await sendMails(email, subject, text);
+        // }
 
         //Final
         success = true;
         return res.status(201).json({ success, news })
 
     } catch (error) {
-        console.log(error.message);
+        console.error(`[controllers][news][addNews] Error occured during add news: ${error.message}`);
         success = false;
         return res.status(500).json({ success, Error: "Internal Server Error Occured!" })
     }
@@ -270,7 +275,7 @@ async function addMagazine(req, res) {
         // Give the data type also so accroding to that they fetch it.
 
     } catch (error) {
-        console.log(error.message);
+        console.error(`[controllers][news][addMagazine] Error occured during add magazine: ${error.message}`);
         success = false;
         return res.status(500).json({ success, Error: "Internal Server Error Occured!" })
     }
@@ -321,7 +326,7 @@ async function updateNews(req, res) {
         //                     // console.log(result);
         //                 } catch (error) {
         //                     success = false;
-        //                     return res.status(400).json({ success, Error: error });
+        //                     return res.status(400).json({success, Error: error });
         //                 }
         //             }
         //         }
@@ -354,12 +359,14 @@ async function updateNews(req, res) {
 
         if (!news) {
             success = false;
+            console.log(`[controllers][news][updateNews] News is not found!`)
             return res.status(404).json({ success, Error: "News is not found!" })
         }
 
         //Verified the news user and login user
         if (news.createdUser.toString() !== req.user.id) {
             success = false;
+            console.log(`[controllers][news][updateNews] You can't edit news!`)
             return res.status(404).json({ success, Error: "You can't edit news!" })
         }
 
@@ -371,7 +378,7 @@ async function updateNews(req, res) {
         return res.status(200).json({ success, news })
 
     } catch (error) {
-        console.log(error.message);
+        console.log(`[controllers][news][updateNews] Error occured during update news: ${error.message}`);
         success = false;
         return res.status(500).json({ success, Error: "Internal Server Error Occured!" })
     }
@@ -393,12 +400,14 @@ async function deleteNews(req, res) {
 
 
         if (!news) {
+            console.log(`[controllers][news][deleteNews] News is not found!`)
             success = false;
             return res.status(404).json({ success, Error: "News is not found!" })
         }
 
         //Verified the news user and login user
         if (news.createdUser.toString() !== req.user.id) {
+            console.log(`[controllers][news][deleteNews] Can't delete news!`)
             success = false;
             return res.status(404).json({ success, Error: "You can't delete news!" })
         }
@@ -414,7 +423,7 @@ async function deleteNews(req, res) {
                 fileId: news.coverImageURL
             })
 
-        console.log(responseDrive);
+        console.log(`[controllers][news][deleteNews] You deleted the image from the drive! ${responseDrive}`);
 
         //         //Delete image from cloudinary
         //         await cloudinary.uploader.destroy(imageName, (error, result) => {
@@ -432,7 +441,7 @@ async function deleteNews(req, res) {
         return res.status(200).json({ success, news })
 
     } catch (error) {
-        console.log(error.message);
+        console.log(`[controllers][news][deleteNews] Error occured during delete image: ${error.message}`);
         success = false;
         return res.status(500).json({ success, Error: "Internal Server Error Occured!" })
     }
@@ -502,7 +511,7 @@ async function deleteMagazine(req, res) {
 
         // if (imageDeletionResult.result !== 'ok') {
         //     console.log(`Error deleting image: ${imageDeletionResult}`);
-        //     return res.status(500).json({ success: false, Error: "Failed to delete image from Cloudinary." });
+        //     return res.status(500).json({success: false, Error: "Failed to delete image from Cloudinary." });
         // }
 
 
@@ -666,7 +675,7 @@ async function sendAdminMails() {
             port: 587,
             secure: false, // true for port 465, false for other ports
             auth: {
-                user: process.env.USER,       // Sender gmail address 
+                user: process.env.USER,       // Sender gmail address
                 pass: process.env.APP_PASSWORD,     // App password from gmail account this process are written on the bottom of the web page.
             },
         });
@@ -701,7 +710,7 @@ async function sendAdminMails() {
 
     } catch (error) {
         console.log("Read data error", error.message);
-        // return res.status(400).json({ Error: error.message });
+        // return res.status(400).json({Error: error.message });
     }
 }
 
@@ -830,7 +839,7 @@ async function addProductData(req, res) {
         //Destructure the request
         const { companyName, productName, companyLink } = req.body;
 
-        const productArray = productName.split(', ').map(product => product.trim()); // Split and trim products    
+        const productArray = productName.split(', ').map(product => product.trim()); // Split and trim products
 
         let chemical;
 

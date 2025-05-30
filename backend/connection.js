@@ -5,7 +5,7 @@ async function handleToDB(url) {
         return mongoose.connect(url);
 
     } catch (error) {
-        console.log(error.message);
+        console.log(`[connection][handleToDB] Error occured during connect with DB: ${error.message}`);
     }
 }
 

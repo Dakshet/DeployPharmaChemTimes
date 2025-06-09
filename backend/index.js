@@ -30,20 +30,20 @@ const subscriptionRoute = require("./routes/subscription")
 
 
 // MongoDB connection
-// handleToDB(MONGODB_URL).then(() => {
-//     console.log(`[index][MongoDB] MongoDB Connected Successfully!`);
+handleToDB(MONGODB_URL).then(() => {
+    console.log(`[index][MongoDB] MongoDB Connected Successfully!`);
+
+    // Listen
+    app.listen(PORT, () => {
+        console.log(`[index][listen] Server is running on ${PORT}`)
+    });
+
+}).catch((error) => {
+    console.error(`[index][MongoDB] Failed to connect to MongoDB: ${error.message}`);
+    process.exit(1); // Exit the process if the DB connection fails
+})
 
 
-
-// }).catch((error) => {
-//     console.error(`[index][MongoDB] Failed to connect to MongoDB: ${error.message}`);
-//     process.exit(1); // Exit the process if the DB connection fails
-// })
-
-// Listen
-app.listen(PORT, () => {
-    console.log(`[index][listen] Server is running on ${PORT}`)
-});
 
 // Cors
 app.use(cors({
